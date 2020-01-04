@@ -11,7 +11,7 @@ spring:
     url: jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/group4_3?useunicode=true;&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
- mapper-locations: mapper/**/*Mapper.xml
+ mapper-locations: mapper/**/**/*Mapper.xml
 wx:
   appID: wx1046df29d9aa8427
   mchID: 1413626902

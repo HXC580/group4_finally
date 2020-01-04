@@ -11,7 +11,7 @@ public class Student implements Serializable {
 
     private Integer age;
 
-    private Integer phonenumber;
+    private String phonenumber;
 
     private String gender;
 
@@ -51,12 +51,12 @@ public class Student implements Serializable {
         this.age = age;
     }
 
-    public Integer getPhonenumber() {
+    public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(Integer phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber == null ? null : phonenumber.trim();
     }
 
     public String getGender() {

@@ -4,7 +4,7 @@ import net.sf.json.JSONObject;
 import java.util.Map;
 
 
-import java.util.Map;
+
 
 public class JsonToMap {
 public static Map<String,String> transfrom(String json){//json转MAP
