@@ -404,6 +404,66 @@ public class Return_listExample {
             addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
+
+        public Criteria andLendIdIsNull() {
+            addCriterion("lend_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdIsNotNull() {
+            addCriterion("lend_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdEqualTo(Integer value) {
+            addCriterion("lend_id =", value, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdNotEqualTo(Integer value) {
+            addCriterion("lend_id <>", value, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdGreaterThan(Integer value) {
+            addCriterion("lend_id >", value, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("lend_id >=", value, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdLessThan(Integer value) {
+            addCriterion("lend_id <", value, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdLessThanOrEqualTo(Integer value) {
+            addCriterion("lend_id <=", value, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdIn(List<Integer> values) {
+            addCriterion("lend_id in", values, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdNotIn(List<Integer> values) {
+            addCriterion("lend_id not in", values, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdBetween(Integer value1, Integer value2) {
+            addCriterion("lend_id between", value1, value2, "lendId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLendIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("lend_id not between", value1, value2, "lendId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

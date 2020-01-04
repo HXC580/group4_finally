@@ -6,7 +6,7 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="PhoneNumber" jdbcType="INTEGER" property="phonenumber" />
+    <result column="PhoneNumber" jdbcType="VARCHAR" property="phonenumber" />
     <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="dormitory_id" jdbcType="VARCHAR" property="dormitoryId" />
   </resultMap>
@@ -106,7 +106,7 @@
       age, PhoneNumber, gender, 
       dormitory_id)
     values (#{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{phonenumber,jdbcType=INTEGER}, #{gender,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{phonenumber,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
       #{dormitoryId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.group4.bean.Student">
@@ -148,7 +148,7 @@
         #{age,jdbcType=INTEGER},
       </if>
       <if test="phonenumber != null">
-        #{phonenumber,jdbcType=INTEGER},
+        #{phonenumber,jdbcType=VARCHAR},
       </if>
       <if test="gender != null">
         #{gender,jdbcType=VARCHAR},
@@ -180,7 +180,7 @@
         age = #{record.age,jdbcType=INTEGER},
       </if>
       <if test="record.phonenumber != null">
-        PhoneNumber = #{record.phonenumber,jdbcType=INTEGER},
+        PhoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
       </if>
       <if test="record.gender != null">
         gender = #{record.gender,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
       password = #{record.password,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
-      PhoneNumber = #{record.phonenumber,jdbcType=INTEGER},
+      PhoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=VARCHAR},
       dormitory_id = #{record.dormitoryId,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -219,7 +219,7 @@
         age = #{age,jdbcType=INTEGER},
       </if>
       <if test="phonenumber != null">
-        PhoneNumber = #{phonenumber,jdbcType=INTEGER},
+        PhoneNumber = #{phonenumber,jdbcType=VARCHAR},
       </if>
       <if test="gender != null">
         gender = #{gender,jdbcType=VARCHAR},
@@ -235,7 +235,7 @@
     set password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
-      PhoneNumber = #{phonenumber,jdbcType=INTEGER},
+      PhoneNumber = #{phonenumber,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
       dormitory_id = #{dormitoryId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
