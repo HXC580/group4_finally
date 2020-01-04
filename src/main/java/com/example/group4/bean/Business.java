@@ -1,18 +1,29 @@
 package com.example.group4.bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
+@ApiModel
 public class Business implements Serializable {
+
+    @ApiModelProperty(value = "机器id",required = true)
     private Integer id;
 
+    @ApiModelProperty(value = "机器名", hidden = true)
     private String name;
 
+    @ApiModelProperty(value = "地址",hidden = true)
     private String address;
 
+    @ApiModelProperty(hidden = true)
     private String lawname;
 
+    @ApiModelProperty(value = "机器号",hidden = true)
     private String idNo;
 
+    @ApiModelProperty(value = "联系方式")
     private Integer phonenumber;
 
     private static final long serialVersionUID = 1L;
