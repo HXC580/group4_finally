@@ -9,6 +9,7 @@ import com.example.group4.service.IMerchantService.IMerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,16 +38,16 @@ public class MerchantServiceImpl implements IMerchantService {
     }
 
     @Override
-    public List<Cost_bill> selectCollectionRecords(int id) throws RuntimeException {
+    public List<Cost_bill> selectCollectionRecords(Date startDate,Date endDate,int id) throws RuntimeException {
         Cost_billExample example = new Cost_billExample();
-        example.createCriteria().andMachineIdEqualTo(id);
+        example.createCriteria().andMachineIdEqualTo(id).andTimeBetween(startDate,endDate);
         return cost_billMapper.selectByExample(example);
     }
 
     @Override
-    public double getProfit(int id) throws RuntimeException {
+    public double getProfit(Date startDate, Date endDate, int id) throws RuntimeException {
         double profit= 0;
-        List<Cost_bill> cost_bills = selectCollectionRecords(id);
+        List<Cost_bill> cost_bills = selectCollectionRecords(startDate, endDate, id);
         for (Cost_bill cost_bill : cost_bills) {
             profit += cost_bill.getMoney();
         }

@@ -23,7 +23,7 @@ public class Business implements Serializable {
     @ApiModelProperty(value = "机器号",hidden = true)
     private String idNo;
 
-    @ApiModelProperty(value = "联系方式")
+    @ApiModelProperty(value = "联系方式",dataType = "int")
     private Integer phonenumber;
 
     private static final long serialVersionUID = 1L;
