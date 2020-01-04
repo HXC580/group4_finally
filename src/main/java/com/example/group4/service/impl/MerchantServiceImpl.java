@@ -15,4 +15,18 @@ public class MerchantServiceImpl implements IMerchantService {
     public Business queById(int id) {
         return businessMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void saveOrUpdate(Business business) throws RuntimeException {
+        if(business==null){
+            new RuntimeException("参数错误");
+        }
+        if(business.getId()==null){
+            businessMapper.insert(business);
+        }
+        else {
+            businessMapper.updateByPrimaryKey(business);
+        }
+    }
+
 }

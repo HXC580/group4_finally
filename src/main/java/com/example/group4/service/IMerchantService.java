@@ -4,9 +4,8 @@ import com.example.group4.bean.Business;
 
 public interface IMerchantService {
 
-    Business queById(int id);
+    Business queById(int id) throws RuntimeException;
 
-    void update(Business business);
-
+   void saveOrUpdate(Business business) throws  RuntimeException;
 
 }

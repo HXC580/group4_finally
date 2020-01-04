@@ -22,7 +22,7 @@ public class MerchantController {
 
     @GetMapping("/update")
     public Message update(Business business){
-        merchantService.update(business);
+        merchantService.saveOrUpdate(business);
         return MessageUtil.success();
     }
 }
