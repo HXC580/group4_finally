@@ -3,26 +3,24 @@
 <mapper  namespace="com.example.group4.mapper.student.ex.BookEXMapper">
 
     <resultMap id="selectAllLendList" type="com.example.group4.bean.student.ex.Lend_listEX">
-        <id column="id" property="id"></id>
-        <result column="status" property="status"></result>
-        <result column="code" property="code" />
-        <result column="surveyday" property="surveyday" />
-        <result column="department_id"  property="departmentId" />
-        <result column="course_id" property="courseId" />
-        <result column="clazz_id" property="clazzId" />
-        <result column="user_id" property="userId" />
-        <result column="questionnaire_id" property="questionnaireId" />
-        <result column="average" property="average" />
-        <association property="department" column="department_id" select="selectDepartmentName"></association>
-        <association property="course" column="course_id" select="selectCourseName"></association>
-        <association property="clazz" column="clazz_id" select="selectClazzName"></association>
-        <association property="teacher" column="user_id" select="selectTeacherName"></association>
-        <association property="questionnaire" column="questionnaire_id" select="selectQuestionnaireName"></association>
+        <result column="bname" property="BookName"></result>
+        <result column="bauthor" property="Author"></result>
+        <result column="bpublisher" property="Publisher" />
+        <result column="bpublish_time" property="PublishTime" />
+        <result column="ltime"  property="BorrowTime" />
+
+        <association property="return_list" column="return_list_id" select="selectReturnList"></association>
+
     </resultMap>
 
     <select id="selectAllLendList" resultMap="selectAllLendList">
-        select b.name,b.author,b.publisher,b.publish_time,b.instorage_time,b.address
-        from lend_list l, book b, return_list r;
-        where l.book_id=b.id and l.id=r.lend_id and
+        select b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.id return_list_id
+        from lend_list l, book b, return_list r
+        where l.book_id=b.id and l.id=r.lend_id
     </select>
+
+    <select id="selectReturnList" resultType="com.example.group4.bean.Return_list">
+        select * from return_list where id=#{id}
+    </select>
+
 </mapper>

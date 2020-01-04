@@ -1,19 +1,14 @@
 package com.example.group4.bean.student.ex;
 
-import com.example.group4.bean.Return_list;
-
 import java.util.Date;
 
-public class Lend_listEX {
+public class Return_listEX {
     private String BookName;
     private String Author;
     private String Publisher;
     private Date PublishTime;
     private Date BorrowTime;
-    private String Status;
-    private String IsReturnBookTimeOut;
-    private double fine;
-    private Return_list return_list;
+    private Date ReturnTime;
 
     public String getBookName() {
         return BookName;
@@ -55,35 +50,11 @@ public class Lend_listEX {
         BorrowTime = borrowTime;
     }
 
-    public String getStatus() {
-        return Status;
+    public Date getReturnTime() {
+        return ReturnTime;
     }
 
-    public void setStatus(String status) {
-        Status = status;
-    }
-
-    public String getIsReturnBookTimeOut() {
-        return IsReturnBookTimeOut;
-    }
-
-    public void setIsReturnBookTimeOut(String isReturnBookTimeOut) {
-        IsReturnBookTimeOut = isReturnBookTimeOut;
-    }
-
-    public double getFine() {
-        return fine;
-    }
-
-    public void setFine(double fine) {
-        this.fine = fine;
-    }
-
-    public Return_list getReturn_list() {
-        return return_list;
-    }
-
-    public void setReturn_list(Return_list return_list) {
-        this.return_list = return_list;
+    public void setReturnTime(Date returnTime) {
+        ReturnTime = returnTime;
     }
 }
