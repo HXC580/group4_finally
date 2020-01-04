@@ -1,4 +1,4 @@
-package com.example.group4.controller;
+package com.example.group4.web.controller;
 
 import com.example.group4.bean.Business;
 import com.example.group4.service.IMerchantService;
