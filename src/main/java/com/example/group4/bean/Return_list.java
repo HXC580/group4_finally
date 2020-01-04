@@ -14,6 +14,8 @@ public class Return_list implements Serializable {
 
     private Date time;
 
+    private Integer lendId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -56,6 +58,14 @@ public class Return_list implements Serializable {
         this.time = time;
     }
 
+    public Integer getLendId() {
+        return lendId;
+    }
+
+    public void setLendId(Integer lendId) {
+        this.lendId = lendId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -67,6 +77,7 @@ public class Return_list implements Serializable {
         sb.append(", cardId=").append(cardId);
         sb.append(", money=").append(money);
         sb.append(", time=").append(time);
+        sb.append(", lendId=").append(lendId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
