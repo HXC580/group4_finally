@@ -17,6 +17,7 @@ public class MerchantServiceImpl implements IMerchantService {
     }
 
     @Override
+<<<<<<< HEAD
     public void saveOrUpdate(Business business) throws RuntimeException {
         if(business==null){
             new RuntimeException("参数错误");
@@ -29,4 +30,9 @@ public class MerchantServiceImpl implements IMerchantService {
         }
     }
 
+=======
+    public void update(Business business) {
+
+    }
+>>>>>>> 02ab32f307dc8152af3004c08c86cf1de2fdbb1b
 }
