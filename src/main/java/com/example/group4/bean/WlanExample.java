@@ -2,16 +2,17 @@ package com.example.group4.bean;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
-public class Lend_listExample {
+public class WlanExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public Lend_listExample() {
+    public WlanExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,6 +106,32 @@ public class Lend_listExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        protected void addCriterionForJDBCTime(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Time(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCTime(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Time> timeList = new ArrayList<java.sql.Time>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                timeList.add(new java.sql.Time(iter.next().getTime()));
+            }
+            addCriterion(condition, timeList, property);
+        }
+
+        protected void addCriterionForJDBCTime(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Time(value1.getTime()), new java.sql.Time(value2.getTime()), property);
+        }
+
         public Criteria andIdIsNull() {
             addCriterion("id is null");
             return (Criteria) this;
@@ -175,113 +202,63 @@ public class Lend_listExample {
             return (Criteria) this;
         }
 
-        public Criteria andCardIdEqualTo(Integer value) {
+        public Criteria andCardIdEqualTo(String value) {
             addCriterion("card_id =", value, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdNotEqualTo(Integer value) {
+        public Criteria andCardIdNotEqualTo(String value) {
             addCriterion("card_id <>", value, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdGreaterThan(Integer value) {
+        public Criteria andCardIdGreaterThan(String value) {
             addCriterion("card_id >", value, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCardIdGreaterThanOrEqualTo(String value) {
             addCriterion("card_id >=", value, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdLessThan(Integer value) {
+        public Criteria andCardIdLessThan(String value) {
             addCriterion("card_id <", value, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdLessThanOrEqualTo(Integer value) {
+        public Criteria andCardIdLessThanOrEqualTo(String value) {
             addCriterion("card_id <=", value, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdIn(List<Integer> values) {
+        public Criteria andCardIdLike(String value) {
+            addCriterion("card_id like", value, "cardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardIdNotLike(String value) {
+            addCriterion("card_id not like", value, "cardId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCardIdIn(List<String> values) {
             addCriterion("card_id in", values, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdNotIn(List<Integer> values) {
+        public Criteria andCardIdNotIn(List<String> values) {
             addCriterion("card_id not in", values, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdBetween(Integer value1, Integer value2) {
+        public Criteria andCardIdBetween(String value1, String value2) {
             addCriterion("card_id between", value1, value2, "cardId");
             return (Criteria) this;
         }
 
-        public Criteria andCardIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andCardIdNotBetween(String value1, String value2) {
             addCriterion("card_id not between", value1, value2, "cardId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdIsNull() {
-            addCriterion("book_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdIsNotNull() {
-            addCriterion("book_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdEqualTo(Integer value) {
-            addCriterion("book_id =", value, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdNotEqualTo(Integer value) {
-            addCriterion("book_id <>", value, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdGreaterThan(Integer value) {
-            addCriterion("book_id >", value, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("book_id >=", value, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdLessThan(Integer value) {
-            addCriterion("book_id <", value, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdLessThanOrEqualTo(Integer value) {
-            addCriterion("book_id <=", value, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdIn(List<Integer> values) {
-            addCriterion("book_id in", values, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdNotIn(List<Integer> values) {
-            addCriterion("book_id not in", values, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdBetween(Integer value1, Integer value2) {
-            addCriterion("book_id between", value1, value2, "bookId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBookIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("book_id not between", value1, value2, "bookId");
             return (Criteria) this;
         }
 
@@ -342,6 +319,186 @@ public class Lend_listExample {
 
         public Criteria andTimeNotBetween(Date value1, Date value2) {
             addCriterion("time not between", value1, value2, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowIsNull() {
+            addCriterion("used_flow is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowIsNotNull() {
+            addCriterion("used_flow is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowEqualTo(Double value) {
+            addCriterion("used_flow =", value, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowNotEqualTo(Double value) {
+            addCriterion("used_flow <>", value, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowGreaterThan(Double value) {
+            addCriterion("used_flow >", value, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowGreaterThanOrEqualTo(Double value) {
+            addCriterion("used_flow >=", value, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowLessThan(Double value) {
+            addCriterion("used_flow <", value, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowLessThanOrEqualTo(Double value) {
+            addCriterion("used_flow <=", value, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowIn(List<Double> values) {
+            addCriterion("used_flow in", values, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowNotIn(List<Double> values) {
+            addCriterion("used_flow not in", values, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowBetween(Double value1, Double value2) {
+            addCriterion("used_flow between", value1, value2, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedFlowNotBetween(Double value1, Double value2) {
+            addCriterion("used_flow not between", value1, value2, "usedFlow");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeIsNull() {
+            addCriterion("used_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeIsNotNull() {
+            addCriterion("used_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeEqualTo(Date value) {
+            addCriterionForJDBCTime("used_time =", value, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeNotEqualTo(Date value) {
+            addCriterionForJDBCTime("used_time <>", value, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeGreaterThan(Date value) {
+            addCriterionForJDBCTime("used_time >", value, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCTime("used_time >=", value, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeLessThan(Date value) {
+            addCriterionForJDBCTime("used_time <", value, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCTime("used_time <=", value, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeIn(List<Date> values) {
+            addCriterionForJDBCTime("used_time in", values, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeNotIn(List<Date> values) {
+            addCriterionForJDBCTime("used_time not in", values, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCTime("used_time between", value1, value2, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedTimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCTime("used_time not between", value1, value2, "usedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyIsNull() {
+            addCriterion("money is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyIsNotNull() {
+            addCriterion("money is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyEqualTo(Double value) {
+            addCriterion("money =", value, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyNotEqualTo(Double value) {
+            addCriterion("money <>", value, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyGreaterThan(Double value) {
+            addCriterion("money >", value, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyGreaterThanOrEqualTo(Double value) {
+            addCriterion("money >=", value, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyLessThan(Double value) {
+            addCriterion("money <", value, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyLessThanOrEqualTo(Double value) {
+            addCriterion("money <=", value, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyIn(List<Double> values) {
+            addCriterion("money in", values, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyNotIn(List<Double> values) {
+            addCriterion("money not in", values, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyBetween(Double value1, Double value2) {
+            addCriterion("money between", value1, value2, "money");
+            return (Criteria) this;
+        }
+
+        public Criteria andMoneyNotBetween(Double value1, Double value2) {
+            addCriterion("money not between", value1, value2, "money");
             return (Criteria) this;
         }
     }

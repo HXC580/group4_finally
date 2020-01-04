@@ -353,6 +353,66 @@ public class MealcardExample {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
+
+        public Criteria andCeilingIsNull() {
+            addCriterion("ceiling is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingIsNotNull() {
+            addCriterion("ceiling is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingEqualTo(Double value) {
+            addCriterion("ceiling =", value, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingNotEqualTo(Double value) {
+            addCriterion("ceiling <>", value, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingGreaterThan(Double value) {
+            addCriterion("ceiling >", value, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingGreaterThanOrEqualTo(Double value) {
+            addCriterion("ceiling >=", value, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingLessThan(Double value) {
+            addCriterion("ceiling <", value, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingLessThanOrEqualTo(Double value) {
+            addCriterion("ceiling <=", value, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingIn(List<Double> values) {
+            addCriterion("ceiling in", values, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingNotIn(List<Double> values) {
+            addCriterion("ceiling not in", values, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingBetween(Double value1, Double value2) {
+            addCriterion("ceiling between", value1, value2, "ceiling");
+            return (Criteria) this;
+        }
+
+        public Criteria andCeilingNotBetween(Double value1, Double value2) {
+            addCriterion("ceiling not between", value1, value2, "ceiling");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

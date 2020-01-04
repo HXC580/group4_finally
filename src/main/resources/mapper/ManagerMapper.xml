@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.group4.mapper.Lend_listMapper">
-  <resultMap id="BaseResultMap" type="com.example.group4.bean.Lend_list">
+<mapper namespace="com.example.group4.mapper.ManagerMapper">
+  <resultMap id="BaseResultMap" type="com.example.group4.bean.Manager">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="card_id" jdbcType="INTEGER" property="cardId" />
-    <result column="book_id" jdbcType="INTEGER" property="bookId" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, card_id, book_id, time
+    id, name, gender, phoneNumber, password
   </sql>
-  <select id="selectByExample" parameterType="com.example.group4.bean.Lend_listExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.group4.bean.ManagerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from lend_list
+    from manager
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,76 +86,85 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from lend_list
+    from manager
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from lend_list
+    delete from manager
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.group4.bean.Lend_listExample">
-    delete from lend_list
+  <delete id="deleteByExample" parameterType="com.example.group4.bean.ManagerExample">
+    delete from manager
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.group4.bean.Lend_list">
-    insert into lend_list (id, card_id, book_id, 
-      time)
-    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
-      #{time,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.group4.bean.Manager">
+    insert into manager (id, name, gender, 
+      phoneNumber, password)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.group4.bean.Lend_list">
-    insert into lend_list
+  <insert id="insertSelective" parameterType="com.example.group4.bean.Manager">
+    insert into manager
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="cardId != null">
-        card_id,
+      <if test="name != null">
+        name,
       </if>
-      <if test="bookId != null">
-        book_id,
+      <if test="gender != null">
+        gender,
       </if>
-      <if test="time != null">
-        time,
+      <if test="phonenumber != null">
+        phoneNumber,
+      </if>
+      <if test="password != null">
+        password,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="cardId != null">
-        #{cardId,jdbcType=INTEGER},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="bookId != null">
-        #{bookId,jdbcType=INTEGER},
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
+      <if test="phonenumber != null">
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.group4.bean.Lend_listExample" resultType="java.lang.Long">
-    select count(*) from lend_list
+  <select id="countByExample" parameterType="com.example.group4.bean.ManagerExample" resultType="java.lang.Long">
+    select count(*) from manager
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update lend_list
+    update manager
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.cardId != null">
-        card_id = #{record.cardId,jdbcType=INTEGER},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.bookId != null">
-        book_id = #{record.bookId,jdbcType=INTEGER},
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=VARCHAR},
       </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
+      <if test="record.phonenumber != null">
+        phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -162,35 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update lend_list
+    update manager
     set id = #{record.id,jdbcType=INTEGER},
-      card_id = #{record.cardId,jdbcType=INTEGER},
-      book_id = #{record.bookId,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      name = #{record.name,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.group4.bean.Lend_list">
-    update lend_list
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.group4.bean.Manager">
+    update manager
     <set>
-      <if test="cardId != null">
-        card_id = #{cardId,jdbcType=INTEGER},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="bookId != null">
-        book_id = #{bookId,jdbcType=INTEGER},
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
+      <if test="phonenumber != null">
+        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.group4.bean.Lend_list">
-    update lend_list
-    set card_id = #{cardId,jdbcType=INTEGER},
-      book_id = #{bookId,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.example.group4.bean.Manager">
+    update manager
+    set name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

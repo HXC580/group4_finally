@@ -3,14 +3,14 @@ package com.example.group4.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Lend_list implements Serializable {
+public class Machine implements Serializable {
     private Integer id;
 
-    private Integer cardId;
-
-    private Integer bookId;
+    private Integer businessId;
 
     private Date time;
+
+    private String address;
 
     private static final long serialVersionUID = 1L;
 
@@ -22,20 +22,12 @@ public class Lend_list implements Serializable {
         this.id = id;
     }
 
-    public Integer getCardId() {
-        return cardId;
+    public Integer getBusinessId() {
+        return businessId;
     }
 
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
-    }
-
-    public Integer getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
+    public void setBusinessId(Integer businessId) {
+        this.businessId = businessId;
     }
 
     public Date getTime() {
@@ -46,6 +38,14 @@ public class Lend_list implements Serializable {
         this.time = time;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -53,9 +53,9 @@ public class Lend_list implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", cardId=").append(cardId);
-        sb.append(", bookId=").append(bookId);
+        sb.append(", businessId=").append(businessId);
         sb.append(", time=").append(time);
+        sb.append(", address=").append(address);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

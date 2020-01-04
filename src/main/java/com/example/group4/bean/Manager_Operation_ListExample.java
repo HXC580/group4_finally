@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Lend_listExample {
+public class Manager_Operation_ListExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public Lend_listExample() {
+    public Manager_Operation_ListExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -225,63 +225,133 @@ public class Lend_listExample {
             return (Criteria) this;
         }
 
-        public Criteria andBookIdIsNull() {
-            addCriterion("book_id is null");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdIsNotNull() {
-            addCriterion("book_id is not null");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdEqualTo(Integer value) {
-            addCriterion("book_id =", value, "bookId");
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdNotEqualTo(Integer value) {
-            addCriterion("book_id <>", value, "bookId");
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdGreaterThan(Integer value) {
-            addCriterion("book_id >", value, "bookId");
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("book_id >=", value, "bookId");
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdLessThan(Integer value) {
-            addCriterion("book_id <", value, "bookId");
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdLessThanOrEqualTo(Integer value) {
-            addCriterion("book_id <=", value, "bookId");
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdIn(List<Integer> values) {
-            addCriterion("book_id in", values, "bookId");
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdNotIn(List<Integer> values) {
-            addCriterion("book_id not in", values, "bookId");
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdBetween(Integer value1, Integer value2) {
-            addCriterion("book_id between", value1, value2, "bookId");
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andBookIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("book_id not between", value1, value2, "bookId");
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdIsNull() {
+            addCriterion("manager_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdIsNotNull() {
+            addCriterion("manager_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdEqualTo(Integer value) {
+            addCriterion("manager_id =", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdNotEqualTo(Integer value) {
+            addCriterion("manager_id <>", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdGreaterThan(Integer value) {
+            addCriterion("manager_id >", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("manager_id >=", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdLessThan(Integer value) {
+            addCriterion("manager_id <", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdLessThanOrEqualTo(Integer value) {
+            addCriterion("manager_id <=", value, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdIn(List<Integer> values) {
+            addCriterion("manager_id in", values, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdNotIn(List<Integer> values) {
+            addCriterion("manager_id not in", values, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdBetween(Integer value1, Integer value2) {
+            addCriterion("manager_id between", value1, value2, "managerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andManagerIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("manager_id not between", value1, value2, "managerId");
             return (Criteria) this;
         }
 

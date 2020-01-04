@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.group4.mapper.Lend_listMapper">
-  <resultMap id="BaseResultMap" type="com.example.group4.bean.Lend_list">
+<mapper namespace="com.example.group4.mapper.WlanMapper">
+  <resultMap id="BaseResultMap" type="com.example.group4.bean.Wlan">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="card_id" jdbcType="INTEGER" property="cardId" />
-    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="used_flow" jdbcType="DOUBLE" property="usedFlow" />
+    <result column="used_time" jdbcType="TIME" property="usedTime" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, card_id, book_id, time
+    id, card_id, time, used_flow, used_time, money
   </sql>
-  <select id="selectByExample" parameterType="com.example.group4.bean.Lend_listExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.group4.bean.WlanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from lend_list
+    from wlan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,27 +87,29 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from lend_list
+    from wlan
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from lend_list
+    delete from wlan
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.group4.bean.Lend_listExample">
-    delete from lend_list
+  <delete id="deleteByExample" parameterType="com.example.group4.bean.WlanExample">
+    delete from wlan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.group4.bean.Lend_list">
-    insert into lend_list (id, card_id, book_id, 
-      time)
-    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
-      #{time,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.group4.bean.Wlan">
+    insert into wlan (id, card_id, time, 
+      used_flow, used_time, money
+      )
+    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{usedFlow,jdbcType=DOUBLE}, #{usedTime,jdbcType=TIME}, #{money,jdbcType=DOUBLE}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.group4.bean.Lend_list">
-    insert into lend_list
+  <insert id="insertSelective" parameterType="com.example.group4.bean.Wlan">
+    insert into wlan
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -113,11 +117,17 @@
       <if test="cardId != null">
         card_id,
       </if>
-      <if test="bookId != null">
-        book_id,
-      </if>
       <if test="time != null">
         time,
+      </if>
+      <if test="usedFlow != null">
+        used_flow,
+      </if>
+      <if test="usedTime != null">
+        used_time,
+      </if>
+      <if test="money != null">
+        money,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -125,36 +135,48 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="cardId != null">
-        #{cardId,jdbcType=INTEGER},
-      </if>
-      <if test="bookId != null">
-        #{bookId,jdbcType=INTEGER},
+        #{cardId,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="usedFlow != null">
+        #{usedFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="usedTime != null">
+        #{usedTime,jdbcType=TIME},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.group4.bean.Lend_listExample" resultType="java.lang.Long">
-    select count(*) from lend_list
+  <select id="countByExample" parameterType="com.example.group4.bean.WlanExample" resultType="java.lang.Long">
+    select count(*) from wlan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update lend_list
+    update wlan
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.cardId != null">
-        card_id = #{record.cardId,jdbcType=INTEGER},
-      </if>
-      <if test="record.bookId != null">
-        book_id = #{record.bookId,jdbcType=INTEGER},
+        card_id = #{record.cardId,jdbcType=VARCHAR},
       </if>
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usedFlow != null">
+        used_flow = #{record.usedFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="record.usedTime != null">
+        used_time = #{record.usedTime,jdbcType=TIME},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -162,35 +184,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update lend_list
+    update wlan
     set id = #{record.id,jdbcType=INTEGER},
-      card_id = #{record.cardId,jdbcType=INTEGER},
-      book_id = #{record.bookId,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      card_id = #{record.cardId,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      used_flow = #{record.usedFlow,jdbcType=DOUBLE},
+      used_time = #{record.usedTime,jdbcType=TIME},
+      money = #{record.money,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.group4.bean.Lend_list">
-    update lend_list
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.group4.bean.Wlan">
+    update wlan
     <set>
       <if test="cardId != null">
-        card_id = #{cardId,jdbcType=INTEGER},
-      </if>
-      <if test="bookId != null">
-        book_id = #{bookId,jdbcType=INTEGER},
+        card_id = #{cardId,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="usedFlow != null">
+        used_flow = #{usedFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="usedTime != null">
+        used_time = #{usedTime,jdbcType=TIME},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.group4.bean.Lend_list">
-    update lend_list
-    set card_id = #{cardId,jdbcType=INTEGER},
-      book_id = #{bookId,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.example.group4.bean.Wlan">
+    update wlan
+    set card_id = #{cardId,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      used_flow = #{usedFlow,jdbcType=DOUBLE},
+      used_time = #{usedTime,jdbcType=TIME},
+      money = #{money,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
