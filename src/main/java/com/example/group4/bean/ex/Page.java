@@ -4,6 +4,8 @@ public class Page {
     private String tableName;//表名
     private int PageCountNumber;//数据条数
     private int n;//每页多少个
+    private int PageNumber;//总页数
+    private int NowPageNumber=1;//当前页码
 
     public int getN() {
         return n;
@@ -12,10 +14,6 @@ public class Page {
     public void setN(int n) {
         this.n = n;
     }
-
-    private int PageNumber;//总页数
-    private int NowPageNumber=1;//当前页码
-
     public String getTableName() {
         return tableName;
     }
