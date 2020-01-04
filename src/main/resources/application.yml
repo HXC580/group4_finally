@@ -1,6 +1,10 @@
 server:
   port: 8888
 spring:
+  mvc:
+    view:
+      suffix: .html
+      prefix: /templates
   datasource:
     username: group4
     password: CJMcjm136466!
@@ -8,3 +12,15 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
  mapper-locations: mapper/**/*Mapper.xml
+wx:
+  appID: wx1046df29d9aa8427
+  mchID: 1413626902
+  key: lkjhgfdsa1234567890poiuytrewqZXC
+  unifiedorder:
+    notifyUrl: ${intranet.penetrateUrl}/wxPay/unifiedorderNotify
+intranet:
+  penetrateUrl: www.xccjm.fun:8888
+https:
+  connectionTimeout: 15000
+  readTimeout: 15000
+
