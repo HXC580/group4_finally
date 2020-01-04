@@ -3,8 +3,9 @@ package com.example.group4.service.impl;
 import com.example.group4.service.LoginService;
 
 public class LoginImpl implements LoginService {
+
     @Override
-    public boolean login(String id, String pass) {
+    public boolean login(String id, String pass, String type) {
         return false;
     }
 

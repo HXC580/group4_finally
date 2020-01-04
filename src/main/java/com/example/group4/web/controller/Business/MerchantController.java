@@ -5,11 +5,13 @@ import com.example.group4.bean.Cost_bill;
 import com.example.group4.service.IMerchantService.IMerchantService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
+import com.google.common.base.Utf8;
+import io.swagger.annotations.ApiImplicitParam;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,13 +34,26 @@ public class MerchantController {
         return MessageUtil.success();
     }
 
-    @GetMapping("/selectCollectionRecords")
-    public Message selectCollectionRecords(int id){
-        return MessageUtil.success(merchantService.selectCollectionRecords(id));
+    @PostMapping("/selectCollectionRecords")
+    public Message selectCollectionRecords(@RequestBody Date startDate,@RequestBody Date endDate, int id){
+        return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,id));
     }
 
     @GetMapping("/profit")
-    public Message profit(int id){
-        return MessageUtil.success(merchantService.getProfit(id));
+    public Message profit(Date startDate,Date endDate,int id){
+       return MessageUtil.success(merchantService.getProfit(startDate,endDate,id));
+    }
+
+
+    public Message message(Object object,int code){
+        if(object == null){
+            return MessageUtil.error(200,"参数为空");
+        }
+        else {
+            if(code==0)
+                return MessageUtil.success();
+            else
+                return MessageUtil.success(object);
+        }
     }
 }
