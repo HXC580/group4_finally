@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.example.group4.mapper.student.ex.BookEXMapper">
 
-    <resultMap id="selectAllLendList" type="com.example.group4.bean.ex.SurveyEX">
+    <resultMap id="selectAllLendList" type="com.example.group4.bean.student.ex.Lend_listEX">
         <id column="id" property="id"></id>
         <result column="status" property="status"></result>
         <result column="code" property="code" />
@@ -21,8 +21,8 @@
     </resultMap>
 
     <select id="selectAllLendList" resultMap="selectAllLendList">
-        select l.id,l
-        from lend_list l,
-        where name like #{word}
+        select b.name,b.author,b.publisher,b.publish_time,b.instorage_time,b.address
+        from lend_list l, book b, return_list r;
+        where l.book_id=b.id and l.id=r.lend_id and
     </select>
 </mapper>
