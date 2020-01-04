@@ -63,7 +63,7 @@ public class BookImpl  implements IBookService {
             if(lend_listEX.getIsReturnBookTimeOut()=="否"){
                 lend_listEX.setFine(0.00);
             }else{
-                int days=(int)time/1000/60/60/24;
+                int days=(int)(time-1000*60*60*24*30)/1000/60/60/24;
                 Double fine=days*0.1;
                 lend_listEX.setFine(fine);
             }
@@ -71,6 +71,12 @@ public class BookImpl  implements IBookService {
 
         }
 
+        return lend_listEXES;
+    }
+
+    @Override
+    public List<Lend_listEX> selectByKey(String key) {
+        List<Lend_listEX> lend_listEXES = bookEXMapper.selectByKey(key);
         return lend_listEXES;
     }
 }

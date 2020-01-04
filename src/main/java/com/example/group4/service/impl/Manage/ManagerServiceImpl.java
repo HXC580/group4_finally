@@ -53,7 +53,7 @@ public class ManagerServiceImpl implements IManagerService {
         //修改学生卡信息
 
 
-        mealcardMapper.updateByExample();
+        //mealcardMapper.updateByExample();
 
 
 

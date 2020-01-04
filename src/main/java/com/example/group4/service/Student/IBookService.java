@@ -13,4 +13,5 @@ public interface IBookService {
     List<Lend_list> displayAllLendList();
     List<Return_list> displayAllReturnList();
     List<Lend_listEX> selectAllLendList();
+    List<Lend_listEX> selectByKey(String key);
 }

@@ -3,6 +3,7 @@ package com.example.group4.web.controller.student;
 
 import com.example.group4.bean.Lend_list;
 import com.example.group4.bean.Return_list;
+import com.example.group4.bean.student.ex.Lend_listEX;
 import com.example.group4.service.Student.IBookService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
@@ -36,6 +37,23 @@ public class BookController {
     @ApiOperation(value="获取全部还书信息")
     public Message displayAllReturnList(){
         List<Return_list> list=iBookService.displayAllReturnList();
+        return MessageUtil.success(list);
+
+    }
+
+    @GetMapping("/selectAllLendList")
+    @ApiOperation(value="获取全部还书详细信息")
+    public Message selectAllLendList(){
+        List<Lend_listEX> list=iBookService.selectAllLendList();
+        return MessageUtil.success(list);
+
+    }
+
+    @GetMapping("/selectByKey")
+    @ApiOperation(value="根据关键字获取全部还书详细信息")
+    public Message selectByKey(String key){
+        key="%"+key+"%";
+        List<Lend_listEX> list=iBookService.selectByKey(key);
         return MessageUtil.success(list);
 
     }

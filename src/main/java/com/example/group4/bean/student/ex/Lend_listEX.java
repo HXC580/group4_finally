@@ -5,6 +5,7 @@ import com.example.group4.bean.Return_list;
 import java.util.Date;
 
 public class Lend_listEX {
+    private int BookID;
     private String BookName;
     private String Author;
     private String Publisher;
@@ -85,5 +86,13 @@ public class Lend_listEX {
 
     public void setReturn_list(Return_list return_list) {
         this.return_list = return_list;
+    }
+
+    public int getBookID() {
+        return BookID;
+    }
+
+    public void setBookID(int bookID) {
+        BookID = bookID;
     }
 }

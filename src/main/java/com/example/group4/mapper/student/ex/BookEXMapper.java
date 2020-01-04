@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BookEXMapper {
     List<Lend_listEX> selectAllLendList();
+    List<Lend_listEX> selectByKey(String key);
 }
