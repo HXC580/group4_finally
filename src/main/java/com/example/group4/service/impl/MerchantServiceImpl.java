@@ -15,4 +15,9 @@ public class MerchantServiceImpl implements IMerchantService {
     public Business queById(int id) {
         return businessMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void update(Business business) {
+
+    }
 }
