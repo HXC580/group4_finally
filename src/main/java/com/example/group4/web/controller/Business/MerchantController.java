@@ -1,7 +1,7 @@
 package com.example.group4.web.controller.Business;
 
 import com.example.group4.bean.Business;
-import com.example.group4.service.IMerchantService;
+import com.example.group4.service.IMerchantService.IMerchantService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,9 @@ public class MerchantController {
 
     @GetMapping("/update")
     public Message update(Business business){
+        System.out.println(business.getPhonenumber().getClass().toString());
+        //有问题
+
         merchantService.saveOrUpdate(business);
         return MessageUtil.success();
     }
