@@ -6,6 +6,7 @@
     <result column="money" jdbcType="DOUBLE" property="money" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="ceiling" jdbcType="DOUBLE" property="ceiling" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, money, student_id, type
+    id, money, student_id, type, ceiling
   </sql>
   <select id="selectByExample" parameterType="com.example.group4.bean.MealcardExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.example.group4.bean.Mealcard">
     insert into mealcard (id, money, student_id, 
-      type)
+      type, ceiling)
     values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, #{studentId,jdbcType=INTEGER}, 
-      #{type,jdbcType=VARCHAR})
+      #{type,jdbcType=VARCHAR}, #{ceiling,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.example.group4.bean.Mealcard">
     insert into mealcard
@@ -119,6 +120,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="ceiling != null">
+        ceiling,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +136,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ceiling != null">
+        #{ceiling,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=VARCHAR},
       </if>
+      <if test="record.ceiling != null">
+        ceiling = #{record.ceiling,jdbcType=DOUBLE},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       money = #{record.money,jdbcType=DOUBLE},
       student_id = #{record.studentId,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=VARCHAR}
+      type = #{record.type,jdbcType=VARCHAR},
+      ceiling = #{record.ceiling,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="ceiling != null">
+        ceiling = #{ceiling,jdbcType=DOUBLE},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +204,8 @@
     update mealcard
     set money = #{money,jdbcType=DOUBLE},
       student_id = #{studentId,jdbcType=INTEGER},
-      type = #{type,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR},
+      ceiling = #{ceiling,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

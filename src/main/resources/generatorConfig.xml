@@ -58,9 +58,11 @@
 		<table tableName="mealcard" domainObjectName="Mealcard"></table>
 		<table tableName="return_list" domainObjectName="Return_list"></table>
 		<table tableName="student" domainObjectName="Student"></table>
+		<table tableName="manager" domainObjectName="Manager"></table>
+		<table tableName="manager_operation_list" domainObjectName="Manager_Operation_List"></table>
+		<table tableName="wlan" domainObjectName="Wlan"></table>
 
-
-
+		<table tableName="machine" domainObjectName="Machine"></table>
 
 
 	</context>

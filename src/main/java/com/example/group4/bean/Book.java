@@ -20,6 +20,8 @@ public class Book implements Serializable {
 
     private String status;
 
+    private Double price;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -86,6 +88,14 @@ public class Book implements Serializable {
         this.status = status == null ? null : status.trim();
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -100,6 +110,7 @@ public class Book implements Serializable {
         sb.append(", instorageTime=").append(instorageTime);
         sb.append(", address=").append(address);
         sb.append(", status=").append(status);
+        sb.append(", price=").append(price);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

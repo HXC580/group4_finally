@@ -3,12 +3,14 @@ package com.example.group4.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Lend_list implements Serializable {
+public class Manager_Operation_List implements Serializable {
     private Integer id;
 
     private Integer cardId;
 
-    private Integer bookId;
+    private String type;
+
+    private Integer managerId;
 
     private Date time;
 
@@ -30,12 +32,20 @@ public class Lend_list implements Serializable {
         this.cardId = cardId;
     }
 
-    public Integer getBookId() {
-        return bookId;
+    public String getType() {
+        return type;
     }
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    public Integer getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Integer managerId) {
+        this.managerId = managerId;
     }
 
     public Date getTime() {
@@ -54,7 +64,8 @@ public class Lend_list implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", cardId=").append(cardId);
-        sb.append(", bookId=").append(bookId);
+        sb.append(", type=").append(type);
+        sb.append(", managerId=").append(managerId);
         sb.append(", time=").append(time);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

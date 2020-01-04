@@ -11,6 +11,8 @@ public class Mealcard implements Serializable {
 
     private String type;
 
+    private Double ceiling;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -45,6 +47,14 @@ public class Mealcard implements Serializable {
         this.type = type == null ? null : type.trim();
     }
 
+    public Double getCeiling() {
+        return ceiling;
+    }
+
+    public void setCeiling(Double ceiling) {
+        this.ceiling = ceiling;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -55,6 +65,7 @@ public class Mealcard implements Serializable {
         sb.append(", money=").append(money);
         sb.append(", studentId=").append(studentId);
         sb.append(", type=").append(type);
+        sb.append(", ceiling=").append(ceiling);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

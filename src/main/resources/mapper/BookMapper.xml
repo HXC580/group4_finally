@@ -10,6 +10,7 @@
     <result column="instorage_time" jdbcType="TIMESTAMP" property="instorageTime" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, author, publisher, publish_time, instorage_time, address, status
+    id, name, author, publisher, publish_time, instorage_time, address, status, price
   </sql>
   <select id="selectByExample" parameterType="com.example.group4.bean.BookExample" resultMap="BaseResultMap">
     select
@@ -105,10 +106,12 @@
   <insert id="insert" parameterType="com.example.group4.bean.Book">
     insert into book (id, name, author, 
       publisher, publish_time, instorage_time, 
-      address, status)
+      address, status, price
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
       #{publisher,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{instorageTime,jdbcType=TIMESTAMP}, 
-      #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+      #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.group4.bean.Book">
     insert into book
@@ -137,6 +140,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="price != null">
+        price,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -162,6 +168,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -198,6 +207,9 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
       </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +224,8 @@
       publish_time = #{record.publishTime,jdbcType=TIMESTAMP},
       instorage_time = #{record.instorageTime,jdbcType=TIMESTAMP},
       address = #{record.address,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +254,9 @@
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -252,7 +268,8 @@
       publish_time = #{publishTime,jdbcType=TIMESTAMP},
       instorage_time = #{instorageTime,jdbcType=TIMESTAMP},
       address = #{address,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR}
+      status = #{status,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
