@@ -7,7 +7,7 @@ import com.example.group4.common.getData.getDataFromMysql;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class isNull {
+public class  isNull {
     public static Boolean isOrNull(String sql){
         sql="select isnull("+sql+")";
         HashMap map= getDataFromMysql.getDataArrayListMap(sql).get(0);
