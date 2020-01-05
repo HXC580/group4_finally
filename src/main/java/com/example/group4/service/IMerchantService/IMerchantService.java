@@ -2,6 +2,7 @@ package com.example.group4.service.IMerchantService;
 
 import com.example.group4.bean.Business;
 import com.example.group4.bean.Cost_bill;
+import com.example.group4.bean.ex.Cost_billEX;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ public interface IMerchantService {
 
    void saveOrUpdate(Business business) throws  RuntimeException;
 
-    List<Cost_bill> selectCollectionRecords(Date startDate, Date endDate, int id) throws RuntimeException;
+    List<Cost_billEX> selectCollectionRecords(Date startDate, Date endDate, int id) throws RuntimeException;
 
     double getProfit(Date startDate, Date endDate, int id) throws RuntimeException;
 }
