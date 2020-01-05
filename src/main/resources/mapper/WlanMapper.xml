@@ -8,6 +8,7 @@
     <result column="used_flow" jdbcType="DOUBLE" property="usedFlow" />
     <result column="used_time" jdbcType="TIME" property="usedTime" />
     <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="pass" jdbcType="VARCHAR" property="pass" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, card_id, time, used_flow, used_time, money
+    id, card_id, time, used_flow, used_time, money, pass
   </sql>
   <select id="selectByExample" parameterType="com.example.group4.bean.WlanExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.example.group4.bean.Wlan">
     insert into wlan (id, card_id, time, 
-      used_flow, used_time, money
-      )
+      used_flow, used_time, money, 
+      pass)
     values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
-      #{usedFlow,jdbcType=DOUBLE}, #{usedTime,jdbcType=TIME}, #{money,jdbcType=DOUBLE}
-      )
+      #{usedFlow,jdbcType=DOUBLE}, #{usedTime,jdbcType=TIME}, #{money,jdbcType=DOUBLE}, 
+      #{pass,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.group4.bean.Wlan">
     insert into wlan
@@ -129,6 +130,9 @@
       <if test="money != null">
         money,
       </if>
+      <if test="pass != null">
+        pass,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="money != null">
         #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.money != null">
         money = #{record.money,jdbcType=DOUBLE},
       </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       time = #{record.time,jdbcType=TIMESTAMP},
       used_flow = #{record.usedFlow,jdbcType=DOUBLE},
       used_time = #{record.usedTime,jdbcType=TIME},
-      money = #{record.money,jdbcType=DOUBLE}
+      money = #{record.money,jdbcType=DOUBLE},
+      pass = #{record.pass,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="money != null">
         money = #{money,jdbcType=DOUBLE},
       </if>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -222,7 +236,8 @@
       time = #{time,jdbcType=TIMESTAMP},
       used_flow = #{usedFlow,jdbcType=DOUBLE},
       used_time = #{usedTime,jdbcType=TIME},
-      money = #{money,jdbcType=DOUBLE}
+      money = #{money,jdbcType=DOUBLE},
+      pass = #{pass,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

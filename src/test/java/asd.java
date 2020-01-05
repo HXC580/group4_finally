@@ -1,13 +1,14 @@
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.zip.DataFormatException;
 
 public class asd {
     @Test
     public void rest()
     {
-        Date date = new Date();
-        System.out.println(date.getClass());
+        SimpleDateFormat ad = new SimpleDateFormat("yyyy-MM-dd");
+        String date = ad.format(new Date());
+        System.out.println(date);
     }
 }

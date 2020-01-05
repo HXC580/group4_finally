@@ -16,6 +16,8 @@ public class Wlan implements Serializable {
 
     private Double money;
 
+    private String pass;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -66,6 +68,14 @@ public class Wlan implements Serializable {
         this.money = money;
     }
 
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass == null ? null : pass.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -78,6 +88,7 @@ public class Wlan implements Serializable {
         sb.append(", usedFlow=").append(usedFlow);
         sb.append(", usedTime=").append(usedTime);
         sb.append(", money=").append(money);
+        sb.append(", pass=").append(pass);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
