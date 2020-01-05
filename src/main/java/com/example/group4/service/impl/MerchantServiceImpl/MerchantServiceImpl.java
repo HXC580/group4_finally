@@ -3,12 +3,14 @@ package com.example.group4.service.impl.MerchantServiceImpl;
 import com.example.group4.bean.Business;
 import com.example.group4.bean.Cost_bill;
 import com.example.group4.bean.Cost_billExample;
+import com.example.group4.bean.ex.Cost_billEX;
 import com.example.group4.mapper.BusinessMapper;
 import com.example.group4.mapper.Cost_billMapper;
 import com.example.group4.service.IMerchantService.IMerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,17 +40,30 @@ public class MerchantServiceImpl implements IMerchantService {
     }
 
     @Override
-    public List<Cost_bill> selectCollectionRecords(Date startDate,Date endDate,int id) throws RuntimeException {
+    public List<Cost_billEX> selectCollectionRecords(Date startDate,Date endDate,int id) throws RuntimeException {
         Cost_billExample example = new Cost_billExample();
         example.createCriteria().andMachineIdEqualTo(id).andTimeBetween(startDate,endDate);
-        return cost_billMapper.selectByExample(example);
+        List<Cost_bill> cost_bills = cost_billMapper.selectByExample(example);
+        List<Cost_billEX> cost_billEXList = new ArrayList<>();
+
+        double profit=0;
+        for (Cost_bill cost_bill : cost_bills) {
+            profit += cost_bill.getMoney();
+        }
+
+        for (int i = 0; i < cost_bills.size(); i++) {
+            cost_billEXList.add(new Cost_billEX(cost_bills.get(i).getId(),cost_bills.get(i).getCardId(),cost_bills.get(i).getMoney(),cost_bills.get(i).getTime(),cost_bills.get(i).getMachineId(),profit));
+        }
+
+
+        return cost_billEXList;
     }
 
     @Override
     public double getProfit(Date startDate, Date endDate, int id) throws RuntimeException {
         double profit= 0;
-        List<Cost_bill> cost_bills = selectCollectionRecords(startDate, endDate, id);
-        for (Cost_bill cost_bill : cost_bills) {
+        List<Cost_billEX> cost_bills = selectCollectionRecords(startDate, endDate, id);
+        for (Cost_billEX cost_bill : cost_bills) {
             profit += cost_bill.getMoney();
         }
         return profit;
