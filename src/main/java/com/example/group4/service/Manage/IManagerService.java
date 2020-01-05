@@ -20,5 +20,6 @@ public interface IManagerService {
     Business searchBy3();
     void modify(Dormitory dormitory);
     List<Dormitory> selectAllDormitory();
+    void modifyBusiness(Business business);
 
 }

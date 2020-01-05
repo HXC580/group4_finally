@@ -13,7 +13,7 @@ public class Business implements Serializable {
 
     private String idNo;
 
-    private Integer phonenumber;
+    private String phonenumber;
 
     private static final long serialVersionUID = 1L;
 
@@ -57,11 +57,11 @@ public class Business implements Serializable {
         this.idNo = idNo == null ? null : idNo.trim();
     }
 
-    public Integer getPhonenumber() {
+    public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(Integer phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 

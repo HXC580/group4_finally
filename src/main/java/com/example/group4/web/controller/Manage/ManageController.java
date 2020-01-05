@@ -10,6 +10,7 @@ import com.example.group4.service.Manage.IManagerService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,19 +60,30 @@ public class ManageController {
     }
 
     @GetMapping("查询本人信息")
+
     public Message selectManageown(int id){
         return MessageUtil.success(managerService.selectManageown(id));
     }
+
+
     @PostMapping("添加商户")
     public Message addBusiness(Business business){
         managerService.addBusiness(business);
         return MessageUtil.success();
     }
+    @PostMapping("修改商户信息")
+    public Message ModifyBusiness(Business business){
+        managerService.modifyBusiness(business);
+        return MessageUtil.success();
+    }
+
+
     @GetMapping("查询商户")
     public Message selectAllBusiness(){
         return MessageUtil.success(managerService.selectAllBusiness());
     }
     @PostMapping("修改楼长")
+
     public Message modifyDormitory(Dormitory dormitory){
         managerService.modify(dormitory);
         return MessageUtil.success();
