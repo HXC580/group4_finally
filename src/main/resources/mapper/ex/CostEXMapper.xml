@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.example.group4.mapper.ex.CostbillEXMapper">
+<<<<<<< HEAD
+<mapper namespace="com.example.group4.mapper.ex.CostEXMapper">
     <select id="consume" resultType="double">
-    <!--select money from cost_bill where card_id = #{id} and time(order_date)= #{date}-->
-    select money from cost_bill where TO_DAYS(time) = to_days(now());
-    </select>
-
-
+        <!--select money from cost_bill where card_id = #{id} and time(order_date)= #{date}-->
+        select money from cost_bill where TO_DAYS(time) = to_days(now());
+=======
+<mapper namespace="com.example.group4.mapper.ex.CostBill2EXMapper">
     <resultMap id="aaa" type="com.example.group4.bean.ex.CostBillEX">
         <id column="id" property="id"></id>
         <result column="card_id" property="cardId"></result>
@@ -18,6 +17,7 @@
     </resultMap>
     <select id="findAll" resultMap="aaa">
         select * from cost_bill limit #{start},#{pagesize}
+>>>>>>> bb60bfd21ba401d9a2c8f7abe46f481624eb52c2
     </select>
 
     <resultMap id="abc" type="com.example.group4.bean.Business">
@@ -50,6 +50,3 @@
         select sum(money) from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day}
     </select>
 </mapper>
-
-
-
