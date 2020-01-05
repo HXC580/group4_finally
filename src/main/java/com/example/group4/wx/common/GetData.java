@@ -18,7 +18,7 @@ public class GetData {
     static Map<String,String> map;
     public static boolean getSqlServerData(String PO_NO)    {
         map=new HashMap<>();
-        sql="select po_no,sys_name,prd_name,price,po_state from po where PO_NO = '"+PO_NO+"'" ;
+        sql="select po_no,sys_name,prd_name,price,po_state from group4_3.po where PO_NO = '"+PO_NO+"'" ;
         try {
             //加载驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
