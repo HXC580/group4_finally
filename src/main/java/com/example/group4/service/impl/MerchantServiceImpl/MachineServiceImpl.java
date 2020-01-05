@@ -7,7 +7,7 @@ import com.example.group4.bean.Mealcard;
 import com.example.group4.mapper.Cost_billMapper;
 import com.example.group4.mapper.MachineMapper;
 import com.example.group4.mapper.MealcardMapper;
-import com.example.group4.mapper.ex.CostbillEXMapper;
+import com.example.group4.mapper.ex.CostEXMapper;
 import com.example.group4.service.IMerchantService.IMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class MachineServiceImpl implements IMachineService {
     @Autowired
     private MealcardMapper mealcardMapper;
     @Autowired
-    private CostbillEXMapper costbillEXMapper;
+    private CostEXMapper costbillEXMapper;
     @Autowired
     private Cost_billMapper cost_billMapper;
 
