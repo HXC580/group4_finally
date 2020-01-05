@@ -144,4 +144,19 @@ public class ManagerServiceImpl implements IManagerService {
         return dormitoryMapper.selectByExample(example);
     }
 
+    @Override
+    public void modifyBusiness(Business business) {
+        if (business == null) {
+            throw new RuntimeException("参数为空");
+        }
+        if (business.getId() == null) {
+            businessMapper.insert(business);
+
+        } else {
+
+            businessMapper.updateByPrimaryKey(business);
+
+        }
+
+    }
 }
