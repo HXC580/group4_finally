@@ -61,6 +61,7 @@
 		<table tableName="manager" domainObjectName="Manager"></table>
 		<table tableName="manager_operation_list" domainObjectName="Manager_Operation_List"></table>
 		<table tableName="wlan" domainObjectName="Wlan"></table>
+		<table tableName="po" domainObjectName="Po"></table>
 
 		<table tableName="machine" domainObjectName="Machine"></table>
 
