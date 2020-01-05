@@ -1,5 +1,6 @@
 package com.example.group4.web.controller.StudentCard;
 
+import com.example.group4.bean.Po;
 import com.example.group4.service.impl.StudentCardService.RechargeServiceImpl;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RechargeController {
     private int id;
     private double money;
+    private Boolean ef=false;
     @Autowired
     private RechargeServiceImpl rechargeService;
 
     @ApiOperation(value = "充值")
     @GetMapping("/Recharge")
     public Message Recharge(){
+        if(ef)
         rechargeService.AddSum(id,money);
         return MessageUtil.success();
     }
@@ -32,7 +35,8 @@ public class RechargeController {
     public String po(int id1,double money1){
         id=id1;
         money=money1;
-        rechargeService.AddSum(id1,money1);
-        return "redirect:/From?PO_NO=id1";
+        Po po=rechargeService.insertPrepay(id1, money1);
+        return "redirect:/From?PO_NO="+po.getPoNo();
     }
+
 }

@@ -6,7 +6,9 @@ import com.example.group4.bean.Recharge_bill;
 import com.example.group4.mapper.MealcardMapper;
 import com.example.group4.mapper.PoMapper;
 import com.example.group4.mapper.Recharge_billMapper;
+import com.example.group4.mapper.ex.PoEXMapper;
 import com.example.group4.service.StudentCardService.IRechargeService;
+import org.omg.PortableServer.POA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class RechargeServiceImpl implements IRechargeService {
     @Autowired
     private MealcardMapper mealcardMapper;
     @Autowired
-    private PoMapper poMapper;
+    private PoEXMapper poEXMapper;
     public void AddSum(int id, double money){
         if(mealcardMapper.selectByPrimaryKey(id).getType()=="normal"){
             //添加充值表中的记录
@@ -40,10 +42,14 @@ public class RechargeServiceImpl implements IRechargeService {
     }
 
     @Override
-    public void insertPrepay(int id, double money) {
+    public Po insertPrepay(int id, double money) {
         Po po = new Po();
         po.setPrice(""+money+"");
-        poMapper.insert(po);
+        po.setPoState("待支付");
+        po.setPrdName("续费一年");
+        po.setSysName("测试系统3");
+        poEXMapper.insertPrepay(po);
+        return po;
     }
 
 

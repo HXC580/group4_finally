@@ -16,7 +16,7 @@ public class update {
     static Connection conn=null;
     static PreparedStatement pstmt=null;
     public  static  void updateData(String id,String returncode){
-        sql="UPDATE po SET PO_STATE='"+ returncode+"' where PO_NO = '"+id+"';" ;
+        sql="UPDATE group4_3.po SET PO_STATE='"+ returncode+"' where PO_NO = '"+id+"';" ;
 
 
         MSSQLUtil.setPoState(returncode);
