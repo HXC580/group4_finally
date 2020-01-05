@@ -12,9 +12,9 @@ public class Book implements Serializable {
 
     private String publisher;
 
-    private Date publishTime;
+    private Date publish_time;
 
-    private Date instorageTime;
+    private Date instorage_time;
 
     private String address;
 
@@ -56,20 +56,20 @@ public class Book implements Serializable {
         this.publisher = publisher == null ? null : publisher.trim();
     }
 
-    public Date getPublishTime() {
-        return publishTime;
+    public Date getPublish_time() {
+        return publish_time;
     }
 
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
+    public void setPublish_time(Date publish_time) {
+        this.publish_time = publish_time;
     }
 
-    public Date getInstorageTime() {
-        return instorageTime;
+    public Date getInstorage_time() {
+        return instorage_time;
     }
 
-    public void setInstorageTime(Date instorageTime) {
-        this.instorageTime = instorageTime;
+    public void setInstorage_time(Date instorage_time) {
+        this.instorage_time = instorage_time;
     }
 
     public String getAddress() {
@@ -98,21 +98,16 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", author=").append(author);
-        sb.append(", publisher=").append(publisher);
-        sb.append(", publishTime=").append(publishTime);
-        sb.append(", instorageTime=").append(instorageTime);
-        sb.append(", address=").append(address);
-        sb.append(", status=").append(status);
-        sb.append(", price=").append(price);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publish_time=" + publish_time +
+                ", instorage_time=" + instorage_time +
+                ", address='" + address + '\'' +
+                ", status='" + status + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

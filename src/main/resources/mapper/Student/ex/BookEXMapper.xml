@@ -5,10 +5,10 @@
     <resultMap id="selectAllLendList" type="com.example.group4.bean.student.ex.Lend_listEX">
         <result column="bname" property="BookName"></result>
         <result column="bauthor" property="Author"></result>
-        <result column="bpublisher" property="Publisher" />
-        <result column="bpublish_time" property="PublishTime" />
-        <result column="ltime"  property="BorrowTime" />
-        <result column="bid" property="BookID"/>
+        <result column="bpublisher" property="Publisher" ></result>
+        <result column="bpublish_time" property="PublishTime" ></result>
+        <result column="ltime"  property="BorrowTime" ></result>
+        <result column="bid" property="BookID"></result>
 
         <association property="return_list" column="return_list_id" select="selectReturnList"></association>
 
@@ -24,8 +24,7 @@
         select * from return_list where id=#{id}
     </select>
 
-
-    <select id="selectByKey" resultMap="selectAllLendList">
+    <select id="selectLendListByKey" resultMap="selectAllLendList">
         select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.id return_list_id
         from lend_list l,book b,return_list r
         where  l.book_id=b.id
@@ -36,5 +35,55 @@
         or b.publisher in (select publisher from book where publisher like #{key})
         or b.publish_time in (select publish_time from book where publish_time like #{key})
         or l.time in (select time from lend_list where time like #{key})
+    </select>
+
+
+
+
+
+    <select id="selectAllReturnList" resultMap="selectAllReturnListEX">
+        select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.time rtime
+        from lend_list l, book b, return_list r
+        where l.book_id=b.id and l.id=r.lend_id
+    </select>
+
+    <resultMap id="selectAllReturnListEX" type="com.example.group4.bean.student.ex.Return_listEX">
+        <result column="bid" property="BookID"></result>
+        <result column="bname" property="BookName"></result>
+        <result column="bauthor" property="Author"></result>
+        <result column="bpublisher" property="Publisher" ></result>
+        <result column="bpublish_time" property="PublishTime" ></result>
+        <result column="ltime"  property="BorrowTime" ></result>
+        <result column="rtime" property="ReturnTime"></result>
+
+    </resultMap>
+
+    <select id="selectReturnListByKey" resultMap="selectAllReturnListEX">
+        select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.time rtime
+        from lend_list l,book b,return_list r
+        where  l.book_id=b.id
+        and l.id=r.lend_id
+        and b.id in (select id from book where id like #{key})
+        or b.name in (select name from book where name like #{key})
+        or b.author in (select author from book where author like #{key})
+        or b.publisher in (select publisher from book where publisher like #{key})
+        or b.publish_time in (select publish_time from book where publish_time like #{key})
+        or l.time in (select time from lend_list where time like #{key})
+        or r.time in (select time from return_list where time like #{key})
+    </select>
+
+
+
+
+    <select id="selectBookByKey" resultType="com.example.group4.bean.Book">
+        select *
+        from book b
+        where  b.id in (select id from book where id like #{key})
+        or b.name in (select name from book where name like #{key})
+        or b.author in (select author from book where author like #{key})
+        or b.publisher in (select publisher from book where publisher like #{key})
+        or b.publish_time in (select publish_time from book where publish_time like #{key})
+        or b.address in (select address from book where address like #{key})
+        or b.status in (select status from book where status like #{key})
     </select>
 </mapper>

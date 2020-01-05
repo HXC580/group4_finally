@@ -95,4 +95,20 @@ public class Lend_listEX {
     public void setBookID(int bookID) {
         BookID = bookID;
     }
+
+    @Override
+    public String toString() {
+        return "Lend_listEX{" +
+                "BookID=" + BookID +
+                ", BookName='" + BookName + '\'' +
+                ", Author='" + Author + '\'' +
+                ", Publisher='" + Publisher + '\'' +
+                ", PublishTime=" + PublishTime +
+                ", BorrowTime=" + BorrowTime +
+                ", Status='" + Status + '\'' +
+                ", IsReturnBookTimeOut='" + IsReturnBookTimeOut + '\'' +
+                ", fine=" + fine +
+                ", return_list=" + return_list +
+                '}';
+    }
 }

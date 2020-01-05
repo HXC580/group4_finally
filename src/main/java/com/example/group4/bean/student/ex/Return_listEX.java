@@ -3,12 +3,21 @@ package com.example.group4.bean.student.ex;
 import java.util.Date;
 
 public class Return_listEX {
+    private int BookID;
     private String BookName;
     private String Author;
     private String Publisher;
     private Date PublishTime;
     private Date BorrowTime;
     private Date ReturnTime;
+
+    public int getBookID() {
+        return BookID;
+    }
+
+    public void setBookID(int bookID) {
+        BookID = bookID;
+    }
 
     public String getBookName() {
         return BookName;

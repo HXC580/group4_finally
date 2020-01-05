@@ -1,10 +1,9 @@
 package com.example.group4.service.Student.impl;
 
-import com.example.group4.bean.Lend_list;
-import com.example.group4.bean.Lend_listExample;
-import com.example.group4.bean.Return_list;
-import com.example.group4.bean.Return_listExample;
+import com.example.group4.bean.*;
 import com.example.group4.bean.student.ex.Lend_listEX;
+import com.example.group4.bean.student.ex.Return_listEX;
+import com.example.group4.mapper.BookMapper;
 import com.example.group4.mapper.Lend_listMapper;
 import com.example.group4.mapper.Return_listMapper;
 import com.example.group4.mapper.student.ex.BookEXMapper;
@@ -23,20 +22,27 @@ public class BookImpl  implements IBookService {
     private Return_listMapper return_listMapper;
     @Autowired
     private BookEXMapper bookEXMapper;
+    @Autowired
+    private BookMapper bookMapper;
 
 
     @Override
     public List<Lend_list> displayAllLendList() {
         Lend_listExample lend_listExample=new Lend_listExample();
         List<Lend_list> lend_lists = lend_listMapper.selectByExample(lend_listExample);
-        return lend_lists;
+
+            return lend_lists;
+
     }
 
     @Override
     public List<Return_list> displayAllReturnList() {
         Return_listExample return_listExample = new Return_listExample();
         List<Return_list> return_lists = return_listMapper.selectByExample(return_listExample);
-        return return_lists;
+
+            return return_lists;
+
+
     }
 
     @Override
@@ -71,12 +77,60 @@ public class BookImpl  implements IBookService {
 
         }
 
-        return lend_listEXES;
+
+            return lend_listEXES;
+
+
     }
 
     @Override
-    public List<Lend_listEX> selectByKey(String key) {
-        List<Lend_listEX> lend_listEXES = bookEXMapper.selectByKey(key);
-        return lend_listEXES;
+    public List<Lend_listEX> selectLendListByKey(String key) {
+        key="%"+key+"%";
+        List<Lend_listEX> lend_listEXES = bookEXMapper.selectLendListByKey(key);
+
+
+            return lend_listEXES;
+
+    }
+
+
+
+
+
+
+
+
+    @Override
+    public List<Return_listEX> selectAllReturnList() {
+        List<Return_listEX> return_listEXES=bookEXMapper.selectAllReturnList();
+
+
+            return return_listEXES;
+
+    }
+
+    @Override
+    public List<Return_listEX> selectReturnListByKey(String key) {
+        List<Return_listEX> return_listEXES=bookEXMapper.selectReturnListByKey(key);
+
+            return return_listEXES;
+
+    }
+
+    @Override
+    public List<Book> selectAllBook() {
+        BookExample bookExample= new BookExample();
+        List<Book> books = bookMapper.selectByExample(bookExample);
+
+            return books;
+
+    }
+
+    @Override
+    public List<Book> selectBookByKey(String key) {
+        List<Book> books = bookEXMapper.selectBookByKey(key);
+
+            return books;
+
     }
 }
