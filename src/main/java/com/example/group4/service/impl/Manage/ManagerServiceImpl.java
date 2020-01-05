@@ -8,6 +8,7 @@ import com.example.group4.mapper.MealcardMapper;
 import com.example.group4.mapper.StudentMapper;
 import com.example.group4.mapper.ManagerMapper;
 
+import com.example.group4.mapper.ex.MealcardEXMapper;
 import com.example.group4.service.Manage.IManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,9 @@ public class ManagerServiceImpl implements IManagerService {
     private StudentMapper studentMapper;
     @Autowired
     private Manager_Operation_ListMapper manager_operation_listMapper;
+
     @Autowired
-    private MealcardMapper mealcardMapper;
+    private MealcardEXMapper mealcardEXMapper;
     @Override
     public void ModifyStudent(Student student) {
         StudentExample studentExamples=new StudentExample();
@@ -51,11 +53,27 @@ public class ManagerServiceImpl implements IManagerService {
         operation.setType("freeze");
         manager_operation_listMapper.insert(operation);
         //修改学生卡信息
+        mealcardEXMapper.freeze(card_id);
 
+    }
+    public void abfreeze(int card_id,int manager_id){
+        Manager_Operation_List operation=new Manager_Operation_List();
+        //设置时间
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//        System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+        Date date=new Date();
+//        SimpleDateFormat dateFormat_min=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");//设置当前时间的格式，为年-月-日 时-分-秒
+//        dateFormat_min.format(date);
+        operation.setTime(date);
 
-        mealcardMapper.updateByExample();
+        //插入操作数据记录
 
-
+        operation.setCardId(card_id);
+        operation.setManagerId(manager_id);
+        operation.setType("abfreeze");
+        manager_operation_listMapper.insert(operation);
+        //修改学生卡信息
+        mealcardEXMapper.abfreeze(card_id);
 
     }
 }

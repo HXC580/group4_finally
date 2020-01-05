@@ -23,9 +23,21 @@ public class ManageController {
         managerService.ModifyStudent(student);
         return MessageUtil.success();
     }
-    @PostMapping("冻结/解冻")
+    @PostMapping("冻结")
     public Message freeze(int card_id,int manager_id){
         managerService.freeze(card_id,manager_id);
+        return MessageUtil.success();
+
+    }
+    @PostMapping("解冻")
+    public Message abfreeze(int card_id,int manager_id){
+        managerService.abfreeze(card_id,manager_id);
+        return MessageUtil.success();
+
+    }
+    @PostMapping("")
+    public Message logout(int card_id,int manager_id){
+        managerService.abfreeze(card_id,manager_id);
         return MessageUtil.success();
 
     }
