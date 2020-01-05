@@ -1,7 +1,6 @@
 package com.example.group4.service.IMerchantService;
 
 import com.example.group4.bean.Business;
-import com.example.group4.bean.Cost_bill;
 import com.example.group4.bean.ex.Cost_billEX;
 
 import java.util.Date;
