@@ -64,14 +64,14 @@ public class MachineServiceImpl implements IMachineService {
         }
         //饭卡状态是否异常
         if (!"normal".equals(mealcard.getType())){
-            new RuntimeException("饭卡异常！");
+            throw new RuntimeException("饭卡异常！");
         }//饭卡是否限额
         else if (s+money>mealcard.getCeiling()){
-            new RuntimeException("超过饭卡限额");
+            throw new RuntimeException("超过饭卡限额");
         }
         //饭卡余额是否足够
         else if(mealcard.getMoney()<money){
-            new RuntimeException("余额不足，请充值！");
+            throw new RuntimeException("余额不足，请充值！");
         }
         else {
             Cost_bill cost_bill = new Cost_bill();
