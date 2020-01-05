@@ -15,7 +15,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @Service
-public class BookImpl  implements IBookService {
+public class BookServiceImpl implements IBookService {
     @Autowired
     private Lend_listMapper lend_listMapper;
     @Autowired

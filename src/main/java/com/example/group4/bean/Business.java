@@ -1,7 +1,5 @@
 package com.example.group4.bean;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 
 public class Business implements Serializable {
@@ -15,7 +13,6 @@ public class Business implements Serializable {
 
     private String idNo;
 
-    @ApiModelProperty(value = "联系方式",dataType = "int")
     private Integer phonenumber;
 
     private static final long serialVersionUID = 1L;
