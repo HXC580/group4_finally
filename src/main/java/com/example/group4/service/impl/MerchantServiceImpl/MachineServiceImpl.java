@@ -4,7 +4,7 @@ import com.example.group4.bean.*;
 import com.example.group4.mapper.Cost_billMapper;
 import com.example.group4.mapper.MachineMapper;
 import com.example.group4.mapper.MealcardMapper;
-import com.example.group4.mapper.ex.CostbillMapper;
+import com.example.group4.mapper.ex.CostbillEXMapper;
 import com.example.group4.service.IMerchantService.IMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class MachineServiceImpl implements IMachineService {
     @Autowired
     private MealcardMapper mealcardMapper;
     @Autowired
-    private CostbillMapper costbillEXMapper;
+    private CostbillEXMapper costbillEXMapper;
     @Autowired
     private Cost_billMapper cost_billMapper;
 
@@ -52,9 +52,7 @@ public class MachineServiceImpl implements IMachineService {
     public String recordBill(int cardId, double money, int machineId) throws RuntimeException {
         //饭卡状态是否异常
         Mealcard mealcard = mealcardMapper.selectByPrimaryKey(cardId);
-
         //饭卡是否限额
-
         double[] bills = costbillEXMapper.consume(cardId, new Date());
         double s = 0;
         for (double bill : bills) {

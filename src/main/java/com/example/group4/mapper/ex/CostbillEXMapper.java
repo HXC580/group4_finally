@@ -5,7 +5,7 @@ import com.example.group4.bean.ex.CostBillEX;
 import java.util.Date;
 import java.util.List;
 
-public interface CostbillMapper {
+public interface CostbillEXMapper {
     List<CostBillEX> findAll(int start, int pagesize);
     List<CostBillEX>findByMoney(double money);
     double sum();

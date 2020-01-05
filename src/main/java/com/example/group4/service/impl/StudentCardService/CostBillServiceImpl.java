@@ -1,6 +1,7 @@
 package com.example.group4.service.impl.StudentCardService;
 
 import com.example.group4.bean.ex.CostBillEX;
+import com.example.group4.mapper.ex.CostbillEXMapper;
 import com.example.group4.service.StudentCardService.ICostBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 public class CostBillServiceImpl implements ICostBillService {
     @Autowired
-    private CostBill2EXMapper costBillEXMapper;
+    private CostbillEXMapper costBillEXMapper;
 
     @Override
     public List<CostBillEX> findAll(int start,int pagesize) {
