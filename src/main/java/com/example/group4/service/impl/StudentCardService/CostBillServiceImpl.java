@@ -1,7 +1,6 @@
 package com.example.group4.service.impl.StudentCardService;
 
 import com.example.group4.bean.ex.CostBillEX;
-import com.example.group4.mapper.ex.CostBill2EXMapper;
 import com.example.group4.service.StudentCardService.ICostBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

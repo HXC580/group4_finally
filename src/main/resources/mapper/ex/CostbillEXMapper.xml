@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.group4.mapper.ex.CostbillMapper">
+    <select id="consume" resultType="double">
+    <!--select money from cost_bill where card_id = #{id} and time(order_date)= #{date}-->
+    select money from cost_bill where TO_DAYS(time) = to_days(now());
+    </select>
+
+
+    <resultMap id="aaa" type="com.example.group4.bean.ex.CostBillEX">
+        <id column="id" property="id"></id>
+        <result column="card_id" property="cardId"></result>
+        <result column="money" property="money"></result>
+        <result column="time" property="time"></result>
+        <result column="machine_id" property="machineId"></result>
+        <association property="business" select="selectBusiness" column="machine_id"></association>
+    </resultMap>
+    <select id="findAll" resultMap="aaa">
+        select * from cost_bill limit #{start},#{pagesize}
+    </select>
+
+    <resultMap id="abc" type="com.example.group4.bean.Business">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="address" property="address"></result>
+        <result column="lawName" property="lawname"></result>
+        <result column="ID_NO" property="idNo"></result>
+        <result column="phoneNumber" property="phonenumber"></result>
+    </resultMap>
+    <select id="selectBusiness" resultMap="abc">
+        select a.* from business a where id in (select business_id from machine b where b.id=#{machinessId})
+    </select>
+
+
+    <select id="findByMoney" resultMap="aaa">
+        select * from cost_bill where money>=#{money}
+    </select>
+
+    <select id="sum" resultType="double">
+        select sum(money) from cost_bill
+    </select>
+
+    <select id="findByTime" resultMap="aaa">
+        select * from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day}
+    </select>
+
+
+    <select id="sumByTime" resultType="double">
+        select sum(money) from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day}
+    </select>
+</mapper>
+
+
+

@@ -53,7 +53,10 @@ public class MachineController {
     @ApiOperation(value = "记录饭卡消费")
     public Message recordBill(int cardId,double money,int machineId){
         String result = machineService.recordBill(cardId,money,machineId);
-        if ("超过饭卡限额！"==result){
+        if ("饭卡异常"==result){
+            return MessageUtil.error(200,"饭卡异常");
+        }
+        if ("超过饭卡限额"==result){
             return MessageUtil.error(200,"超过饭卡限额");
         }else if ("余额不足，请充值！"==result){
             return MessageUtil.error(200,"余额不足，请充值！");
