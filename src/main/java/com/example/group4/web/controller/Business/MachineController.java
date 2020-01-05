@@ -48,4 +48,15 @@ public class MachineController {
         machineService.delMac(id);
         return MessageUtil.success();
     }
+
+    @GetMapping("recordBill")
+    @ApiOperation(value = "记录饭卡消费")
+    public Message recordBill(int cardId,double money,int machineId){
+        //饭卡状态有无异常
+
+        //饭卡消费是否限额
+        //饭卡余额是否足够
+        machineService.recordBill(cardId,money,machineId);
+        return MessageUtil.success();
+    }
 }
