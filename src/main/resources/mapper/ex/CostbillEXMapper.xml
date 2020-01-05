@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.group4.mapper.ex.CostbillEXMapper">
+    <select id="consume" resultType="double">
+        <!--select money from cost_bill where card_id = #{id} and time(order_date)= #{date}-->
+        select money from cost_bill where TO_DAYS(time) = to_days(now());
+    </select>
+</mapper>

@@ -11,4 +11,6 @@ public interface IMachineService {
     void editOrAddMac(Machine machine) throws RuntimeException;
 
     void delMac(int id)throws RuntimeException;
+
+    void recordBill(int cardId, double money, int machineId)throws RuntimeException;
 }
