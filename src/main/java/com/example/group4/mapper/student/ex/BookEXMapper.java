@@ -12,4 +12,5 @@ public interface BookEXMapper {
     List<Return_listEX> selectAllReturnList();
     List<Return_listEX> selectReturnListByKey(String key);
     List<Book> selectBookByKey(String key);
+    Lend_listEX selectLendListById(int id);
 }

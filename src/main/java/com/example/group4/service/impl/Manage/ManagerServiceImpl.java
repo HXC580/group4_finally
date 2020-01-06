@@ -53,9 +53,14 @@ public class ManagerServiceImpl implements IManagerService {
         //修改学生卡信息
 
 
-        mealcardMapper.updateByExample();
+       // mealcardMapper.updateByExample();
 
 
+
+    }
+
+    @Override
+    public void abfreeze(int card_id, int manager_id) {
 
     }
 }

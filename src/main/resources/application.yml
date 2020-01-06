@@ -23,4 +23,8 @@ intranet:
 https:
   connectionTimeout: 15000
   readTimeout: 15000
-
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect: mysql

@@ -158,6 +158,13 @@
             <version>2.6.1</version>
         </dependency>
 
+        <!-- mybatis分页插件pagehelp 数据驱动 -->
+       <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper</artifactId>
+        <version>4.1.6</version>
+    </dependency>
+
     </dependencies>
 
     <build>

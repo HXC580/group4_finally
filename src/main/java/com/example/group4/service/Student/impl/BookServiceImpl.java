@@ -5,6 +5,7 @@ import com.example.group4.bean.student.ex.Lend_listEX;
 import com.example.group4.bean.student.ex.Return_listEX;
 import com.example.group4.mapper.BookMapper;
 import com.example.group4.mapper.Lend_listMapper;
+import com.example.group4.mapper.PoMapper;
 import com.example.group4.mapper.Return_listMapper;
 import com.example.group4.mapper.student.ex.BookEXMapper;
 import com.example.group4.service.Student.IBookService;
@@ -24,6 +25,42 @@ public class BookServiceImpl implements IBookService {
     private BookEXMapper bookEXMapper;
     @Autowired
     private BookMapper bookMapper;
+    @Autowired
+    private PoMapper poMapper;
+
+
+
+    public void setLendListEX(Lend_listEX lend_listEX) {
+
+     if(lend_listEX.getReturn_list()==null)
+     {
+        lend_listEX.setStatus("未还书");
+    } else {
+        lend_listEX.setStatus("已还书");
+    }
+    Calendar calendar1 = Calendar.getInstance();
+    Calendar calendar2 = Calendar.getInstance();
+    calendar1.setTime(lend_listEX.getReturn_list().getTime());
+    calendar2.setTime(lend_listEX.getBorrowTime());
+    long time = lend_listEX.getReturn_list().getTime().getTime() - lend_listEX.getBorrowTime().getTime();
+    calendar2.add(Calendar.MONTH,1);
+
+    if(calendar1.before(calendar2))
+    {
+        lend_listEX.setIsReturnBookTimeOut("否");
+    }else {
+        lend_listEX.setIsReturnBookTimeOut("是");
+    }
+    if(lend_listEX.getIsReturnBookTimeOut()=="否")
+    {
+        lend_listEX.setFine(0.00);
+    }else {
+        int days = (int) (time - 1000 * 60 * 60 * 24 * 30) / 1000 / 60 / 60 / 24;
+        Double fine = days * 0.1;
+        lend_listEX.setFine(fine);
+    }
+
+ }
 
 
     @Override
@@ -39,7 +76,7 @@ public class BookServiceImpl implements IBookService {
     public List<Return_list> displayAllReturnList() {
         Return_listExample return_listExample = new Return_listExample();
         List<Return_list> return_lists = return_listMapper.selectByExample(return_listExample);
-
+            System.out.println(return_lists);
             return return_lists;
 
 
@@ -49,7 +86,8 @@ public class BookServiceImpl implements IBookService {
     public List<Lend_listEX> selectAllLendList() {
         List<Lend_listEX> lend_listEXES = bookEXMapper.selectAllLendList();
         for (Lend_listEX lend_listEX: lend_listEXES) {
-            if (lend_listEX.getReturn_list() == null) {
+              setLendListEX(lend_listEX);
+/*            if (lend_listEX.getReturn_list() == null) {
                 lend_listEX.setStatus("未还书");
             } else {
                 lend_listEX.setStatus("已还书");
@@ -72,7 +110,7 @@ public class BookServiceImpl implements IBookService {
                 int days=(int)(time-1000*60*60*24*30)/1000/60/60/24;
                 Double fine=days*0.1;
                 lend_listEX.setFine(fine);
-            }
+            }*/
 
 
         }
@@ -92,6 +130,24 @@ public class BookServiceImpl implements IBookService {
             return lend_listEXES;
 
     }
+    @Override
+    public Lend_listEX selectLendListById(int id) {
+        Lend_listEX lend_listEX = bookEXMapper.selectLendListById(id);
+        return lend_listEX;
+
+    }
+
+
+/*    @Override
+    public void (int id) {
+        Lend_listEX lend_listEX = bookEXMapper.selectLendListById(id);
+
+
+    }*/
+
+
+
+
 
 
 

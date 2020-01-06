@@ -20,4 +20,5 @@ public interface IBookService {
     List<Return_listEX> selectReturnListByKey(String key);
     List<Book> selectAllBook();
     List<Book> selectBookByKey(String key);
+    Lend_listEX selectLendListById(int id);
 }

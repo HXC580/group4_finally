@@ -1,9 +1,7 @@
 package com.example.group4.service.Student;
 
-import com.example.group4.bean.Mealcard;
-import com.example.group4.bean.Wlan;
-
 
 public interface IWlanService {
-    String selectpwdByStuId(int sid);
+    String selectPwdByStuId(int sid);
+    void bindPwdByStuId(int id,String pwd);
 }

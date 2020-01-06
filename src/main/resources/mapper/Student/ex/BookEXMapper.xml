@@ -37,6 +37,14 @@
         or l.time in (select time from lend_list where time like #{key})
     </select>
 
+    <select id="selectLendListById" resultMap="selectAllLendList">
+        select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.id return_list_id
+        from lend_list l, book b, return_list r
+        where l.book_id=b.id and l.id=r.lend_id and l.id=#{id}
+    </select>
+
+
+
 
 
 

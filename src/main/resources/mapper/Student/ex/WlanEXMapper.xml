@@ -6,5 +6,8 @@
         select pass from wlan where student_id=#{id}
     </select>
 
+    <update id="bindPwdByStuId">
+        update wlan set pass=#{pwd} where student_id=#{id}
+    </update>
 
 </mapper>

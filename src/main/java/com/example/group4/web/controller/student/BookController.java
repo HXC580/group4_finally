@@ -91,6 +91,27 @@ public class BookController {
         List<Book> list=iBookService.selectBookByKey(key);
         return MessageUtil.success(list);
 
+
+
+
     }
+    @GetMapping("/payFine")
+    @ApiOperation(value="根据借书Id付罚款")
+    public Message payFineBy(int LendListId){
+
+
+        return MessageUtil.success();
+
+    }
+    @GetMapping("/selectLendListById")
+    @ApiOperation(value="根据借书Id付罚款")
+    public Message selectLendListById(int id){
+        Lend_listEX lend_listEX = iBookService.selectLendListById(id);
+
+        return MessageUtil.success(lend_listEX);
+
+    }
+
+
 
 }
