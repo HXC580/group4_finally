@@ -59,13 +59,15 @@ public class MerchantController {
 
     @GetMapping("/profit")
     @ApiOperation(value = "查询总收入")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",value = "商户id",paramType = "query",dataType = "int"),
-            @ApiImplicitParam(name = "startDate",value = "开始日期"),
-            @ApiImplicitParam(name = "endDate", value = "结束日期")
-    })
-    public Message profit(Date startDate,Date endDate,int id){
-       return MessageUtil.success(merchantService.getProfit(startDate,endDate,id));
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "id",value = "商户id",paramType = "query",dataType = "int"),
+//            @ApiImplicitParam(name = "startDate",value = "开始日期"),
+//            @ApiImplicitParam(name = "endDate", value = "结束日期")
+//    })
+    public Message profit(String startDateStr,String endDateStr,int id){
+        Date startDate = getDaDate(startDateStr);
+        Date endDate = getDaDate(endDateStr);
+        return MessageUtil.success(merchantService.getProfit(startDate,endDate,id));
     }
 
 
@@ -85,7 +87,7 @@ public class MerchantController {
     //获取系统当前时间，字符串类型
     public static String getStrDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//设置为东八区
+        //设置为东八区
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         Date newDate = new Date();
         String dateStr = sdf.format(newDate);
@@ -95,8 +97,6 @@ public class MerchantController {
 
     //获取系统当前时间Date类型，需要将字符串类型转成时间
     public static Date getDaDate( String dateStr){
-
-
         //将字符串转成时间
 //        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
