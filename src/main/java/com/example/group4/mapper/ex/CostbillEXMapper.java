@@ -1,6 +1,7 @@
 package com.example.group4.mapper.ex;
 
 import com.example.group4.bean.ex.CostBillEX;
+import com.example.group4.bean.ex.ProfitEX;
 
 import java.util.Date;
 import java.util.List;
@@ -13,4 +14,11 @@ public interface CostbillEXMapper {
     double sumByTime(int day);
 
     double[] consume(int id, Date date);
+
+
+    List<ProfitEX> getProfitChartByDay();
+
+    List<ProfitEX> getProfitChartByMonth();
+
+    List<ProfitEX> getProfitChartByYear();
 }

@@ -1,6 +1,7 @@
 package com.example.group4.service.impl.StudentCardService;
 
 import com.example.group4.bean.ex.CostBillEX;
+import com.example.group4.bean.ex.ProfitEX;
 import com.example.group4.mapper.ex.CostbillEXMapper;
 import com.example.group4.service.StudentCardService.ICostBillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,16 @@ public class CostBillServiceImpl implements ICostBillService {
     @Override
     public double sumByTime(int day) {
         return costBillEXMapper.sumByTime(day);
+    }
+
+    @Override
+    public List<ProfitEX> getProfitChart(String selected) {
+        if ("day".equals(selected)){
+            return costBillEXMapper.getProfitChartByDay();
+        }else if("month".equals(selected)){
+            return costBillEXMapper.getProfitChartByMonth();
+        }else {
+            return costBillEXMapper.getProfitChartByYear();
+        }
     }
 }
