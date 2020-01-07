@@ -20,9 +20,34 @@
         where l.book_id=b.id and l.id=r.lend_id
     </select>
 
-    <select id="selectReturnList" resultType="com.example.group4.bean.Return_list">
+   <!-- <select id="selectReturnList" resultType="com.example.group4.bean.Return_list">
+        select * from return_list where id=#{id}
+    </select>-->
+
+
+    <select id="selectReturnList" resultMap="selectReturn_list">
         select * from return_list where id=#{id}
     </select>
+
+    <resultMap id="selectReturn_list" type="com.example.group4.bean.Return_list">
+        <result column="id" property="id"></result>
+        <result column="book_id" property="bookId"></result>
+        <result column="card_id" property="cardId"></result>
+        <result column="money" property="money" ></result>
+        <result column="time" property="time" ></result>
+        <result column="lend_id"  property="lendId" ></result>
+
+    </resultMap>
+
+
+
+
+
+
+
+
+
+
 
     <select id="selectLendListByKey" resultMap="selectAllLendList">
         select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.id return_list_id
@@ -42,6 +67,10 @@
         from lend_list l, book b, return_list r
         where l.book_id=b.id and l.id=r.lend_id and l.id=#{id}
     </select>
+
+
+
+
 
 
 
@@ -83,7 +112,13 @@
 
 
 
-    <select id="selectBookByKey" resultType="com.example.group4.bean.Book">
+
+
+
+
+
+
+    <select id="selectBookByKey" resultType="com.example.group4.bean.student.ex.BookEX">
         select *
         from book b
         where  b.id in (select id from book where id like #{key})

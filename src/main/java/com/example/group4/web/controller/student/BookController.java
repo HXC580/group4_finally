@@ -10,6 +10,7 @@ import com.example.group4.service.Student.IBookService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -97,20 +98,21 @@ public class BookController {
     }
     @GetMapping("/payFine")
     @ApiOperation(value="根据借书Id付罚款")
-    public Message payFineBy(int LendListId){
+    @ApiImplicitParam(name = "id",value = "借书id",paramType = "query",dataType = "int",required = true)
+    public String payFineBy(int id){
+        String url=iBookService.payFineById(id);
 
-
-        return MessageUtil.success();
+        return url;
 
     }
-    @GetMapping("/selectLendListById")
+/*    @GetMapping("/selectLendListById")
     @ApiOperation(value="根据借书Id付罚款")
     public Message selectLendListById(int id){
         Lend_listEX lend_listEX = iBookService.selectLendListById(id);
 
         return MessageUtil.success(lend_listEX);
 
-    }
+    }*/
 
 
 

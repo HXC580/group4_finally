@@ -6,15 +6,15 @@ import java.util.Date;
 public class Return_list implements Serializable {
     private Integer id;
 
-    private Integer book_id;
+    private Integer bookId;
 
-    private Integer card_id;
+    private Integer cardId;
 
     private Double money;
 
     private Date time;
 
-    private Integer lend_id;
+    private Integer lendId;
 
     public Integer getId() {
         return id;
@@ -24,21 +24,7 @@ public class Return_list implements Serializable {
         this.id = id;
     }
 
-    public Integer getBook_id() {
-        return book_id;
-    }
 
-    public void setBook_id(Integer book_id) {
-        this.book_id = book_id;
-    }
-
-    public Integer getCard_id() {
-        return card_id;
-    }
-
-    public void setCard_id(Integer card_id) {
-        this.card_id = card_id;
-    }
 
     public Double getMoney() {
         return money;
@@ -56,23 +42,39 @@ public class Return_list implements Serializable {
         this.time = time;
     }
 
-    public Integer getLend_id() {
-        return lend_id;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setLend_id(Integer lend_id) {
-        this.lend_id = lend_id;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
+    public Integer getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
+    }
+
+    public Integer getLendId() {
+        return lendId;
+    }
+
+    public void setLendId(Integer lendId) {
+        this.lendId = lendId;
     }
 
     @Override
     public String toString() {
         return "Return_list{" +
                 "id=" + id +
-                ", book_id=" + book_id +
-                ", card_id=" + card_id +
+                ", bookId=" + bookId +
+                ", cardId=" + cardId +
                 ", money=" + money +
                 ", time=" + time +
-                ", lend_id=" + lend_id +
+                ", lendId=" + lendId +
                 '}';
     }
 }

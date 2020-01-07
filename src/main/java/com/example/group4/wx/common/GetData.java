@@ -9,7 +9,7 @@ import java.util.Map;
 public class GetData {
     private static String user = "group4";
     private static String pwd = "CJMcjm136466!";
-    private static String url = "jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/wx_test?useunicode=true;&characterEncoding=utf8";
+    private static String url = "jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/group4_3?useunicode=true;&characterEncoding=utf8";
     private static String   sql;
 
     static Connection conn=null;
@@ -18,7 +18,7 @@ public class GetData {
     static Map<String,String> map;
     public static boolean getSqlServerData(String PO_NO)    {
         map=new HashMap<>();
-        sql="select po_no,sys_name,prd_name,price,po_state from po where PO_NO = '"+PO_NO+"'" ;
+        sql="select po_no,sys_name,prd_name,price,po_state from group4_3.po where PO_NO = '"+PO_NO+"'" ;
         try {
             //加载驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
