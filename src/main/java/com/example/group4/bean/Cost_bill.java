@@ -1,8 +1,13 @@
 package com.example.group4.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@ApiModel
 public class Cost_bill implements Serializable {
     private Integer id;
 
@@ -10,6 +15,8 @@ public class Cost_bill implements Serializable {
 
     private Double money;
 
+    @ApiModelProperty(required = true,example = "2018-10-1 12:23:45")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date time;
 
     private Integer machineId;
