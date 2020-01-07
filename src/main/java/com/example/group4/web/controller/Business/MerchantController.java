@@ -90,15 +90,16 @@ public class MerchantController {
     @ApiOperation("下载收益报表")
     public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int macId,HttpServletResponse response) throws IOException {
         List<Cost_bill> cost_bills = merchantService.downloadProfitSheet(busId,macId);
-        download(cost_bills,response);
+        String name = merchantService.queById(busId).getName();
+        download(cost_bills,response,name);
     }
 
-    public void download(List<Cost_bill> cost_bills, HttpServletResponse response) throws IOException {
+    public void download(List<Cost_bill> cost_bills, HttpServletResponse response,String name) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet();
         //表头
         sheet.addMergedRegion(new CellRangeAddress(0,0,0,3));
-        sheet.createRow(0).createCell(0).setCellValue("收益报表");
+        sheet.createRow(0).createCell(0).setCellValue(name+"收益报表");
         //表二
         XSSFRow row = sheet.createRow(1);
         row.createCell(0).setCellValue("学生卡号");
@@ -114,7 +115,7 @@ public class MerchantController {
         }
 
         response.setHeader("content-Type","application/vnd.ms-excel");
-        response.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode("收益报表.xlsx","utf-8"));
+        response.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode(name+"-收益报表.xlsx","utf-8"));
         workbook.write(response.getOutputStream());
     }
 
