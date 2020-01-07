@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.group4.mapper.ex.Dormitory_ioEXMapper">
+    <resultMap id="dangers" type="com.example.group4.bean.ex.dangerEX">
+        <result column="id" property="io_id"></result>
+        <result column="card_id" property="student_id"></result>
+        <result column="card_id" property="card_id"></result>
+        <result column="time" property="time"></result>
+        <result column="IOtype" property="IOtype"></result>
+        <result column="name" property="name"></result>
+        <result column="age" property="age"></result>
+        <result column="PhoneNumber" property="phonenumber"></result>
+        <result column="gender" property="gender"></result>
+        <result column="dormitory_id" property="dormitory_id"></result>
+    </resultMap>
+    <select id="danger" resultMap="dangers">
+--     SELECT a.* FROM
+--     Dormitory_io a
+--     WHERE
+--     EXISTS
+--     (SELECT 1 from Dormitory_io b WHERE a.time>b.time  null and a.card_id=b.card_id)
+--     or
+--     (SELECT 1 from Dormitory_io cl WHERE a.card_id=cl.card_id GROUP BY a.card_id HAVING count(cl.card_id)=1)
+select dor.*,stu.* FROM(
+select * from dormitory_io WHERE  time in (
+select max(time) from dormitory_io WHERE time BETWEEN #{dayBegin}
+AND #{dayEnd} GROUP BY card_id))dor,
+student stu WHERE dor.IOtype="out" AND stu.id=dor.card_id
+
+</select>
+</mapper>
