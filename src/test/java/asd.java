@@ -20,7 +20,8 @@ public class asd {
     public void rest()
     {
 
-        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipaydev.com/gateway.do", APPID, APP_PRIVATE_KEY, "json", "UTF-8", ALIPAY_PUBLIC_KEY, "RSA2"); //获得初始化的AlipayClient
+        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipaydev.com/gateway.do", APPID, APP_PRIVATE_KEY,
+                "json", "UTF-8", ALIPAY_PUBLIC_KEY, "RSA2"); //获得初始化的AlipayClient
         AlipayTradePayRequest request = new AlipayTradePayRequest();
         AlipayTradePayModel model = new AlipayTradePayModel();
 
@@ -45,7 +46,8 @@ public class asd {
     //扫码支付
     @Test
     public void Test2()throws Exception{
-        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipaydev.com/gateway.do", APPID, APP_PRIVATE_KEY, "json", "UTF-8", ALIPAY_PUBLIC_KEY, "RSA2"); //获得初始化的AlipayClient
+        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipaydev.com/gateway.do",
+                APPID, APP_PRIVATE_KEY, "json", "UTF-8", ALIPAY_PUBLIC_KEY, "RSA2"); //获得初始化的AlipayClient
         AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();//创建API对应的request类
         request.setBizContent("{" +
                 "    \"out_trade_no\":\"20150320010101002\"," +//商户订单号

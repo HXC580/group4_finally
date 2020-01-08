@@ -186,7 +186,7 @@ public class ManagerServiceImpl implements IManagerService {
 
         String dateB=date+" 00:00:00";
         String dateE=date+" 23:59:59";
-        System.out.println(dateB+dateE);
+
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date DateB = null;
