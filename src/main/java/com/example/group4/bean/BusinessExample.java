@@ -164,6 +164,76 @@ public class BusinessExample {
             return (Criteria) this;
         }
 
+        public Criteria andPassIsNull() {
+            addCriterion("pass is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassIsNotNull() {
+            addCriterion("pass is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassEqualTo(String value) {
+            addCriterion("pass =", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotEqualTo(String value) {
+            addCriterion("pass <>", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassGreaterThan(String value) {
+            addCriterion("pass >", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassGreaterThanOrEqualTo(String value) {
+            addCriterion("pass >=", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassLessThan(String value) {
+            addCriterion("pass <", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassLessThanOrEqualTo(String value) {
+            addCriterion("pass <=", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassLike(String value) {
+            addCriterion("pass like", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotLike(String value) {
+            addCriterion("pass not like", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassIn(List<String> values) {
+            addCriterion("pass in", values, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotIn(List<String> values) {
+            addCriterion("pass not in", values, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassBetween(String value1, String value2) {
+            addCriterion("pass between", value1, value2, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotBetween(String value1, String value2) {
+            addCriterion("pass not between", value1, value2, "pass");
+            return (Criteria) this;
+        }
+
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -481,6 +551,16 @@ public class BusinessExample {
 
         public Criteria andPhonenumberLessThanOrEqualTo(String value) {
             addCriterion("phoneNumber <=", value, "phonenumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhonenumberLike(String value) {
+            addCriterion("phoneNumber like", value, "phonenumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhonenumberNotLike(String value) {
+            addCriterion("phoneNumber not like", value, "phonenumber");
             return (Criteria) this;
         }
 

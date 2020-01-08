@@ -3,11 +3,12 @@
 <mapper namespace="com.example.group4.mapper.BusinessMapper">
   <resultMap id="BaseResultMap" type="com.example.group4.bean.Business">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pass" jdbcType="VARCHAR" property="pass" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="lawName" jdbcType="VARCHAR" property="lawname" />
     <result column="ID_NO" jdbcType="VARCHAR" property="idNo" />
-    <result column="phoneNumber" jdbcType="INTEGER" property="phonenumber" />
+    <result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, address, lawName, ID_NO, phoneNumber
+    id, pass, name, address, lawName, ID_NO, phoneNumber
   </sql>
   <select id="selectByExample" parameterType="com.example.group4.bean.BusinessExample" resultMap="BaseResultMap">
     select
@@ -101,18 +102,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.group4.bean.Business">
-    insert into business (id, name, address, 
-      lawName, ID_NO, phoneNumber
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{lawname,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, #{phonenumber,jdbcType=INTEGER}
-      )
+    insert into business (id, pass, name, 
+      address, lawName, ID_NO, 
+      phoneNumber)
+    values (#{id,jdbcType=INTEGER}, #{pass,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{lawname,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.group4.bean.Business">
     insert into business
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="pass != null">
+        pass,
       </if>
       <if test="name != null">
         name,
@@ -134,6 +138,9 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -147,7 +154,7 @@
         #{idNo,jdbcType=VARCHAR},
       </if>
       <if test="phonenumber != null">
-        #{phonenumber,jdbcType=INTEGER},
+        #{phonenumber,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -163,6 +170,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=VARCHAR},
+      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -176,7 +186,7 @@
         ID_NO = #{record.idNo,jdbcType=VARCHAR},
       </if>
       <if test="record.phonenumber != null">
-        phoneNumber = #{record.phonenumber,jdbcType=INTEGER},
+        phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -186,11 +196,12 @@
   <update id="updateByExample" parameterType="map">
     update business
     set id = #{record.id,jdbcType=INTEGER},
+      pass = #{record.pass,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       lawName = #{record.lawname,jdbcType=VARCHAR},
       ID_NO = #{record.idNo,jdbcType=VARCHAR},
-      phoneNumber = #{record.phonenumber,jdbcType=INTEGER}
+      phoneNumber = #{record.phonenumber,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,6 +209,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.example.group4.bean.Business">
     update business
     <set>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -211,18 +225,19 @@
         ID_NO = #{idNo,jdbcType=VARCHAR},
       </if>
       <if test="phonenumber != null">
-        phoneNumber = #{phonenumber,jdbcType=INTEGER},
+        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.group4.bean.Business">
     update business
-    set name = #{name,jdbcType=VARCHAR},
+    set pass = #{pass,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       lawName = #{lawname,jdbcType=VARCHAR},
       ID_NO = #{idNo,jdbcType=VARCHAR},
-      phoneNumber = #{phonenumber,jdbcType=INTEGER}
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

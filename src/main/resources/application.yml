@@ -16,6 +16,7 @@ wx:
   appID: wx1046df29d9aa8427
   mchID: 1413626902
   key: lkjhgfdsa1234567890poiuytrewqZXC
+  appID2: wxde780dd478c0a2dd
   unifiedorder:
     notifyUrl: ${intranet.penetrateUrl}/wxPay/unifiedorderNotify
 intranet:

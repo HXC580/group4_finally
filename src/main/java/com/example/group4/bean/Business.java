@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Business implements Serializable {
     private Integer id;
 
+    private String pass;
+
     private String name;
 
     private String address;
@@ -23,6 +25,14 @@ public class Business implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass == null ? null : pass.trim();
     }
 
     public String getName() {
@@ -62,7 +72,7 @@ public class Business implements Serializable {
     }
 
     public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+        this.phonenumber = phonenumber == null ? null : phonenumber.trim();
     }
 
     @Override
@@ -72,6 +82,7 @@ public class Business implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", pass=").append(pass);
         sb.append(", name=").append(name);
         sb.append(", address=").append(address);
         sb.append(", lawname=").append(lawname);

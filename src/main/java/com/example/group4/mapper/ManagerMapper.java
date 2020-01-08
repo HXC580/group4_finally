@@ -4,6 +4,9 @@ import com.example.group4.bean.Manager;
 import com.example.group4.bean.ManagerExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 
 public interface ManagerMapper {
     long countByExample(ManagerExample example);

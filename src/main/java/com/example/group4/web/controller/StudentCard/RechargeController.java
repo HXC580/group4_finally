@@ -21,10 +21,14 @@ public class RechargeController {
 
     @ApiOperation(value = "充值")
     @GetMapping("/Recharge")
-    public Message Recharge(){
-        if(ef)
-        rechargeService.AddSum(id,money);
-        return MessageUtil.success();
+    public Message Recharge(boolean flag){
+        if(flag)
+        {
+            rechargeService.AddSum(id,money);
+            return MessageUtil.success();
+        }else {
+            return  MessageUtil.error(1128,"支付失败");
+        }
     }
     @GetMapping("/test")
     public String test(int id){
