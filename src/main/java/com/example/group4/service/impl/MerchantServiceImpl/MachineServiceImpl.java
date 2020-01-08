@@ -69,12 +69,14 @@ public class MachineServiceImpl implements IMachineService {
         else if (mealcard.getMoney() < money) {
             return "余额不足，请充值！";
         } else {
+            //新增消费记录
             Cost_bill cost_bill = new Cost_bill();
             cost_bill.setCardId(cardId);
             cost_bill.setMachineId(machineId);
             cost_bill.setMoney(money);
             cost_bill.setTime(new Date());
             cost_billMapper.insert(cost_bill);
+            //更新该饭卡已消费金额及余额数
             mealcard.setMoney(mealcard.getMoney() - money);
             mealcardMapper.updateByPrimaryKey(mealcard);
             return "成功";

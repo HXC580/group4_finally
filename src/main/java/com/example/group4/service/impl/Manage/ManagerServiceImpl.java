@@ -1,18 +1,22 @@
 package com.example.group4.service.impl.Manage;
 
 import com.example.group4.bean.*;
+import com.example.group4.bean.ex.dangerEX;
 import com.example.group4.mapper.*;
 
+import com.example.group4.mapper.ex.Dormitory_ioEXMapper;
 import com.example.group4.mapper.ex.ManagerEXMapper;
 import com.example.group4.mapper.ex.MealcardEXMapper;
 import com.example.group4.service.Manage.IManagerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.SimpleFormatter;
+import java.util.*;
+
 
 @Service
 public class ManagerServiceImpl implements IManagerService {
@@ -32,6 +36,10 @@ public class ManagerServiceImpl implements IManagerService {
     private MealcardEXMapper mealcardEXMapper;
     @Autowired
     private MealcardMapper mealcardMapper;
+    @Autowired
+    private Dormitory_ioMapper dormitory_ioMapper;
+    @Autowired
+    private Dormitory_ioEXMapper dormitory_ioEXMapper;
 
     @Override
     public void ModifyStudent(Student student) {
@@ -159,4 +167,91 @@ public class ManagerServiceImpl implements IManagerService {
         }
 
     }
+
+    @Override
+    public void IOrecord(int card_id, String condition) {
+        Dormitory_io io = new Dormitory_io();
+        io.setId(null);
+        io.setIotype(condition);
+        io.setCardId(card_id);
+        Date time = new Date();
+        io.setTime(time);
+        //io.setTime(null);
+        dormitory_ioMapper.insert(io);
+
+    }
+
+    @Override
+    public List<dangerEX> danger(String date) {
+
+        String dateB=date+" 00:00:00";
+        String dateE=date+" 23:59:59";
+        System.out.println(dateB+dateE);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date DateB = null;
+        Date DateE = null;
+        try {
+            DateB = df.parse(dateB);
+            DateE = df.parse(dateE);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+//        Date date = new Date();//取时间
+//        Calendar calendar = new GregorianCalendar();
+//        calendar.add(calendar.DATE, 1);//把日期往后增加一天.整数往后推,负数往前移动
+
+        return dormitory_ioEXMapper.danger(DateB,DateE);
+
+    }
+
+    @Override
+    public List<Manager_Operation_List> list() {
+        Manager_Operation_ListExample example = new Manager_Operation_ListExample();
+        return manager_operation_listMapper.selectByExample(example);
+    }
+//*****************************************************************************************************************************************************8
+public static String Later() {
+    Date date = new Date();//取时间
+    Calendar calendar = new GregorianCalendar();
+    calendar.setTime(date);
+    calendar.add(calendar.YEAR, 1);//把日期往后增加一年.整数往后推,负数往前移动
+    calendar.add(calendar.DAY_OF_MONTH, 1);//把日期往后增加一个月.整数往后推,负数往前移动
+    calendar.add(calendar.DATE, 1);//把日期往后增加一天.整数往后推,负数往前移动
+    return null;
+}
+
+    //获取系统当前时间，字符串类型
+    public static String getStrDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//设置为东八区
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        Date newDate = new Date();
+        String dateStr = sdf.format(newDate);
+        return dateStr;
+    }
+
+    //获取系统当前时间Date类型，需要将字符串类型转成时间
+    public static Date getDaDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//设置为东八区
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+
+
+//将字符串转成时间
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date newDate = null;
+        try {
+            newDate = df.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDate;
+    }
+    //CURRENT_TIMESTAMP
+
 }

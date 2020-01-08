@@ -1,6 +1,7 @@
 package com.example.group4.service.Manage;
 
 import com.example.group4.bean.*;
+import com.example.group4.bean.ex.dangerEX;
 
 import java.util.List;
 
@@ -21,5 +22,8 @@ public interface IManagerService {
     void modify(Dormitory dormitory);
     List<Dormitory> selectAllDormitory();
     void modifyBusiness(Business business);
+    void IOrecord(int id,String condition);
+    List<dangerEX> danger(String date);
+    List<Manager_Operation_List> list();
 
 }

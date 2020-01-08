@@ -1,20 +1,23 @@
 package com.example.group4.bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
+@ApiModel
 public class Business implements Serializable {
+    @ApiModelProperty(required = true,value = "商户id")
     private Integer id;
-
-    private String pass;
-
+    @ApiModelProperty(value = "商户名")
     private String name;
-
+    @ApiModelProperty(value = "商户地址")
     private String address;
-
+    @ApiModelProperty(value = "商户地址")
     private String lawname;
-
+    @ApiModelProperty(value = "法人身份证号")
     private String idNo;
-
+    @ApiModelProperty(value = "联系方式")
     private String phonenumber;
 
     private static final long serialVersionUID = 1L;
@@ -25,14 +28,6 @@ public class Business implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass == null ? null : pass.trim();
     }
 
     public String getName() {
@@ -72,7 +67,7 @@ public class Business implements Serializable {
     }
 
     public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber == null ? null : phonenumber.trim();
+        this.phonenumber = phonenumber;
     }
 
     @Override
@@ -82,7 +77,6 @@ public class Business implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", pass=").append(pass);
         sb.append(", name=").append(name);
         sb.append(", address=").append(address);
         sb.append(", lawname=").append(lawname);

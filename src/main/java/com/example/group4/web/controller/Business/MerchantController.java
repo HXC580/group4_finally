@@ -1,19 +1,32 @@
 package com.example.group4.web.controller.Business;
 
 import com.example.group4.bean.Business;
+import com.example.group4.bean.Cost_bill;
 import com.example.group4.service.IMerchantService.IMerchantService;
+import com.example.group4.service.StudentCardService.ICostBillService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 @RestController
@@ -22,6 +35,8 @@ import java.util.TimeZone;
 public class MerchantController {
     @Autowired
     private IMerchantService merchantService;
+    @Autowired
+    private ICostBillService costBillService;
 
     @GetMapping("/detail")
     @ApiOperation(value = "查询商户信息")
@@ -33,9 +48,6 @@ public class MerchantController {
     @GetMapping("/update")
     @ApiOperation(value = "修改商户信息")
     public Message update(Business business){
-        System.out.println(business.getPhonenumber().getClass().toString());
-        //有问题
-
         merchantService.saveOrUpdate(business);
         return MessageUtil.success();
     }
@@ -48,12 +60,9 @@ public class MerchantController {
 //            @ApiImplicitParam(name = "endDateStr", value = "结束日期", dataType = "String")
 //    })
     public Message selectCollectionRecords(String startDateStr,String endDateStr, int id){
-        System.out.println(startDateStr);
-        System.out.println(endDateStr);
-        Date startDate = getDaDate(startDateStr);
-        Date endDate = getDaDate(endDateStr);
-        System.out.println(startDate);
-        System.out.println(endDate);
+        //String转换成Date
+        Date startDate = getDaDate(startDateStr+" 00:00:00");
+        Date endDate = getDaDate(endDateStr+" 23:59:59");
         return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,id));
     }
 
@@ -65,12 +74,52 @@ public class MerchantController {
 //            @ApiImplicitParam(name = "endDate", value = "结束日期")
 //    })
     public Message profit(String startDateStr,String endDateStr,int id){
-        Date startDate = getDaDate(startDateStr);
-        Date endDate = getDaDate(endDateStr);
+        Date startDate = getDaDate(startDateStr+" 00:00:00");
+        Date endDate = getDaDate(endDateStr+" 23:59:59");
         return MessageUtil.success(merchantService.getProfit(startDate,endDate,id));
     }
 
 
+    @GetMapping("/getProfitChart")
+    @ApiOperation("获取收益图表信息")
+    public Message getProfitChart(String selected){
+        return MessageUtil.success(costBillService.getProfitChart(selected));
+    }
+
+    @GetMapping("/downloadProfitSheet")
+    @ApiOperation("下载收益报表")
+    public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int macId,HttpServletResponse response) throws IOException {
+        List<Cost_bill> cost_bills = merchantService.downloadProfitSheet(busId,macId);
+        String name = merchantService.queById(busId).getName();
+        download(cost_bills,response,name);
+    }
+
+    public void download(List<Cost_bill> cost_bills, HttpServletResponse response,String name) throws IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet();
+        //表头
+        sheet.addMergedRegion(new CellRangeAddress(0,0,0,3));
+        sheet.createRow(0).createCell(0).setCellValue(name+"收益报表");
+        //表二
+        XSSFRow row = sheet.createRow(1);
+        row.createCell(0).setCellValue("学生卡号");
+        row.createCell(1).setCellValue("消费金额");
+        row.createCell(2).setCellValue("消费时间");
+        row.createCell(3).setCellValue("机器序号");
+        for (int i = 0; i < cost_bills.size(); i++) {
+            XSSFRow row1 = sheet.createRow(i + 2);
+            row1.createCell(0).setCellValue(cost_bills.get(i).getCardId());
+            row1.createCell(1).setCellValue(cost_bills.get(i).getMoney());
+            row1.createCell(2).setCellValue(DateToStr(cost_bills.get(i).getTime()));
+            row1.createCell(3).setCellValue(cost_bills.get(i).getMachineId());
+        }
+
+        response.setHeader("content-Type","application/vnd.ms-excel");
+        response.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode(name+"-收益报表.xlsx","utf-8"));
+        workbook.write(response.getOutputStream());
+    }
+
+    //工具类，判断返回是否为空
     public Message message(Object object,int code){
         if(object == null){
             return MessageUtil.error(200,"参数为空");
@@ -83,6 +132,12 @@ public class MerchantController {
         }
     }
 
+
+    public static String DateToStr(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateStr = sdf.format(date);
+        return dateStr;
+    }
 
     //获取系统当前时间，字符串类型
     public static String getStrDate(){
@@ -99,7 +154,7 @@ public class MerchantController {
     public static Date getDaDate( String dateStr){
         //将字符串转成时间
 //        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date newDate=null;
         try {
             newDate = df.parse(dateStr);
