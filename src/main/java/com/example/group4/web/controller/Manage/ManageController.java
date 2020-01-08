@@ -7,7 +7,7 @@ import com.example.group4.bean.Manager;
 import com.example.group4.bean.Student;
 
 import com.example.group4.service.Manage.IManagerService;
-import com.example.group4.testHXC.pay;
+//import com.example.group4.testHXC.pay;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
@@ -135,13 +135,13 @@ public class ManageController {
     public Message operation(){
         return MessageUtil.success(managerService.list());
     }
-    @GetMapping("/Aalipay")
-    // @Api(description = "dd")
-    @ApiOperation(value = "测试支付")
-    public Message alipay(String id){
-      pay pay= new pay();
-     return MessageUtil.success(pay.rest(id));
-    }
+//    @GetMapping("/Aalipay")
+//    // @Api(description = "dd")
+//    @ApiOperation(value = "测试支付")
+//    public Message alipay(String id){
+//      pay pay= new pay();
+//     return MessageUtil.success(pay.rest(id));
+//    }
 
 
 
