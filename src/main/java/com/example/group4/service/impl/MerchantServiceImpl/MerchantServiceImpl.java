@@ -42,7 +42,7 @@ public class MerchantServiceImpl implements IMerchantService {
     }
 
     @Override
-    public List<Cost_billEX> selectCollectionRecords(Date startDate,Date endDate,int id,int currentPage,int pageSize) throws RuntimeException {
+    public List<Cost_billEX> selectCollectionRecords(Date startDate,Date endDate,int macId,int busId,int currentPage,int pageSize) throws RuntimeException {
         //查询数据
 //        Cost_billExample example = new Cost_billExample();
 //        example.createCriteria().andMachineIdEqualTo(id).andTimeBetween(startDate,endDate);
@@ -51,13 +51,11 @@ public class MerchantServiceImpl implements IMerchantService {
 //        int firstIndex = (currentPage-1)*pageSize;
 //        int lastIndex = currentPage*pageSize;
 //        cost_bills = cost_bills.subList(firstIndex,lastIndex);
-
-        List<Cost_bill> cost_bills = selectCostbillByPage(id, startDate, endDate,currentPage,pageSize);
+        List<Cost_bill> cost_bills = selectCostbillByPage(macId,busId, startDate, endDate,currentPage,pageSize);
         if (cost_bills==null){
             return null;
         }else {
             List<Cost_billEX> cost_billEXList = new ArrayList<>();
-
             double profit=0;
             //计算收益记录的总额
             for (Cost_bill cost_bill : cost_bills) {
@@ -71,9 +69,20 @@ public class MerchantServiceImpl implements IMerchantService {
         }
     }
 
-    public List<Cost_bill> selectCostbillByPage(int id,Date startDate,Date endDate,int currentPage,int pageSize){
+    public List<Cost_bill> selectCostbillByPage(int macId,int busId,Date startDate,Date endDate,int currentPage,int pageSize){
        try {
-           List<Cost_bill> cost_bills = selectAllCostbill(id,startDate,endDate);
+           List<Cost_bill> cost_bills = new ArrayList<>();
+           //单个machine对应的cost_bills的分页数据
+           if (macId!=-1){
+               cost_bills = selectAllCostbillByMacId(macId,startDate,endDate);
+           }
+           //该商户下所有machine的cost_bills的分页数据
+           else {
+               int[] ids = machineMapper.getMachineByBusId(busId);
+               for (int i = 0; i < ids.length; i++) {
+                   cost_bills.addAll(selectAllCostbillByMacId(ids[i],startDate,endDate));
+               }
+           }
            //数组分页
            int firstIndex = (currentPage-1)*pageSize;
            int lastIndex = currentPage*pageSize;
@@ -89,16 +98,32 @@ public class MerchantServiceImpl implements IMerchantService {
     }
 
 
-    public List<Cost_bill> selectAllCostbill(int id,Date startDate,Date endDate){
+    public List<Cost_bill> selectAllCostbillByMacId(int id,Date startDate,Date endDate){
         Cost_billExample example = new Cost_billExample();
         example.createCriteria().andMachineIdEqualTo(id).andTimeBetween(startDate,endDate);
         return cost_billMapper.selectByExample(example);
     }
 
     @Override
-    public double getProfit(Date startDate, Date endDate, int id) throws RuntimeException {
+    public double getProfit(Date startDate, Date endDate, int macId,int busId) throws RuntimeException {
+        double profit =0;
+        //获得某台机器的收益
+        if (macId!=-1){
+            return getProfitByMacId(startDate,endDate,macId);
+        }
+        //获得当前商户下全部机器收益
+        else {
+            int[] ids = machineMapper.getMachineByBusId(busId);
+            for (int i = 0; i < ids.length; i++) {
+                profit += getProfitByMacId(startDate,endDate,ids[i]);
+            }
+            return profit;
+        }
+    }
+
+    public double getProfitByMacId(Date startDate, Date endDate, int macId){
         double profit= 0;
-        List<Cost_bill> cost_bills = selectAllCostbill(id,startDate, endDate);
+        List<Cost_bill> cost_bills = selectAllCostbillByMacId(macId,startDate, endDate);
         for (Cost_bill cost_bill : cost_bills) {
             profit += cost_bill.getMoney();
         }

@@ -193,4 +193,8 @@
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getMachineByBusId" resultType="int">
+    select id from machine where business_id = #{id}
+  </select>
 </mapper>

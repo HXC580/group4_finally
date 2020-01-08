@@ -27,4 +27,6 @@ public interface MachineMapper {
     int updateByPrimaryKeySelective(Machine record);
 
     int updateByPrimaryKey(Machine record);
+
+    int[] getMachineByBusId(int id);
 }

@@ -9,6 +9,7 @@ import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -53,44 +54,48 @@ public class MerchantController {
     }
 
     @PostMapping("/selectCollectionRecords")
-    @ApiOperation(value = "查询收款记录")
-    @ApiImplicitParam(name = "id",value = "机器id",dataType = "int",paramType = "query")
+    @ApiOperation(value = "查询收款记录(指定机器/指定商户下所有机器)")
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "id",value = "商户id",paramType = "query",dataType = "int"),
 //            @ApiImplicitParam(name = "startDateStr",value = "开始日期", dataType = "String"),
 //            @ApiImplicitParam(name = "endDateStr", value = "结束日期", dataType = "String")
 //    })
-    public Message selectCollectionRecords(String startDateStr,String endDateStr, int id,
+    public Message selectCollectionRecords(String startDateStr,String endDateStr,
+                                           int busId,
+                                           @RequestParam(required = false,defaultValue = "-1") int macId,
                                            @RequestParam(required = false,defaultValue = "1") int currentPage,
                                            @RequestParam(required = false,defaultValue = "5") int pageSize){
         //String转换成Date
         Date startDate = getDaDate(startDateStr+" 00:00:00");
         Date endDate = getDaDate(endDateStr+" 23:59:59");
-        if (merchantService.selectCollectionRecords(startDate,endDate,id,currentPage,pageSize)==null){
+        if (merchantService.selectCollectionRecords(startDate,endDate,macId,busId,currentPage,pageSize)==null){
             return MessageUtil.error(500,"数组越界,请检查起始页数是否正确。");
         }else {
-            return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,id, currentPage,pageSize));
+            return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,macId, busId,currentPage,pageSize));
         }
     }
 
-    @GetMapping("/profit")
-    @ApiOperation(value = "查询总收入")
+    @GetMapping("/profitByMacIdOrAll")
+    @ApiOperation(value = "查询单个机器总收入/查询所有机器总收入")
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "id",value = "商户id",paramType = "query",dataType = "int"),
 //            @ApiImplicitParam(name = "startDate",value = "开始日期"),
 //            @ApiImplicitParam(name = "endDate", value = "结束日期")
 //    })
-    public Message profit(String startDateStr,String endDateStr,int id){
+    public Message profitByMacId(String startDateStr,String endDateStr,
+                                 @RequestParam(required = false,defaultValue = "-1") int MacId,
+                                 int busId){
         Date startDate = getDaDate(startDateStr+" 00:00:00");
         Date endDate = getDaDate(endDateStr+" 23:59:59");
-        return MessageUtil.success(merchantService.getProfit(startDate,endDate,id));
+        return MessageUtil.success(merchantService.getProfit(startDate,endDate,MacId,busId));
     }
-
 
     @GetMapping("/getProfitChart")
     @ApiOperation("获取收益柱状图信息")
-    public Message getProfitChart(String selected){
-        return MessageUtil.success(costBillService.getProfitChart(selected));
+    @ApiImplicitParam(name = "id",value = "商户id",dataType = "int",paramType = "query")
+    public Message getProfitChart(String selected, int id){
+        System.out.println(selected);
+        return MessageUtil.success(costBillService.getProfitChart(selected,id));
     }
 
     @GetMapping("/downloadProfitSheet")
@@ -125,6 +130,10 @@ public class MerchantController {
         response.setHeader("content-Type","application/vnd.ms-excel");
         response.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode(name+"-收益报表.xlsx","utf-8"));
         workbook.write(response.getOutputStream());
+    }
+
+    public void createSheet(){
+
     }
 
     @GetMapping("/selectMacByBusId")

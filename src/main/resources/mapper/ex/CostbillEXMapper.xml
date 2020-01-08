@@ -50,12 +50,17 @@
         select sum(money) from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day}
     </select>
 
+
     <select id="getProfitChartByDay" resultType="com.example.group4.bean.ex.ProfitEX">
         SELECT
 	        SUM(money) AS countMoney,count(1) AS countNumber,
 	        DATE_FORMAT(time,'%Y-%m-%d') AS dateTime
         FROM
 	        cost_bill
+	    where machine_id in
+	    <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
         GROUP BY DATE_FORMAT(time,'%Y-%m-%d')
     </select>
     <select id="getProfitChartByMonth" resultType="com.example.group4.bean.ex.ProfitEX">
@@ -64,6 +69,10 @@
 	        DATE_FORMAT(time,'%Y-%m') AS dateTime
         FROM
 	        cost_bill
+        where machine_id in
+        <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
         GROUP BY DATE_FORMAT(time,'%Y-%m')
     </select>
     <select id="getProfitChartByYear" resultType="com.example.group4.bean.ex.ProfitEX">
@@ -72,6 +81,10 @@
 	        DATE_FORMAT(time,'%Y') AS dateTime
         FROM
 	        cost_bill
+        where machine_id in
+        <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
         GROUP BY DATE_FORMAT(time,'%Y')
     </select>
 </mapper>
