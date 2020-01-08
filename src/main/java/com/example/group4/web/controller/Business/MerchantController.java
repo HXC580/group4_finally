@@ -9,10 +9,7 @@ import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -59,11 +56,13 @@ public class MerchantController {
 //            @ApiImplicitParam(name = "startDateStr",value = "开始日期", dataType = "String"),
 //            @ApiImplicitParam(name = "endDateStr", value = "结束日期", dataType = "String")
 //    })
-    public Message selectCollectionRecords(String startDateStr,String endDateStr, int id){
+    public Message selectCollectionRecords(String startDateStr,String endDateStr, int id,
+                                           @RequestParam(required = false,defaultValue = "1") int currentPage,
+                                           @RequestParam(required = false,defaultValue = "5") int pageSize){
         //String转换成Date
         Date startDate = getDaDate(startDateStr+" 00:00:00");
         Date endDate = getDaDate(endDateStr+" 23:59:59");
-        return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,id));
+        return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,id, currentPage,pageSize));
     }
 
     @GetMapping("/profit")
@@ -81,14 +80,15 @@ public class MerchantController {
 
 
     @GetMapping("/getProfitChart")
-    @ApiOperation("获取收益图表信息")
+    @ApiOperation("获取收益柱状图信息")
     public Message getProfitChart(String selected){
         return MessageUtil.success(costBillService.getProfitChart(selected));
     }
 
     @GetMapping("/downloadProfitSheet")
     @ApiOperation("下载收益报表")
-    public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int macId,HttpServletResponse response) throws IOException {
+    public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int macId,
+                                    HttpServletResponse response) throws IOException {
         List<Cost_bill> cost_bills = merchantService.downloadProfitSheet(busId,macId);
         String name = merchantService.queById(busId).getName();
         download(cost_bills,response,name);
@@ -119,7 +119,7 @@ public class MerchantController {
         workbook.write(response.getOutputStream());
     }
 
-    //工具类，判断返回是否为空
+    //工具类，判断返回对象是否为空
     public Message message(Object object,int code){
         if(object == null){
             return MessageUtil.error(200,"参数为空");
