@@ -87,10 +87,10 @@ public class BookController {
     }
     @GetMapping("/selectBookByKey")
     @ApiOperation(value="根据关键字获取图书详细信息")
-    public Message selectBookByKey(String key){
+    public List<Book> selectBookByKey(String key){
         key="%"+key+"%";
         List<Book> list=iBookService.selectBookByKey(key);
-        return MessageUtil.success(list);
+        return list;
 
 
 

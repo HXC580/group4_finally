@@ -20,6 +20,7 @@ public class setDataToMysql {
             throw new RuntimeException(e);
         }
         try {
+
             conn = DriverManager.getConnection(url, user, pwd);
             pstmt = conn.prepareStatement(sql);
             pstmt.execute();
