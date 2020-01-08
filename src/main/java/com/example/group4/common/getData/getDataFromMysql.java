@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class getDataFromMysql {
-    private static String user = "root";
+    private static String user = "group4";
     private static String pwd = "CJMcjm136466!";
-    private static String url = "jdbc:mysql://cdb-j1djq9t2.bj.tencentcdb.com:10171/wx_test?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
+    private static String url = "jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/group4_3?useunicode=true;&characterEncoding=utf8";
     private static Connection conn=null;
     private static ResultSet rs = null;
     private static PreparedStatement pstmt=null;

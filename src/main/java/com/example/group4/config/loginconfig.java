@@ -17,12 +17,12 @@ public class loginconfig {
     @Value("${wx.loginUrl}")
     public  void setLoginUrl(String loginUrl) {        this.loginUrl = loginUrl;    }
 
-    @Value("${wx.appSecret}")
+    @Value("${wx.appSecret2}")
     public  void setAppSecret(String appSecret) {
         this.appSecret = appSecret;
     }
 
-    @Value("${wx.appID}")
+    @Value("${wx.appID2}")
     public  void setAppID(String appID) {
         this.appID = appID;
     }

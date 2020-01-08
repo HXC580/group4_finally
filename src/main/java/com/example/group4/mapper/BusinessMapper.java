@@ -4,9 +4,7 @@ import com.example.group4.bean.Business;
 import com.example.group4.bean.BusinessExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface BusinessMapper {
     long countByExample(BusinessExample example);
 

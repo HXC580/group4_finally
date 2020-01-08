@@ -4,6 +4,7 @@ import com.example.group4.common.DataTypeTransform.JsonToMap;
 import com.example.group4.common.DataTypeTransform.jsontouwei;
 import com.example.group4.common.getData.getDataFromMysql;
 import com.example.group4.common.getData.getDataFromOtherUrl;
+import com.example.group4.common.setData.setDataToMysql;
 import com.example.group4.config.loginconfig;
 import com.example.group4.util.UserUtils;
 import org.springframework.util.LinkedMultiValueMap;
@@ -37,13 +38,13 @@ public class MainController {
         Map a = JsonToMap.transfrom(rs);
         String open_id = a.get("openid").toString();
         String session_key = a.get("session_key").toString();
-        String sql = "SELECT * FROM mysc.user_data where open_id=\"" + open_id + "\"";
+        String sql = "SELECT * FROM group4_3.wx where open_id=\"" + open_id + "\"";
         String res = jsontouwei.jsontw(getDataFromMysql.getConnerct(sql));
         if (!res.trim().equals("") && !res.isEmpty()) {
-            sql = "UPDATE `mysc`.`user_data` SET `session_key` = '" + session_key + "' WHERE (`open_id` = '" + open_id + "');";
-            setDataToMysql.InsertOrUpdateDataToMysql(sql);
+//            sql = "UPDATE group4_3.wx SET `session_key` = '" + session_key + "' WHERE (`open_id` = '" + open_id + "');";
+//            setDataToMysql.InsertOrUpdateDataToMysql(sql);
         } else {
-            sql = "insert into  mysc.user_data (open_id,nick_name,avatarUrl,session_key)values('" + open_id + "','" + UserUtils.getNickname() + "','" + UserUtils.getAvatarUrl() + "','" + session_key + "');";
+            sql = "insert into  group4_3.wx (open_id,nick_name,avatarUrl,session_key)values('" + open_id + "','" + UserUtils.getNickname() + "','" + UserUtils.getAvatarUrl() + "','" + session_key + "');";
             setDataToMysql.InsertOrUpdateDataToMysql(sql);
             System.out.println("The frist login!!!");
         }

@@ -9,7 +9,7 @@ import java.util.Map;
 public class GetData {
     private static String user = "group4";
     private static String pwd = "CJMcjm136466!";
-    private static String url = "jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/wx_test?useunicode=true;&characterEncoding=utf8";
+    private static String url = "jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/group4_3?useunicode=true;&characterEncoding=utf8";
     private static String   sql;
 
     static Connection conn=null;
