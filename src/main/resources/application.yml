@@ -8,7 +8,7 @@ spring:
   datasource:
     username: group4
     password: CJMcjm136466!
-    url: jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/group4_3?useunicode=true;&characterEncoding=utf8
+    url: jdbc:mysql://test-group4.mysql.rds.aliyuncs.com:9988/group4_3?useunicode=true;&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
  mapper-locations: mapper/**/**/*Mapper.xml
@@ -16,6 +16,9 @@ wx:
   appID: wx1046df29d9aa8427
   mchID: 1413626902
   key: lkjhgfdsa1234567890poiuytrewqZXC
+  appID2: wxde780dd478c0a2dd
+  appSecret2: 63daed888a3aad288f5e9e89ba06a48e
+  loginUrl: https://api.weixin.qq.com/sns/jscode2session
   unifiedorder:
     notifyUrl: ${intranet.penetrateUrl}/wxPay/unifiedorderNotify
 intranet:

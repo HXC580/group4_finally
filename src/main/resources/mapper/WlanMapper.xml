@@ -3,11 +3,7 @@
 <mapper namespace="com.example.group4.mapper.WlanMapper">
   <resultMap id="BaseResultMap" type="com.example.group4.bean.Wlan">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="used_flow" jdbcType="DOUBLE" property="usedFlow" />
-    <result column="used_time" jdbcType="TIME" property="usedTime" />
-    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="pass" jdbcType="VARCHAR" property="pass" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, card_id, time, used_flow, used_time, money, pass
+    id, student_id, pass
   </sql>
   <select id="selectByExample" parameterType="com.example.group4.bean.WlanExample" resultMap="BaseResultMap">
     select
@@ -102,12 +98,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.group4.bean.Wlan">
-    insert into wlan (id, card_id, time, 
-      used_flow, used_time, money, 
-      pass)
-    values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
-      #{usedFlow,jdbcType=DOUBLE}, #{usedTime,jdbcType=TIME}, #{money,jdbcType=DOUBLE}, 
-      #{pass,jdbcType=VARCHAR})
+    insert into wlan (id, student_id, pass
+      )
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{pass,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.group4.bean.Wlan">
     insert into wlan
@@ -115,20 +109,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="cardId != null">
-        card_id,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="usedFlow != null">
-        used_flow,
-      </if>
-      <if test="usedTime != null">
-        used_time,
-      </if>
-      <if test="money != null">
-        money,
+      <if test="studentId != null">
+        student_id,
       </if>
       <if test="pass != null">
         pass,
@@ -138,20 +120,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="cardId != null">
-        #{cardId,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="usedFlow != null">
-        #{usedFlow,jdbcType=DOUBLE},
-      </if>
-      <if test="usedTime != null">
-        #{usedTime,jdbcType=TIME},
-      </if>
-      <if test="money != null">
-        #{money,jdbcType=DOUBLE},
+      <if test="studentId != null">
+        #{studentId,jdbcType=INTEGER},
       </if>
       <if test="pass != null">
         #{pass,jdbcType=VARCHAR},
@@ -170,20 +140,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.cardId != null">
-        card_id = #{record.cardId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.usedFlow != null">
-        used_flow = #{record.usedFlow,jdbcType=DOUBLE},
-      </if>
-      <if test="record.usedTime != null">
-        used_time = #{record.usedTime,jdbcType=TIME},
-      </if>
-      <if test="record.money != null">
-        money = #{record.money,jdbcType=DOUBLE},
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=INTEGER},
       </if>
       <if test="record.pass != null">
         pass = #{record.pass,jdbcType=VARCHAR},
@@ -196,11 +154,7 @@
   <update id="updateByExample" parameterType="map">
     update wlan
     set id = #{record.id,jdbcType=INTEGER},
-      card_id = #{record.cardId,jdbcType=VARCHAR},
-      time = #{record.time,jdbcType=TIMESTAMP},
-      used_flow = #{record.usedFlow,jdbcType=DOUBLE},
-      used_time = #{record.usedTime,jdbcType=TIME},
-      money = #{record.money,jdbcType=DOUBLE},
+      student_id = #{record.studentId,jdbcType=INTEGER},
       pass = #{record.pass,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,20 +163,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.example.group4.bean.Wlan">
     update wlan
     <set>
-      <if test="cardId != null">
-        card_id = #{cardId,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="usedFlow != null">
-        used_flow = #{usedFlow,jdbcType=DOUBLE},
-      </if>
-      <if test="usedTime != null">
-        used_time = #{usedTime,jdbcType=TIME},
-      </if>
-      <if test="money != null">
-        money = #{money,jdbcType=DOUBLE},
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=INTEGER},
       </if>
       <if test="pass != null">
         pass = #{pass,jdbcType=VARCHAR},
@@ -232,11 +174,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.group4.bean.Wlan">
     update wlan
-    set card_id = #{cardId,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      used_flow = #{usedFlow,jdbcType=DOUBLE},
-      used_time = #{usedTime,jdbcType=TIME},
-      money = #{money,jdbcType=DOUBLE},
+    set student_id = #{studentId,jdbcType=INTEGER},
       pass = #{pass,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
