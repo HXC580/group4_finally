@@ -7,4 +7,8 @@
     <update id="abfreeze" >
         update mealcard set type="normal" where id=#{id}
     </update>
+
+    <update id="updateCeiling">
+        update mealcard set ceiling=#{money} where id=#{id}
+    </update>
 </mapper>

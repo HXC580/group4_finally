@@ -16,6 +16,9 @@ wx:
   appID: wx1046df29d9aa8427
   mchID: 1413626902
   key: lkjhgfdsa1234567890poiuytrewqZXC
+  appID2: wxde780dd478c0a2dd
+  appSecret2: 63daed888a3aad288f5e9e89ba06a48e
+  loginUrl: https://api.weixin.qq.com/sns/jscode2session
   unifiedorder:
     notifyUrl: ${intranet.penetrateUrl}/wxPay/unifiedorderNotify
 intranet:

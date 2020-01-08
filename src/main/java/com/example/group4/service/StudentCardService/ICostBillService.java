@@ -6,11 +6,11 @@ import com.example.group4.bean.ex.ProfitEX;
 import java.util.List;
 
 public interface ICostBillService {
-    List<CostBillEX>findAll(int start, int pagesize);
-    List<CostBillEX>findByMoney(double money);
-    double sum();
-    List<CostBillEX>findByTime(int day);
-    double sumByTime(int day);
+    List<CostBillEX>findById(int id,int start, int pagesize);
+    List<CostBillEX>findByMoney(int id,double money);
+    double sumById(int id);
+    List<CostBillEX>findByTime(int id,int day);
+    double sumByTime(int id,int day);
 
     List<ProfitEX> getProfitChart(String selected);
 }

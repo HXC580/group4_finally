@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @Api(description = "充值控制器")
@@ -21,15 +22,24 @@ public class RechargeController {
 
     @ApiOperation(value = "充值")
     @GetMapping("/Recharge")
-    public Message Recharge(){
-        if(ef)
-        rechargeService.AddSum(id,money);
+    public Message Recharge(boolean flag){
+        if(flag)
+        {
+            rechargeService.AddSum(id,money);
+            return MessageUtil.success();
+        }else {
+            return  MessageUtil.error(1128,"支付失败");
+        }
+    }
+
+    @ApiOperation(value = "设置每日消费上限")
+    @ResponseBody
+    @GetMapping("/updateCeiling")
+    public Message updateCeiling(int id,double money){
+        rechargeService.updateCeiling(id,money);
         return MessageUtil.success();
     }
-    @GetMapping("/test")
-    public String test(int id){
-        return "redirect:/From?PO_NO=id";
-    }
+
 
     @GetMapping("/po")
     public String po(int id1,double money1){
