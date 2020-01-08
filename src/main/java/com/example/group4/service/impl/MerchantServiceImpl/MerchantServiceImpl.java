@@ -53,30 +53,39 @@ public class MerchantServiceImpl implements IMerchantService {
 //        cost_bills = cost_bills.subList(firstIndex,lastIndex);
 
         List<Cost_bill> cost_bills = selectCostbillByPage(id, startDate, endDate,currentPage,pageSize);
-        List<Cost_billEX> cost_billEXList = new ArrayList<>();
+        if (cost_bills==null){
+            return null;
+        }else {
+            List<Cost_billEX> cost_billEXList = new ArrayList<>();
 
-        double profit=0;
-        //计算收益记录的总额
-        for (Cost_bill cost_bill : cost_bills) {
-            profit += cost_bill.getMoney();
+            double profit=0;
+            //计算收益记录的总额
+            for (Cost_bill cost_bill : cost_bills) {
+                profit += cost_bill.getMoney();
+            }
+            //将cost_bill和profit封装到cost_billEX集合中
+            for (int i = 0; i < cost_bills.size(); i++) {
+                cost_billEXList.add(new Cost_billEX(cost_bills.get(i).getId(),cost_bills.get(i).getCardId(),cost_bills.get(i).getMoney(),cost_bills.get(i).getTime(),cost_bills.get(i).getMachineId(),profit));
+            }
+            return cost_billEXList;
         }
-        //将cost_bill和profit封装到cost_billEX集合中
-        for (int i = 0; i < cost_bills.size(); i++) {
-            cost_billEXList.add(new Cost_billEX(cost_bills.get(i).getId(),cost_bills.get(i).getCardId(),cost_bills.get(i).getMoney(),cost_bills.get(i).getTime(),cost_bills.get(i).getMachineId(),profit));
-        }
-        return cost_billEXList;
     }
 
     public List<Cost_bill> selectCostbillByPage(int id,Date startDate,Date endDate,int currentPage,int pageSize){
-        List<Cost_bill> cost_bills = selectAllCostbill(id,startDate,endDate);
-        //数组分页
-        int firstIndex = (currentPage-1)*pageSize;
-        int lastIndex = currentPage*pageSize;
-        if(lastIndex>cost_bills.size()){
-            return cost_bills.subList(firstIndex,cost_bills.size());
-        }else {
-            return cost_bills.subList(firstIndex,lastIndex);
-        }
+       try {
+           List<Cost_bill> cost_bills = selectAllCostbill(id,startDate,endDate);
+           //数组分页
+           int firstIndex = (currentPage-1)*pageSize;
+           int lastIndex = currentPage*pageSize;
+           if(lastIndex>cost_bills.size()){
+               return cost_bills.subList(firstIndex,cost_bills.size());
+           }else {
+               return cost_bills.subList(firstIndex,lastIndex);
+           }
+       }catch (Exception e){
+           System.out.println("数组越界");
+       }
+        return null;
     }
 
 

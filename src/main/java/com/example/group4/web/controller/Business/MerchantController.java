@@ -2,6 +2,7 @@ package com.example.group4.web.controller.Business;
 
 import com.example.group4.bean.Business;
 import com.example.group4.bean.Cost_bill;
+import com.example.group4.service.IMerchantService.IMachineService;
 import com.example.group4.service.IMerchantService.IMerchantService;
 import com.example.group4.service.StudentCardService.ICostBillService;
 import com.example.group4.util.Message;
@@ -34,6 +35,8 @@ public class MerchantController {
     private IMerchantService merchantService;
     @Autowired
     private ICostBillService costBillService;
+    @Autowired
+    private IMachineService machineService;
 
     @GetMapping("/detail")
     @ApiOperation(value = "查询商户信息")
@@ -51,6 +54,7 @@ public class MerchantController {
 
     @PostMapping("/selectCollectionRecords")
     @ApiOperation(value = "查询收款记录")
+    @ApiImplicitParam(name = "id",value = "机器id",dataType = "int",paramType = "query")
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "id",value = "商户id",paramType = "query",dataType = "int"),
 //            @ApiImplicitParam(name = "startDateStr",value = "开始日期", dataType = "String"),
@@ -62,7 +66,11 @@ public class MerchantController {
         //String转换成Date
         Date startDate = getDaDate(startDateStr+" 00:00:00");
         Date endDate = getDaDate(endDateStr+" 23:59:59");
-        return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,id, currentPage,pageSize));
+        if (merchantService.selectCollectionRecords(startDate,endDate,id,currentPage,pageSize)==null){
+            return MessageUtil.error(500,"数组越界,请检查起始页数是否正确。");
+        }else {
+            return MessageUtil.success(merchantService.selectCollectionRecords(startDate,endDate,id, currentPage,pageSize));
+        }
     }
 
     @GetMapping("/profit")
@@ -117,6 +125,12 @@ public class MerchantController {
         response.setHeader("content-Type","application/vnd.ms-excel");
         response.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode(name+"-收益报表.xlsx","utf-8"));
         workbook.write(response.getOutputStream());
+    }
+
+    @GetMapping("/selectMacByBusId")
+    @ApiOperation(value = "根据商户id找机器")
+    public Message selectMacByBusId(int busId){
+        return MessageUtil.success(machineService.selectMacByBusId(busId));
     }
 
     //工具类，判断返回对象是否为空
