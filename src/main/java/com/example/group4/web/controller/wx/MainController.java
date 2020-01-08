@@ -44,12 +44,12 @@ public class MainController {
 //            sql = "UPDATE group4_3.wx SET `session_key` = '" + session_key + "' WHERE (`open_id` = '" + open_id + "');";
 //            setDataToMysql.InsertOrUpdateDataToMysql(sql);
         } else {
-            sql = "insert into  group4_3.wx (open_id,nick_name,avatarUrl,session_key)values('" + open_id + "','" + UserUtils.getNickname() + "','" + UserUtils.getAvatarUrl() + "','" + session_key + "');";
+            sql = "insert into  group4_3.wx (open_id)values('" + open_id + "');";
             setDataToMysql.InsertOrUpdateDataToMysql(sql);
             System.out.println("The frist login!!!");
         }
 
-        returnDta = jsontouwei.jsontw(getDataFromMysql.getConnerct("SELECT * FROM mysc.user_data where open_id=\"" + open_id + "\""));
+        returnDta = jsontouwei.jsontw(getDataFromMysql.getConnerct("SELECT * FROM  group4_3.wx where open_id=\"" + open_id + "\""));
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         Writer writer = response.getWriter();
