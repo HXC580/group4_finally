@@ -6,6 +6,7 @@ import com.example.group4.bean.Recharge_bill;
 import com.example.group4.mapper.MealcardMapper;
 import com.example.group4.mapper.PoMapper;
 import com.example.group4.mapper.Recharge_billMapper;
+import com.example.group4.mapper.ex.MealcardEXMapper;
 import com.example.group4.mapper.ex.PoEXMapper;
 import com.example.group4.service.StudentCardService.IRechargeService;
 import org.omg.PortableServer.POA;
@@ -22,6 +23,9 @@ public class RechargeServiceImpl implements IRechargeService {
     private MealcardMapper mealcardMapper;
     @Autowired
     private PoEXMapper poEXMapper;
+    @Autowired
+    private MealcardEXMapper mealcardEXMapper;
+
     public void AddSum(int id, double money){
         if(mealcardMapper.selectByPrimaryKey(id).getType()=="normal"){
             //添加充值表中的记录
@@ -39,6 +43,11 @@ public class RechargeServiceImpl implements IRechargeService {
 
         }
 
+    }
+
+    @Override
+    public void updateCeiling(int id, double money) {
+        mealcardEXMapper.updateCeiling(id,money);
     }
 
     @Override
