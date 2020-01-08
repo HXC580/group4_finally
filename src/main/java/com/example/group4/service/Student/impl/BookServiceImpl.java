@@ -125,6 +125,23 @@ public class BookServiceImpl implements IBookService {
     }
 
 
+
+
+
+    @Override
+    public Lend_listEX selectLendListById(int id) {
+        Lend_listEX lend_listEX = bookEXMapper.selectLendListById(id);
+        return lend_listEX;
+    }
+
+    @Override
+    public Return_listEX selectReturnListById(int id) {
+        Return_listEX return_listEX = bookEXMapper.selectReturnListById(id);
+
+        return return_listEX;
+    }
+
+
 /*    @Override
     public void (int id) {
         Lend_listEX lend_listEX = bookEXMapper.selectLendListById(id);

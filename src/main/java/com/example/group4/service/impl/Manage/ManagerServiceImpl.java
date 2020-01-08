@@ -1,8 +1,7 @@
 package com.example.group4.service.impl.Manage;
 
-import com.example.group4.bean.Manager_Operation_List;
-import com.example.group4.bean.Student;
-import com.example.group4.bean.StudentExample;
+import com.example.group4.bean.*;
+import com.example.group4.bean.ex.dangerEX;
 import com.example.group4.mapper.Manager_Operation_ListMapper;
 import com.example.group4.mapper.MealcardMapper;
 import com.example.group4.mapper.StudentMapper;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.SimpleFormatter;
 
 @Service
@@ -34,6 +34,16 @@ public class ManagerServiceImpl implements IManagerService {
         studentExamples.createCriteria().andIdEqualTo(student.getId());
         studentMapper.updateByExample(student,studentExamples);
 
+    }
+
+    @Override
+    public List<Student> selectAllStudent() {
+        return null;
+    }
+
+    @Override
+    public Student searchBy1() {
+        return null;
     }
 
     public void freeze(int card_id,int manager_id){
@@ -75,5 +85,75 @@ public class ManagerServiceImpl implements IManagerService {
         //修改学生卡信息
         mealcardEXMapper.abfreeze(card_id);
 
+    }
+
+    @Override
+    public List<Mealcard> selectAllMealcard() {
+        return null;
+    }
+
+    @Override
+    public Mealcard searchBy2() {
+        return null;
+    }
+
+    @Override
+    public void modify(Manager manager) {
+
+    }
+
+    @Override
+    public Manager selectManageown(int id) {
+        return null;
+    }
+
+    @Override
+    public void logout(int student_id, int card_id, int manager_id) {
+
+    }
+
+    @Override
+    public void addBusiness(Business business) {
+
+    }
+
+    @Override
+    public List<Business> selectAllBusiness() {
+        return null;
+    }
+
+    @Override
+    public Business searchBy3() {
+        return null;
+    }
+
+    @Override
+    public void modify(Dormitory dormitory) {
+
+    }
+
+    @Override
+    public List<Dormitory> selectAllDormitory() {
+        return null;
+    }
+
+    @Override
+    public void modifyBusiness(Business business) {
+
+    }
+
+    @Override
+    public void IOrecord(int id, String condition) {
+
+    }
+
+    @Override
+    public List<dangerEX> danger(String date) {
+        return null;
+    }
+
+    @Override
+    public List<Manager_Operation_List> list() {
+        return null;
     }
 }

@@ -105,15 +105,22 @@ public class BookController {
         return url;
 
     }
-/*    @GetMapping("/selectLendListById")
-    @ApiOperation(value="根据借书Id付罚款")
-    public Message selectLendListById(int id){
+    @GetMapping("/selectLendListById")
+    @ApiOperation(value="根据Id查找借书记录")
+    public Lend_listEX selectLendListById(int id){
         Lend_listEX lend_listEX = iBookService.selectLendListById(id);
 
-        return MessageUtil.success(lend_listEX);
+        return lend_listEX;
 
-    }*/
+    }
+    @GetMapping("/selectReturnListById")
+    @ApiOperation(value="根据Id查找还书记录")
+    public Return_listEX selectReturnListById(int id){
+        Return_listEX return_listEX = iBookService.selectReturnListById(id);
 
+        return return_listEX;
+
+    }
 
 
 }
