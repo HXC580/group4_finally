@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @Api(description = "充值控制器")
@@ -30,10 +31,15 @@ public class RechargeController {
             return  MessageUtil.error(1128,"支付失败");
         }
     }
-    @GetMapping("/test")
-    public String test(int id){
-        return "redirect:/From?PO_NO=id";
+
+    @ApiOperation(value = "设置每日消费上限")
+    @ResponseBody
+    @GetMapping("/updateCeiling")
+    public Message updateCeiling(int id,double money){
+        rechargeService.updateCeiling(id,money);
+        return MessageUtil.success();
     }
+
 
     @GetMapping("/po")
     public String po(int id1,double money1){

@@ -1,9 +1,9 @@
-package com.example.group4.bean;
+package com.example.group4.bean.student.ex;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Book implements Serializable {
+public class BookEX {
+
     private Integer id;
 
     private String name;
@@ -12,17 +12,15 @@ public class Book implements Serializable {
 
     private String publisher;
 
-    private Date publishTime;
+    private Date publish_time;
 
-    private Date instorageTime;
+    private Date instorage_time;
 
     private String address;
 
     private String status;
 
     private Double price;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -37,7 +35,7 @@ public class Book implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getAuthor() {
@@ -45,7 +43,7 @@ public class Book implements Serializable {
     }
 
     public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
+        this.author = author;
     }
 
     public String getPublisher() {
@@ -53,27 +51,23 @@ public class Book implements Serializable {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = publisher == null ? null : publisher.trim();
+        this.publisher = publisher;
     }
 
-    public Date getPublishTime() {
-        return publishTime;
+    public Date getPublish_time() {
+        return publish_time;
     }
 
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
+    public void setPublish_time(Date publish_time) {
+        this.publish_time = publish_time;
     }
 
-    public Date getInstorageTime() {
-        return instorageTime;
+    public Date getInstorage_time() {
+        return instorage_time;
     }
 
-    public void setInstorageTime(Date instorageTime) {
-        this.instorageTime = instorageTime;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public void setInstorage_time(Date instorage_time) {
+        this.instorage_time = instorage_time;
     }
 
     public String getAddress() {
@@ -81,22 +75,34 @@ public class Book implements Serializable {
     }
 
     public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+        this.address = address;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookEX{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", publishTime=" + publishTime +
-                ", instorageTime=" + instorageTime +
+                ", publish_time=" + publish_time +
+                ", instorage_time=" + instorage_time +
                 ", address='" + address + '\'' +
                 ", status='" + status + '\'' +
                 ", price=" + price +

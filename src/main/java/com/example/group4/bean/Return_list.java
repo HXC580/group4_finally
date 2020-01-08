@@ -16,14 +16,30 @@ public class Return_list implements Serializable {
 
     private Integer lendId;
 
-    private static final long serialVersionUID = 1L;
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public Integer getBookId() {
@@ -42,22 +58,6 @@ public class Return_list implements Serializable {
         this.cardId = cardId;
     }
 
-    public Double getMoney() {
-        return money;
-    }
-
-    public void setMoney(Double money) {
-        this.money = money;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
     public Integer getLendId() {
         return lendId;
     }
@@ -68,18 +68,13 @@ public class Return_list implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", bookId=").append(bookId);
-        sb.append(", cardId=").append(cardId);
-        sb.append(", money=").append(money);
-        sb.append(", time=").append(time);
-        sb.append(", lendId=").append(lendId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Return_list{" +
+                "id=" + id +
+                ", bookId=" + bookId +
+                ", cardId=" + cardId +
+                ", money=" + money +
+                ", time=" + time +
+                ", lendId=" + lendId +
+                '}';
     }
 }

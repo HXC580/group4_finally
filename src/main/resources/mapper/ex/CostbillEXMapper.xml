@@ -20,6 +20,10 @@
         select * from cost_bill limit #{start},#{pagesize}
     </select>
 
+    <select id="findById" resultMap="aaa">
+        select * from cost_bill where card_id=#{id} limit #{start},#{pagesize}
+    </select>
+
     <resultMap id="abc" type="com.example.group4.bean.Business">
         <id column="id" property="id"></id>
         <result column="name" property="name"></result>
@@ -32,22 +36,20 @@
         select a.* from business a where id in (select business_id from machine b where b.id=#{machinessId})
     </select>
 
-
     <select id="findByMoney" resultMap="aaa">
-        select * from cost_bill where money>=#{money}
+        select * from cost_bill where money>=#{money} and card_id=#{id}
     </select>
 
-    <select id="sum" resultType="double">
-        select sum(money) from cost_bill
+    <select id="sumById" resultType="double">
+        select sum(money) from cost_bill where card_id=#{id}
     </select>
 
     <select id="findByTime" resultMap="aaa">
-        select * from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day}
+    select * from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day} and card_id=#{id}
     </select>
 
-
     <select id="sumByTime" resultType="double">
-        select sum(money) from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day}
+        select sum(money) from cost_bill where TIMESTAMPDIFF(DAY, time, now())&lt;= #{day} and card_id=#{id}
     </select>
 
 

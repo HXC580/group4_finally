@@ -21,29 +21,33 @@ public class CostBillServiceImpl implements ICostBillService {
     private MachineMapper machineMapper;
 
     @Override
-    public List<CostBillEX> findAll(int start,int pagesize) {
-        return costBillEXMapper.findAll( start,pagesize);
+    public List<CostBillEX> findById(int id,int start,int pagesize) {
+        if("null".equals(id))
+            return costBillEXMapper.findAll( start,pagesize);
+        else
+            return costBillEXMapper.findById(id,start,pagesize);
     }
 
     @Override
-    public List<CostBillEX> findByMoney(double money) {
-        return costBillEXMapper.findByMoney(money);
+    public List<CostBillEX> findByMoney(int id,double money) {
+        return costBillEXMapper.findByMoney(id,money);
     }
 
     @Override
-    public double sum() {
-        return costBillEXMapper.sum();
+    public double sumById(int id) {
+        return costBillEXMapper.sumById(id);
     }
 
     @Override
-    public List<CostBillEX> findByTime(int day) {
-        return costBillEXMapper.findByTime(day);
+    public List<CostBillEX> findByTime(int id,int day) {
+        return costBillEXMapper.findByTime(id,day);
     }
 
     @Override
-    public double sumByTime(int day) {
-        return costBillEXMapper.sumByTime(day);
+    public double sumByTime(int id,int day) {
+        return costBillEXMapper.sumByTime(id,day);
     }
+
 
     @Override
     public List<ProfitEX> getProfitChart(String selected,int id) {
