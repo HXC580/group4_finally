@@ -42,12 +42,17 @@ public class MerchantServiceImpl implements IMerchantService {
     }
 
     @Override
-    public List<Cost_billEX> selectCollectionRecords(Date startDate,Date endDate,int id) throws RuntimeException {
+    public List<Cost_billEX> selectCollectionRecords(Date startDate,Date endDate,int id,int currentPage,int pageSize) throws RuntimeException {
         //查询数据
-        Cost_billExample example = new Cost_billExample();
-        example.createCriteria().andMachineIdEqualTo(id).andTimeBetween(startDate,endDate);
-        List<Cost_bill> cost_bills = cost_billMapper.selectByExample(example);
+//        Cost_billExample example = new Cost_billExample();
+//        example.createCriteria().andMachineIdEqualTo(id).andTimeBetween(startDate,endDate);
+//        List<Cost_bill> cost_bills = cost_billMapper.selectByExample(example);
+//        //数组分页
+//        int firstIndex = (currentPage-1)*pageSize;
+//        int lastIndex = currentPage*pageSize;
+//        cost_bills = cost_bills.subList(firstIndex,lastIndex);
 
+        List<Cost_bill> cost_bills = selectCostbillByPage(id, startDate, endDate,currentPage,pageSize);
         List<Cost_billEX> cost_billEXList = new ArrayList<>();
 
         double profit=0;
@@ -62,11 +67,30 @@ public class MerchantServiceImpl implements IMerchantService {
         return cost_billEXList;
     }
 
+    public List<Cost_bill> selectCostbillByPage(int id,Date startDate,Date endDate,int currentPage,int pageSize){
+        List<Cost_bill> cost_bills = selectAllCostbill(id,startDate,endDate);
+        //数组分页
+        int firstIndex = (currentPage-1)*pageSize;
+        int lastIndex = currentPage*pageSize;
+        if(lastIndex>cost_bills.size()){
+            return cost_bills.subList(firstIndex,cost_bills.size());
+        }else {
+            return cost_bills.subList(firstIndex,lastIndex);
+        }
+    }
+
+
+    public List<Cost_bill> selectAllCostbill(int id,Date startDate,Date endDate){
+        Cost_billExample example = new Cost_billExample();
+        example.createCriteria().andMachineIdEqualTo(id).andTimeBetween(startDate,endDate);
+        return cost_billMapper.selectByExample(example);
+    }
+
     @Override
     public double getProfit(Date startDate, Date endDate, int id) throws RuntimeException {
         double profit= 0;
-        List<Cost_billEX> cost_bills = selectCollectionRecords(startDate, endDate, id);
-        for (Cost_billEX cost_bill : cost_bills) {
+        List<Cost_bill> cost_bills = selectAllCostbill(id,startDate, endDate);
+        for (Cost_bill cost_bill : cost_bills) {
             profit += cost_bill.getMoney();
         }
         return profit;

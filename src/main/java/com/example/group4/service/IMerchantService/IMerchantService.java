@@ -14,7 +14,7 @@ public interface IMerchantService {
 
    void saveOrUpdate(Business business) throws  RuntimeException;
 
-    List<Cost_billEX> selectCollectionRecords(Date startDate, Date endDate, int id) throws RuntimeException;
+    List<Cost_billEX> selectCollectionRecords(Date startDate, Date endDate, int id,int currentPage,int pageSize) throws RuntimeException;
 
     double getProfit(Date startDate, Date endDate, int id) throws RuntimeException;
 
