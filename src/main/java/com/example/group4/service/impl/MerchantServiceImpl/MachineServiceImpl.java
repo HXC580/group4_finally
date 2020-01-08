@@ -84,7 +84,12 @@ public class MachineServiceImpl implements IMachineService {
 
     }
 
-
+    @Override
+    public List<Machine> selectMacByBusId(int busId) throws RuntimeException {
+        MachineExample example =new MachineExample();
+        example.createCriteria().andBusinessIdEqualTo(busId);
+        return machineMapper.selectByExample(example);
+    }
 
 
 }

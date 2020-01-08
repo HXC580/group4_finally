@@ -13,4 +13,6 @@ public interface IMachineService {
     void delMac(int id)throws RuntimeException;
 
     String recordBill(int cardId, double money, int machineId)throws RuntimeException;
+
+    List<Machine> selectMacByBusId(int busId) throws RuntimeException;
 }
