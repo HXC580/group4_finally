@@ -62,6 +62,16 @@
         or l.time in (select time from lend_list where time like #{key})
     </select>
 
+    <select id="selectLendListByCardId" resultMap="selectAllLendList">
+        select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.id return_list_id
+        from lend_list l, book b, return_list r
+        where l.book_id=b.id and l.id=r.lend_id and l.card_id=#{id}
+    </select>
+
+ <select id="selectCardIdByStuId" resultType="int">
+     select id from mealcard where student_id=#{id}
+ </select>
+
     <select id="selectLendListById" resultMap="selectAllLendList">
         select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.id return_list_id
         from lend_list l, book b, return_list r
@@ -73,15 +83,14 @@
 
 
 
-
-
-
-
-    <select id="selectReturnListById" resultMap="selectAllReturnListEX">
-        select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.id return_list_id
+    <select id="selectReturnListByCardId" resultMap="selectAllReturnListEX">
+        select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.time rtime
         from lend_list l, book b, return_list r
-        where l.book_id=b.id and l.id=r.lend_id and r.id=#{id}
+        where l.book_id=b.id and l.id=r.lend_id and r.card_id=#{id}
     </select>
+
+
+
 
     <select id="selectAllReturnList" resultMap="selectAllReturnListEX">
         select b.id bid,b.name bname,b.author bauthor,b.publisher bpublisher,b.publish_time bpublish_time,l.time ltime,r.time rtime

@@ -105,20 +105,22 @@ public class BookController {
         return url;
 
     }
-    @GetMapping("/selectLendListById")
-    @ApiOperation(value="根据Id查找借书记录")
-    public Lend_listEX selectLendListById(int id){
-        Lend_listEX lend_listEX = iBookService.selectLendListById(id);
+    @GetMapping("/selectLendListByStuId")
+    @ApiOperation(value="根据学生Id查找借书记录")
+    @ApiImplicitParam(name = "id",value = "借书id",paramType = "query",dataType = "int",required = true)
+    public List<Lend_listEX> selectLendListByStuId(int id){
+        List<Lend_listEX> lend_listEXES = iBookService.selectLendListByStuId(id);
 
-        return lend_listEX;
+        return lend_listEXES;
 
     }
-    @GetMapping("/selectReturnListById")
-    @ApiOperation(value="根据Id查找还书记录")
-    public Return_listEX selectReturnListById(int id){
-        Return_listEX return_listEX = iBookService.selectReturnListById(id);
+    @GetMapping("/selectReturnListByStuId")
+    @ApiOperation(value="根据学生Id查找还书记录")
+    @ApiImplicitParam(name = "id",value = "借书id",paramType = "query",dataType = "int",required = true)
+    public List<Return_listEX> selectReturnListByStuId(int id){
+        List<Return_listEX> return_listEXES = iBookService.selectReturnListByStuId(id);
 
-        return return_listEX;
+        return return_listEXES;
 
     }
 

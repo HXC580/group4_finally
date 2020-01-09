@@ -21,6 +21,6 @@ public interface IBookService {
     List<Book> selectAllBook();
     List<Book> selectBookByKey(String key);
     String payFineById(int id);
-    Lend_listEX selectLendListById(int id);
-    Return_listEX selectReturnListById(int id);
+    List<Lend_listEX> selectLendListByStuId(int id);
+    List<Return_listEX> selectReturnListByStuId(int id);
 }
