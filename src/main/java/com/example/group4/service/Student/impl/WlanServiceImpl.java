@@ -1,15 +1,14 @@
 package com.example.group4.service.Student.impl;
 
-import com.example.group4.bean.Mealcard;
-import com.example.group4.bean.Student;
-import com.example.group4.bean.Wlan;
-import com.example.group4.mapper.MealcardMapper;
-import com.example.group4.mapper.StudentMapper;
-import com.example.group4.mapper.WlanMapper;
 import com.example.group4.mapper.student.ex.WlanEXMapper;
 import com.example.group4.service.Student.IWlanService;
+import com.example.group4.util.TestJsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class WlanServiceImpl implements IWlanService {
@@ -29,5 +28,25 @@ public class WlanServiceImpl implements IWlanService {
     public void bindPwdByStuId(int id,String pwd) {
         wlanEXMapper.bindPwdByStuId(id,pwd);
 
+    }
+
+    @Override
+    public ArrayList<HashMap<String,Double>> getMessage(int sid, int pwd) {
+        TestJsoup testJsoup=new TestJsoup();
+        ArrayList<String> test=new ArrayList();
+        ArrayList<HashMap<String,Double>> meg=new ArrayList();
+        HashMap<String,Double> hashMap=new HashMap<>();
+        try {
+            test = testJsoup.test(String.valueOf(sid), String.valueOf(pwd));
+
+//
+            hashMap.put("time",Double.valueOf(test.get(0)));
+            hashMap.put("flow",Double.valueOf(test.get(1))/1024);
+            hashMap.put("money",Double.valueOf(test.get(2))/10000);
+            meg.add(hashMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  meg;
     }
 }
