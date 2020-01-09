@@ -98,8 +98,8 @@ public class MerchantController {
     }
 
     @GetMapping("/downloadProfitSheet")
-    @ApiOperation("下载收益报表")
-    public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int macId,
+    @ApiOperation("批量机器/全部机器下载收益报表")
+    public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int[] macId,
                                     HttpServletResponse response) throws IOException {
         List<Cost_bill> cost_bills = merchantService.downloadProfitSheet(busId,macId);
         String name = merchantService.queById(busId).getName();

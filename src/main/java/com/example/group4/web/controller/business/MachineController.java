@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
+
 @RestController
 @RequestMapping("/machine")
 @Api(description = "商户机器管理")
@@ -19,11 +22,24 @@ public class MachineController {
     @Autowired
     private IMachineService machineService;
 
-    @ApiImplicitParam(name = "id",value = "机器id",required = true,paramType = "query", dataType = "int")
+    @ApiImplicitParam(name = "id",value = "商户id",required = true,paramType = "query", dataType = "int")
     @GetMapping("/findMacById")
-    @ApiOperation(value = "查询机器")
+    @ApiOperation(value = "根据商户id查询机器")
     public Message findMacById(int id){
         return MessageUtil.success(machineService.findById(id));
+    }
+
+    @ApiImplicitParam(name = "macId",value = "机器id",required = true,paramType = "query",dataType = "int")
+    @GetMapping("/findMacByMacId")
+    @ApiOperation(value = "根据机器id找机器")
+    public Message findMacByMacId(int macId){
+        return MessageUtil.success(machineService.findMacByMacId(macId));
+    }
+
+    @GetMapping("/fuzzyQueMacByAddr")
+    @ApiOperation("根据地址模糊查询机器")
+    public Message fuzzyQueMacByAddr(String word,int busId){
+        return MessageUtil.success(machineService.fuzzyQueMacByAddr(word,busId));
     }
 
     @PostMapping("/editMac")
@@ -40,11 +56,11 @@ public class MachineController {
         return MessageUtil.success();
     }
 
-    @ApiImplicitParam(name = "id",value = "机器id",required = true,paramType = "query", dataType = "int")
-    @ApiOperation(value = "删除机器")
+    @ApiImplicitParam(name = "ids",value = "机器id",required = true,paramType = "query",allowMultiple=true, dataType = "int")
+    @ApiOperation(value = "批量删除机器")
     @GetMapping("delMac")
-    public Message delMac(int id){
-        machineService.delMac(id);
+    public Message delMac(int[] ids){
+        machineService.delMac(ids);
         return MessageUtil.success();
     }
 

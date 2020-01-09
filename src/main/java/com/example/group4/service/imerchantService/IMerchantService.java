@@ -18,7 +18,7 @@ public interface IMerchantService {
 
     double getProfit(Date startDate, Date endDate, int macId,int busId) throws RuntimeException;
 
-    List<Cost_bill> downloadProfitSheet(int busId, int macId) throws RuntimeException;
+    List<Cost_bill> downloadProfitSheet(int busId, int[] macId) throws RuntimeException;
 
     List<Machine> selectMacId(int id) throws RuntimeException;
 }
