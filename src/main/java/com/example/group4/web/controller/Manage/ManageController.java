@@ -41,6 +41,14 @@ public class ManageController {
         managerService.ModifyStudent(student);
         return MessageUtil.success();
     }
+
+    @PostMapping("/SearchStudent")
+    @ApiOperation(value = "模糊查询学生信息")
+    public Message Search(String key ,String value){
+
+        return MessageUtil.success( managerService.searchByS(key,value));
+    }
+
     @GetMapping("/selectAllStudent")
     @ApiOperation(value = "查询所有学生信息")
     public Message selectAllStudent(){
@@ -135,13 +143,16 @@ public class ManageController {
     public Message operation(){
         return MessageUtil.success(managerService.list());
     }
+
+
 //    @GetMapping("/Aalipay")
 //    // @Api(description = "dd")
-//    @ApiOperation(value = "测试支付")
-//    public Message alipay(String id){
+//    @ApiOperation(value = "测试支付宝支付")
+//    public Message alipay111(String id){
 //      pay pay= new pay();
 //     return MessageUtil.success(pay.rest(id));
 //    }
+
 
 
 
@@ -207,7 +218,7 @@ public class ManageController {
 
          */
         response.setHeader("content-Type", "application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("华雪成student.xlsx", "utf-8"));
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("HHHstudent.xlsx", "utf-8"));
         workbook.write(response.getOutputStream());
 
     }

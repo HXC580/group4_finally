@@ -8,7 +8,7 @@ import java.util.List;
 public interface IManagerService {
     void ModifyStudent(Student student);
     List<Student> selectAllStudent();
-    Student searchBy1();
+    List<Student> searchByS(String key,String value);
     void freeze(int card_id,int manager_id);
     void abfreeze(int card_id,int manager_id);
     List<Mealcard> selectAllMealcard();
