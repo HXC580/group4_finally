@@ -1,6 +1,7 @@
 package com.example.group4.service.Student.impl;
 
 import com.example.group4.bean.*;
+import com.example.group4.bean.student.ex.BookEX;
 import com.example.group4.bean.student.ex.Lend_listEX;
 import com.example.group4.bean.student.ex.Return_listEX;
 import com.example.group4.mapper.BookMapper;
@@ -142,6 +143,12 @@ public class BookServiceImpl implements IBookService {
         List<Return_listEX> return_listEXES = bookEXMapper.selectReturnListByCardId(CardId);
 
         return return_listEXES;
+    }
+
+    @Override
+    public BookEX selectBookById(int id) {
+        BookEX bookEX = bookEXMapper.selectByPrimaryKey(id);
+        return bookEX;
     }
 
 

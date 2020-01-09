@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img id="qrCode" class="pre-img" alt="二维码生成失败，请联系后台管理员" style="vertical-align: middle;height: 250px;display: block ;">
+<script>
+/*    var url = ;//你要生成二维码的url是什么就写什么，比如：http://www.baidu.com
+    var width = 250;*/
+    // var id = 1;
+    $("#qrCode").attr("src","http://127.0.0.1:8888//Book/makeQRcode?url="+id);
+
+
+//js中方法，微信扫描二维码
+/*function WeiXin(){
+//debugger;
+//清空二维码文本框
+$("#qrcode").html("");
+
+var title = $("#commentTitle").val();
+var url = window.location.href;
+var url2 = url.split("localhost:8068/");
+if (url2.length > 1){
+var url3 = url2[1];
+var url4 = "http://www.zhengquan51.com/" + url3;
+} else{
+//如果是在线上路径下
+url4 = url2;
+}
+var icno = $("#icno").val();
+if (icno == undefined || icno == null){
+icno = "";
+}
+
+//主要看这里就行了（作用是调用后台接口以及图片回显）
+$("#qrcode").attr("src", "http://127.0.0.1:8888//Book/makeQRcode?url="+id);     //根据路径访问后台接口，生成二维码并通过src属性展示在容器中，url4为我需要生成二维码的页面链接内容
+
+$(".Index-Popup-Boxs").show();
+}*/
+</script>
+</body>
+</html>

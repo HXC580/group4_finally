@@ -49,7 +49,6 @@ public class MarginQueryController {
     @ApiOperation(value="得到流量信息")
     public Message bind(int  sid, int pwd){
         ArrayList<HashMap<String,Double>>  list= iWlanService.getMessage(sid, pwd);
-        System.out.println(list);
         return MessageUtil.success(list);
 
     }
@@ -57,7 +56,7 @@ public class MarginQueryController {
     @GetMapping("binding")
     @ResponseBody()
     @ApiOperation(value="绑定")
-    public Message bind(int  sid, String pwd){
+    public Message bindd(int  sid, String pwd){
         iWlanService.bindPwdByStuId(sid,pwd);
         return MessageUtil.success();
 

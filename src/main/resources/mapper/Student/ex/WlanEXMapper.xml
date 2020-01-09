@@ -10,4 +10,8 @@
         update wlan set pass=#{pwd} where student_id=#{id}
     </update>
 
+    <insert id="setBind">
+        insert into wlan (student_id,pass)values (#{sid},#{pwd})
+    </insert>
+
 </mapper>

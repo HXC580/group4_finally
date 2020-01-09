@@ -26,7 +26,8 @@ public class WlanServiceImpl implements IWlanService {
 
     @Override
     public void bindPwdByStuId(int id,String pwd) {
-        wlanEXMapper.bindPwdByStuId(id,pwd);
+        //wlanEXMapper.bindPwdByStuId(id,pwd);
+        wlanEXMapper.setBind(id,pwd);
 
     }
 

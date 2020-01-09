@@ -127,7 +127,10 @@
 
 
 
+<select id="selectByPrimaryKey" resultType="com.example.group4.bean.student.ex.BookEX">
+    select * from book where id=#{id}
 
+</select>
 
 
 

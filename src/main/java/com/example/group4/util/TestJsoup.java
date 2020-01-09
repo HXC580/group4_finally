@@ -32,7 +32,7 @@ public class TestJsoup {
             Connection data = connect.headers(header);
             Document document = data.get();
             String doc=String.valueOf(document);
-         //   System.out.println(ss);
+          System.out.println(doc);
         String reg = "\\ntime='(.*?)';flow='(.*?)'.*?fee='(.*?)'";
         Matcher m = Pattern.compile(reg).matcher(doc);
         //System.out.println(m);

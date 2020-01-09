@@ -4,6 +4,7 @@ package com.example.group4.service.Student;
 import com.example.group4.bean.Book;
 import com.example.group4.bean.Lend_list;
 import com.example.group4.bean.Return_list;
+import com.example.group4.bean.student.ex.BookEX;
 import com.example.group4.bean.student.ex.Lend_listEX;
 import com.example.group4.bean.student.ex.Return_listEX;
 
@@ -23,4 +24,5 @@ public interface IBookService {
     String payFineById(int id);
     List<Lend_listEX> selectLendListByStuId(int id);
     List<Return_listEX> selectReturnListByStuId(int id);
+    BookEX selectBookById(int id);
 }
