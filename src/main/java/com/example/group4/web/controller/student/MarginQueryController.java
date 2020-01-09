@@ -1,6 +1,6 @@
 package com.example.group4.web.controller.student;
 
-import com.example.group4.service.Student.IWlanService;
+import com.example.group4.service.student.IWlanService;
 
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;

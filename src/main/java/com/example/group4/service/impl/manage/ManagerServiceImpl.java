@@ -1,4 +1,4 @@
-package com.example.group4.service.impl.Manage;
+package com.example.group4.service.impl.manage;
 
 import com.example.group4.bean.*;
 import com.example.group4.bean.ex.dangerEX;
@@ -7,7 +7,7 @@ import com.example.group4.mapper.*;
 import com.example.group4.mapper.ex.Dormitory_ioEXMapper;
 import com.example.group4.mapper.ex.ManagerEXMapper;
 import com.example.group4.mapper.ex.MealcardEXMapper;
-import com.example.group4.service.Manage.IManagerService;
+import com.example.group4.service.manage.IManagerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

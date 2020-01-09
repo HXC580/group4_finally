@@ -1,7 +1,7 @@
-package com.example.group4.web.controller.StudentCard;
+package com.example.group4.web.controller.studentCard;
 
 import com.example.group4.bean.Po;
-import com.example.group4.service.impl.StudentCardService.RechargeServiceImpl;
+import com.example.group4.service.impl.studentCardService.RechargeServiceImpl;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;

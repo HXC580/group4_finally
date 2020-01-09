@@ -6,7 +6,7 @@ import com.example.group4.bean.Lend_list;
 import com.example.group4.bean.Return_list;
 import com.example.group4.bean.student.ex.Lend_listEX;
 import com.example.group4.bean.student.ex.Return_listEX;
-import com.example.group4.service.Student.IBookService;
+import com.example.group4.service.student.IBookService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;

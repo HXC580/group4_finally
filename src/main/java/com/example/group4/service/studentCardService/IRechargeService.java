@@ -1,4 +1,4 @@
-package com.example.group4.service.StudentCardService;
+package com.example.group4.service.studentCardService;
 
 import com.example.group4.bean.Po;
 

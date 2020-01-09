@@ -1,7 +1,7 @@
-package com.example.group4.service.Student.impl;
+package com.example.group4.service.student.impl;
 
 import com.example.group4.mapper.student.ex.WlanEXMapper;
-import com.example.group4.service.Student.IWlanService;
+import com.example.group4.service.student.IWlanService;
 import com.example.group4.util.TestJsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

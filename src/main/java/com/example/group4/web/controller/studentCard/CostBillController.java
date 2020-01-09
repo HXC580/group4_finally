@@ -1,6 +1,6 @@
-package com.example.group4.web.controller.StudentCard;
+package com.example.group4.web.controller.studentCard;
 
-import com.example.group4.service.impl.StudentCardService.CostBillServiceImpl;
+import com.example.group4.service.impl.studentCardService.CostBillServiceImpl;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;

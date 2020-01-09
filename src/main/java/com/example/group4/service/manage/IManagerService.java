@@ -1,4 +1,4 @@
-package com.example.group4.service.Manage;
+package com.example.group4.service.manage;
 
 import com.example.group4.bean.*;
 import com.example.group4.bean.ex.dangerEX;

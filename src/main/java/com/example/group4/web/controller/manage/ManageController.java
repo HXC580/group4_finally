@@ -1,4 +1,4 @@
-package com.example.group4.web.controller.Manage;
+package com.example.group4.web.controller.manage;
 
 
 import com.example.group4.bean.Business;
@@ -6,15 +6,13 @@ import com.example.group4.bean.Dormitory;
 import com.example.group4.bean.Manager;
 import com.example.group4.bean.Student;
 
-import com.example.group4.service.Manage.IManagerService;
+import com.example.group4.service.manage.IManagerService;
 //import com.example.group4.testHXC.pay;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
 
 import io.swagger.annotations.ApiOperation;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;

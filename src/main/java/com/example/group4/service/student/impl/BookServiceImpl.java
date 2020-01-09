@@ -1,4 +1,4 @@
-package com.example.group4.service.Student.impl;
+package com.example.group4.service.student.impl;
 
 import com.example.group4.bean.*;
 import com.example.group4.bean.student.ex.Lend_listEX;
@@ -8,7 +8,7 @@ import com.example.group4.mapper.Lend_listMapper;
 import com.example.group4.mapper.Return_listMapper;
 import com.example.group4.mapper.ex.PoEXMapper;
 import com.example.group4.mapper.student.ex.BookEXMapper;
-import com.example.group4.service.Student.IBookService;
+import com.example.group4.service.student.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

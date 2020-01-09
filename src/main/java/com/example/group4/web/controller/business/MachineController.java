@@ -1,7 +1,7 @@
-package com.example.group4.web.controller.Business;
+package com.example.group4.web.controller.business;
 
 import com.example.group4.bean.Machine;
-import com.example.group4.service.IMerchantService.IMachineService;
+import com.example.group4.service.imerchantService.IMachineService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;

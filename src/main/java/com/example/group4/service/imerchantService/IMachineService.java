@@ -1,4 +1,4 @@
-package com.example.group4.service.IMerchantService;
+package com.example.group4.service.imerchantService;
 
 import com.example.group4.bean.Machine;
 
