@@ -6,6 +6,6 @@ import java.util.HashMap;
 
 public interface IWlanService {
     String selectPwdByStuId(int sid);
-    void bindPwdByStuId(int id,String pwd);
-    ArrayList<HashMap<String,Double>> getMessage(int sid , int pwd);
+    void bindPwdByStuId(String id,String pwd);
+    ArrayList<HashMap<String,Double>> getMessage(String sid , String pwd);
 }

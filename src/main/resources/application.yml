@@ -22,7 +22,7 @@ wx:
   unifiedorder:
     notifyUrl: ${intranet.penetrateUrl}/wxPay/unifiedorderNotify
 intranet:
-  penetrateUrl: www.xccjm.fun:8888
+  penetrateUrl: http://r56r9e.natappfree.cc
 https:
   connectionTimeout: 15000
   readTimeout: 15000

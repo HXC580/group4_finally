@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TestJsoup {
-    public ArrayList test(String sid ,String pwd) throws IOException {
+    public static ArrayList test(String sid, String pwd) throws IOException {
 //       String  url = "http://10.126.1.30/login?DDDDD=" + sid + "&upass=" + pwd + "&R1=0&R2=&R3=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login=&v6ip=";
 //        Document document = Jsoup.connect(url).get();
 //        System.out.println(document);

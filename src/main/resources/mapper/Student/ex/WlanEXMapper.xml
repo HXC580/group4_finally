@@ -6,8 +6,8 @@
         select pass from wlan where student_id=#{id}
     </select>
 
-    <update id="bindPwdByStuId">
-        update wlan set pass=#{pwd} where student_id=#{id}
-    </update>
+<!--    <insert id="bindPwdByStuId">-->
+<!--        insert into wlan (pass,student_id) value (#{pwd},#{id})-->
+<!--    </insert>-->
 
 </mapper>

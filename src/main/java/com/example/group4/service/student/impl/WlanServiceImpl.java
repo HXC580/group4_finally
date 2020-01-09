@@ -25,13 +25,13 @@ public class WlanServiceImpl implements IWlanService {
     }
 
     @Override
-    public void bindPwdByStuId(int id,String pwd) {
+    public void bindPwdByStuId(String id,String pwd) {
         wlanEXMapper.bindPwdByStuId(id,pwd);
 
     }
 
     @Override
-    public ArrayList<HashMap<String,Double>> getMessage(int sid, int pwd) {
+    public ArrayList<HashMap<String,Double>> getMessage(String sid, String pwd) {
         TestJsoup testJsoup=new TestJsoup();
         ArrayList<String> test=new ArrayList();
         ArrayList<HashMap<String,Double>> meg=new ArrayList();

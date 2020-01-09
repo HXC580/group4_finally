@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 @Controller
@@ -46,17 +47,17 @@ public class MarginQueryController {
     @GetMapping("getMessage")
     @ResponseBody()
     @ApiOperation(value="得到流量信息")
-    public Message bind(int  sid, int pwd){
+    public List bind(String  sid, String pwd){
         ArrayList<HashMap<String,Double>>  list= iWlanService.getMessage(sid, pwd);
         System.out.println(list);
-        return MessageUtil.success(list);
+        return list;
 
     }
 
     @GetMapping("binding")
     @ResponseBody()
     @ApiOperation(value="绑定")
-    public Message bind(int  sid, String pwd){
+    public Message bindd(String  sid, String pwd){
         iWlanService.bindPwdByStuId(sid,pwd);
         return MessageUtil.success();
 

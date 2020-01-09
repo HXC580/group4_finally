@@ -89,13 +89,12 @@ public class BookController {
     @ApiOperation(value="根据关键字获取图书详细信息")
     public List<Book> selectBookByKey(String key){
         key="%"+key+"%";
+        System.out.println(key);
         List<Book> list=iBookService.selectBookByKey(key);
+        System.out.println(list);
         return list;
-
-
-
-
     }
+
     @GetMapping("/payFine")
     @ApiOperation(value="根据借书Id付罚款")
     @ApiImplicitParam(name = "id",value = "借书id",paramType = "query",dataType = "int",required = true)

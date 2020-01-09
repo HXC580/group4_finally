@@ -4,7 +4,9 @@ import com.example.group4.bean.Cost_bill;
 import com.example.group4.bean.Cost_billExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface Cost_billMapper {
     long countByExample(Cost_billExample example);
 

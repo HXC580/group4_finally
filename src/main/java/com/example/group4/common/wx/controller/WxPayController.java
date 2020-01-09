@@ -7,6 +7,7 @@ import com.example.group4.config.WxConstants;
 import com.example.group4.common.wx.service.WxMenuService;
 import com.example.group4.common.wx.util.MSSQLUtil;
 import com.example.group4.common.wx.util.WxUtil;
+import com.example.group4.web.controller.studentCard.RechargeController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public static Double Fee=0.01;
 public static String GoodsName="test";
     @Autowired
     private WxMenuService wxMenuService;
-
+private static int i=0;
     /**
      * 二维码首页
      */
@@ -58,6 +59,8 @@ public static String GoodsName="test";
      */
     @RequestMapping(value = {"wxPay/payUrl"})
     public void payUrl(HttpServletRequest request, HttpServletResponse response) throws Exception{
+         i=0;
+
         String outTradeNo= MSSQLUtil.getOuter();
         int falg=0;
         if(MSSQLUtil.getPrice()!=0&& MSSQLUtil.getPrice()!=null){
@@ -83,10 +86,12 @@ public static String GoodsName="test";
      * 统一下单-通知链接
      */
     @RequestMapping(value = {"wxPay/unifiedorderNotify"})
+    @ResponseBody
     public String unifiedorderNotify(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        int i=0;
+        RechargeController rechargeController=new RechargeController();
+
         i++;
-System.out.println("统一下单-通知链接"+i);
+        System.out.println("统一下单-通知链接"+i);
         //商户订单号
         String outTradeNo =null;
         String xmlContent = "<xml>" +                "<return_code><![CDATA[FAIL]]></return_code>" +
@@ -127,40 +132,53 @@ System.out.println("统一下单-通知链接"+i);
                         "<return_code><![CDATA[SUCCESS]]></return_code>" +
                         "<return_msg><![CDATA[OK]]></return_msg>" +
                         "</xml>";
-                return "redirect:/Recharge?flag="+true;
+                if (i<=1){
+                             return   rechargeController.Recharge(true).toString();
+
+                }
             }
             else {
                 status="微信支付失败";
                 update.updateData(MSSQLUtil.getPoNo(),status);
-                return "redirect:/Recharge?flag="+false;
+                return   rechargeController.Recharge(false).toString();
+
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         WxUtil.responsePrint(response,xmlContent);
-        return "redirect:/Recharge?flag="+false;
+
+        return   null;
     }
 
-    /**
-     * 定时器查询是否已支付
-     */
-    @RequestMapping(value = {"wxPay/payStatus"})
-    @ResponseBody
-    public String payStatus(@RequestParam(value = "outTradeNo")String outTradeNo){
-        JSONObject responseObject = new JSONObject();
-        String outTradeNoValue = WxConfig.getPayMap(outTradeNo);
-        String status = "200";
-        //判断是否已经支付成功
-        if(StringUtils.isNotBlank(outTradeNoValue) && StringUtils.equals(outTradeNoValue,"SUCCESS")){
-            status = "0";
-//            INSERT.insertInTo(outTradeNo,MSSQLUtil.getWeixinID(),MSSQLUtil.getDealdate(),MSSQLUtil.getPrice());
-//            update.updateData(MSSQLUtil.getPoNo());
-        }
-        responseObject.put("status",status);
-        System.out.println(responseObject);
-        System.out.println();
-        return responseObject.toJSONString();
-    }
+//    /**
+//     * 定时器查询是否已支付
+//     */
+//    @RequestMapping(value = {"wxPay/payStatus"})
+//    @ResponseBody
+//    public String payStatus(@RequestParam(value = "outTradeNo")String outTradeNo){
+//        JSONObject responseObject = new JSONObject();
+//        String outTradeNoValue = WxConfig.getPayMap(outTradeNo);
+//        String status = "200";
+//        RechargeController rechargeController=new RechargeController();
+//
+//        //判断是否已经支付成功
+//        if(StringUtils.isNotBlank(outTradeNoValue) && StringUtils.equals(outTradeNoValue,"SUCCESS")){
+//            status = "0";
+//            return   rechargeController.Recharge(true).toString();
+//
+////            INSERT.insertInTo(outTradeNo,MSSQLUtil.getWeixinID(),MSSQLUtil.getDealdate(),MSSQLUtil.getPrice());
+////            update.updateData(MSSQLUtil.getPoNo());
+//        }else {
+//
+//        }
+//        System.out.println(status);
+//
+//        responseObject.put("status",status);
+//        System.out.println(responseObject);
+//        System.out.println();
+//        return responseObject.toJSONString();
+//    }
 
 
 
