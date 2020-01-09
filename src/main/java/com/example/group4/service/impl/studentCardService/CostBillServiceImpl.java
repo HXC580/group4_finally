@@ -21,9 +21,9 @@ public class CostBillServiceImpl implements ICostBillService {
     @Override
     public List<CostBillEX> findById(int id,int start,int pagesize) {
         if("null".equals(id)||id==-1)
-            return costBillEXMapper.findAll( start,pagesize);
+            return costBillEXMapper.findAll(start,pagesize);
         else
-            return costBillEXMapper.findById(id,start,pagesize);
+            return costBillEXMapper.findById(id, start, pagesize);
     }
 
     @Override
