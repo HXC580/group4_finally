@@ -1,7 +1,11 @@
 package com.example.group4.service.impl.StudentCardService;
 
+import com.example.group4.bean.Machine;
+import com.example.group4.bean.MachineExample;
 import com.example.group4.bean.ex.CostBillEX;
 import com.example.group4.bean.ex.ProfitEX;
+import com.example.group4.mapper.BusinessMapper;
+import com.example.group4.mapper.MachineMapper;
 import com.example.group4.mapper.ex.CostbillEXMapper;
 import com.example.group4.service.StudentCardService.ICostBillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,8 @@ import java.util.List;
 public class CostBillServiceImpl implements ICostBillService {
     @Autowired
     private CostbillEXMapper costBillEXMapper;
+    @Autowired
+    private MachineMapper machineMapper;
 
     @Override
     public List<CostBillEX> findById(int id,int start,int pagesize) {
@@ -44,13 +50,16 @@ public class CostBillServiceImpl implements ICostBillService {
 
 
     @Override
-    public List<ProfitEX> getProfitChart(String selected) {
+    public List<ProfitEX> getProfitChart(String selected,int id) {
+        MachineExample example = new MachineExample();
+        int[] ids = machineMapper.getMachineByBusId(id);
+
         if ("day".equals(selected)){
-            return costBillEXMapper.getProfitChartByDay();
+            return costBillEXMapper.getProfitChartByDay(ids);
         }else if("month".equals(selected)){
-            return costBillEXMapper.getProfitChartByMonth();
+            return costBillEXMapper.getProfitChartByMonth(ids);
         }else {
-            return costBillEXMapper.getProfitChartByYear();
+            return costBillEXMapper.getProfitChartByYear(ids);
         }
     }
 }

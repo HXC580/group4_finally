@@ -12,5 +12,5 @@ public interface ICostBillService {
     List<CostBillEX>findByTime(int id,int day);
     double sumByTime(int id,int day);
 
-    List<ProfitEX> getProfitChart(String selected);
+    List<ProfitEX> getProfitChart(String selected,int id);
 }

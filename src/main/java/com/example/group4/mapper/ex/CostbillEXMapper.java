@@ -16,9 +16,9 @@ public interface CostbillEXMapper {
     double[] consume(int id, Date date);
 
 
-    List<ProfitEX> getProfitChartByDay();
+    List<ProfitEX> getProfitChartByDay(int[] ids);
 
-    List<ProfitEX> getProfitChartByMonth();
+    List<ProfitEX> getProfitChartByMonth(int[] ids);
 
-    List<ProfitEX> getProfitChartByYear();
+    List<ProfitEX> getProfitChartByYear(int[] ids);
 }
