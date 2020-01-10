@@ -6,10 +6,15 @@ import com.example.group4.bean.Dormitory;
 import com.example.group4.bean.Manager;
 import com.example.group4.bean.Student;
 
+
+import com.example.group4.bean.ex.dangerEX;
+
 import com.example.group4.service.manage.IManagerService;
-//import com.example.group4.testHXC.pay;
+
+import com.example.group4.service.student.IWlanService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
+import com.example.group4.web.controller.test.PhoneCode;
 import io.swagger.annotations.Api;
 
 import io.swagger.annotations.ApiOperation;
@@ -17,20 +22,22 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Manage")
 @Api(description = "管理员功能")
 public class ManageController {
+    @Autowired
+    private IWlanService iWlanService;
+
     @Autowired
     private IManagerService managerService;
     @PostMapping("/modifyStudent")
@@ -133,38 +140,79 @@ public class ManageController {
     @GetMapping("/danger")
     @ApiOperation(value = "查询夜不归宿 yy-MM-dd")
     public Message danger(String date){
+//        PhoneCode phoneCode=new PhoneCode();
+//        PhoneCode.getPhonemsg("1395185");
+        return MessageUtil.success( managerService.danger(date));
+    }
+    @GetMapping("/dangerM")
+    @ApiOperation(value = "查询夜不归宿发送信息给辅导员")
+    public Message dangerM(String date){
+        List<dangerEX> list=managerService.danger(date);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+
+            sb.append(0);
+
+        }
+        String a= sb.toString().substring(0,sb.toString().length()-1);
+
+        PhoneCode phoneCode=new PhoneCode();
+        PhoneCode.getPhonemsg("13951856056",a);
         return MessageUtil.success( managerService.danger(date));
     }
     @GetMapping("/operation")
-   // @Api(description = "dd")
+    // @Api(description = "dd")
     @ApiOperation(value = "查询管理员操作记录")
     public Message operation(){
         return MessageUtil.success(managerService.list());
     }
 
 
-//    @GetMapping("/Aalipay")
+    //    @GetMapping("/Aalipay")
 //    // @Api(description = "dd")
 //    @ApiOperation(value = "测试支付宝支付")
 //    public Message alipay111(String id){
 //      pay pay= new pay();
 //     return MessageUtil.success(pay.rest(id));
 //    }
+    @GetMapping("/LUT")
+// @Api(description = "dd")
+    @ApiOperation(value = "查询套餐余量")
+    public Message Lut(){
 
+        return MessageUtil.success(managerService.list());
+    }
+    @GetMapping("lutQuery")
+    @ApiOperation(value="余量查询")
+    public String  querylut(int  sid){
+        String pwd = null;
+        String  url;
+        pwd=iWlanService.selectPwdByStuId(sid);
 
+        if(pwd==null||pwd.trim().equals("")){
 
+            url = "error2.html";
+        }else {
+            url = "redirect:http://10.126.1.30/login?DDDDD=" + sid + "&upass=" + pwd + "&R1=0&R2=&R3=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login=&v6ip=";
+        }
+        return url;
+    }
 
+    @GetMapping("getlut Message")
+    @ApiOperation(value="得到流量信息")
+    public Message bind(String  sid, String pwd){
+        ArrayList<HashMap<String,Double>> list= iWlanService.getMessage(sid,pwd);
+        System.out.println(list);
+        return MessageUtil.success(list);
 
-
-
-
+    }
 
 
     @GetMapping("/excell")
     // @Api(description = "dd")
     @ApiOperation(value = "导出excell表格student")
     public void outExcell(HttpServletResponse response)throws IOException {
-    List<Student> list =managerService.selectAllStudent();
+        List<Student> list =managerService.selectAllStudent();
 
 
         // 1.创建工作簿
