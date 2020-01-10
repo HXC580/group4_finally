@@ -1,4 +1,4 @@
-package com.example.group4.service.Student;
+package com.example.group4.service.student;
 
 
 import com.example.group4.bean.Book;

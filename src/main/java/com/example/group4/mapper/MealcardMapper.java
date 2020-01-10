@@ -4,7 +4,9 @@ import com.example.group4.bean.Mealcard;
 import com.example.group4.bean.MealcardExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MealcardMapper {
     long countByExample(MealcardExample example);
 

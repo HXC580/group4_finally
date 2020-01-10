@@ -1,15 +1,14 @@
-package com.example.group4.web.controller.Business;
+package com.example.group4.web.controller.business;
 
 import com.example.group4.bean.Business;
 import com.example.group4.bean.Cost_bill;
-import com.example.group4.service.IMerchantService.IMachineService;
-import com.example.group4.service.IMerchantService.IMerchantService;
-import com.example.group4.service.StudentCardService.ICostBillService;
+import com.example.group4.service.imerchantService.IMachineService;
+import com.example.group4.service.imerchantService.IMerchantService;
+import com.example.group4.service.studentCardService.ICostBillService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -99,8 +98,8 @@ public class MerchantController {
     }
 
     @GetMapping("/downloadProfitSheet")
-    @ApiOperation("下载收益报表")
-    public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int macId,
+    @ApiOperation("批量机器/全部机器下载收益报表")
+    public void downloadProfitSheet(int busId,@RequestParam(required = false,defaultValue = "-1") int[] macId,
                                     HttpServletResponse response) throws IOException {
         List<Cost_bill> cost_bills = merchantService.downloadProfitSheet(busId,macId);
         String name = merchantService.queById(busId).getName();

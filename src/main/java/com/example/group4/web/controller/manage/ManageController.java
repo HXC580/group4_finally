@@ -1,4 +1,4 @@
-package com.example.group4.web.controller.Manage;
+package com.example.group4.web.controller.manage;
 
 
 import com.example.group4.bean.Business;
@@ -6,15 +6,13 @@ import com.example.group4.bean.Dormitory;
 import com.example.group4.bean.Manager;
 import com.example.group4.bean.Student;
 
-import com.example.group4.service.Manage.IManagerService;
+import com.example.group4.service.manage.IManagerService;
 //import com.example.group4.testHXC.pay;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
 
 import io.swagger.annotations.ApiOperation;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
@@ -41,6 +39,14 @@ public class ManageController {
         managerService.ModifyStudent(student);
         return MessageUtil.success();
     }
+
+    @PostMapping("/SearchStudent")
+    @ApiOperation(value = "模糊查询学生信息")
+    public Message Search(String key ,String value){
+
+        return MessageUtil.success( managerService.searchByS(key,value));
+    }
+
     @GetMapping("/selectAllStudent")
     @ApiOperation(value = "查询所有学生信息")
     public Message selectAllStudent(){
@@ -135,13 +141,16 @@ public class ManageController {
     public Message operation(){
         return MessageUtil.success(managerService.list());
     }
+
+
 //    @GetMapping("/Aalipay")
 //    // @Api(description = "dd")
-//    @ApiOperation(value = "测试支付")
-//    public Message alipay(String id){
+//    @ApiOperation(value = "测试支付宝支付")
+//    public Message alipay111(String id){
 //      pay pay= new pay();
 //     return MessageUtil.success(pay.rest(id));
 //    }
+
 
 
 
@@ -207,7 +216,7 @@ public class ManageController {
 
          */
         response.setHeader("content-Type", "application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("华雪成student.xlsx", "utf-8"));
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("HHHstudent.xlsx", "utf-8"));
         workbook.write(response.getOutputStream());
 
     }

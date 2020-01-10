@@ -1,13 +1,11 @@
-package com.example.group4.service.impl.StudentCardService;
+package com.example.group4.service.impl.studentCardService;
 
-import com.example.group4.bean.Machine;
 import com.example.group4.bean.MachineExample;
 import com.example.group4.bean.ex.CostBillEX;
 import com.example.group4.bean.ex.ProfitEX;
-import com.example.group4.mapper.BusinessMapper;
 import com.example.group4.mapper.MachineMapper;
 import com.example.group4.mapper.ex.CostbillEXMapper;
-import com.example.group4.service.StudentCardService.ICostBillService;
+import com.example.group4.service.studentCardService.ICostBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +20,10 @@ public class CostBillServiceImpl implements ICostBillService {
 
     @Override
     public List<CostBillEX> findById(int id,int start,int pagesize) {
-        if("null".equals(id))
-            return costBillEXMapper.findAll( start,pagesize);
+        if("null".equals(id)||id==-1)
+            return costBillEXMapper.findAll(start,pagesize);
         else
-            return costBillEXMapper.findById(id,start,pagesize);
+            return costBillEXMapper.findById(id, start, pagesize);
     }
 
     @Override

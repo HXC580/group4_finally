@@ -1,6 +1,8 @@
 package com.example.group4.service.Student.impl;
 
 import com.example.group4.mapper.student.ex.WlanEXMapper;
+
+
 import com.example.group4.service.Student.IWlanService;
 import com.example.group4.util.TestJsoup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,19 @@ public class WlanServiceImpl implements IWlanService {
     }
 
     @Override
-    public void bindPwdByStuId(int id,String pwd) {
-        //wlanEXMapper.bindPwdByStuId(id,pwd);
+//<<<<<<< HEAD:src/main/java/com/example/group4/service/Student/impl/WlanServiceImpl.java
+ //   public void bindPwdByStuId(int id,String pwd) {
+  //      //wlanEXMapper.bindPwdByStuId(id,pwd);
+  //      wlanEXMapper.setBind(id,pwd);
+
+   public void bindIdAndPwd(int id,String pwd) {
         wlanEXMapper.setBind(id,pwd);
+//>>>>>>> origin/master:src/main/java/com/example/group4/service/student/impl/WlanServiceImpl.java
 
     }
 
     @Override
-    public ArrayList<HashMap<String,Double>> getMessage(int sid, int pwd) {
+    public ArrayList<HashMap<String,Double>> getMessage(int sid, String pwd) {
         TestJsoup testJsoup=new TestJsoup();
         ArrayList<String> test=new ArrayList();
         ArrayList<HashMap<String,Double>> meg=new ArrayList();

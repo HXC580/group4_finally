@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TestJsoup {
-    public ArrayList test(String sid ,String pwd) throws IOException {
+    public static ArrayList test(String sid, String pwd) throws IOException {
 //       String  url = "http://10.126.1.30/login?DDDDD=" + sid + "&upass=" + pwd + "&R1=0&R2=&R3=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login=&v6ip=";
 //        Document document = Jsoup.connect(url).get();
 //        System.out.println(document);
@@ -31,12 +31,9 @@ public class TestJsoup {
             header.put("Upgrade-Insecure-Requests","1");
             Connection data = connect.headers(header);
             Document document = data.get();
-            String doc=String.valueOf(document);
-          System.out.println(doc);
+            String doc=String.valueOf(document);      System.out.println(doc);      System.out.println("-------------------------------------------------");
         String reg = "\\ntime='(.*?)';flow='(.*?)'.*?fee='(.*?)'";
         Matcher m = Pattern.compile(reg).matcher(doc);
-        //System.out.println(m);
-   //     String [] msg=new String [3];
         ArrayList<String> list=new ArrayList();
         while (m.find()) {
             for(int i =1;i<=3;i++)
@@ -45,12 +42,12 @@ public class TestJsoup {
 
                 list.add(r);
                // msg[i]=r;
-             // System.out.println(list.get(i));
+
 
             }
-            System.out.println(list);
-        }
 
+        }
+        System.out.println(list);
        return list;
 
 

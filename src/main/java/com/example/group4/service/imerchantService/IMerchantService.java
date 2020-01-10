@@ -1,4 +1,4 @@
-package com.example.group4.service.IMerchantService;
+package com.example.group4.service.imerchantService;
 
 import com.example.group4.bean.Business;
 import com.example.group4.bean.Cost_bill;
@@ -18,7 +18,7 @@ public interface IMerchantService {
 
     double getProfit(Date startDate, Date endDate, int macId,int busId) throws RuntimeException;
 
-    List<Cost_bill> downloadProfitSheet(int busId, int macId) throws RuntimeException;
+    List<Cost_bill> downloadProfitSheet(int busId, int[] macId) throws RuntimeException;
 
     List<Machine> selectMacId(int id) throws RuntimeException;
 }

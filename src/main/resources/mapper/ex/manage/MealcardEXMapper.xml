@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.group4.mapper.ex.MealcardEXMapper">
     <update id="freeze" >
-        update mealcard set type="freeze" where id=#{id}
+        update mealcard set type="freeze" where student_id=#{id}
     </update>
+    
     <update id="abfreeze" >
-        update mealcard set type="normal" where id=#{id}
+        update mealcard set type="normal" where student_id=#{id}
     </update>
 
     <update id="updateCeiling">

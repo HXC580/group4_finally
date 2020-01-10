@@ -4,7 +4,9 @@ import com.example.group4.bean.Recharge_bill;
 import com.example.group4.bean.Recharge_billExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface Recharge_billMapper {
     long countByExample(Recharge_billExample example);
 

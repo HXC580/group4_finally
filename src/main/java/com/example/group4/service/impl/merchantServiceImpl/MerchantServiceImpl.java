@@ -1,11 +1,11 @@
-package com.example.group4.service.impl.MerchantServiceImpl;
+package com.example.group4.service.impl.merchantServiceImpl;
 
 import com.example.group4.bean.*;
 import com.example.group4.bean.ex.Cost_billEX;
 import com.example.group4.mapper.BusinessMapper;
 import com.example.group4.mapper.Cost_billMapper;
 import com.example.group4.mapper.MachineMapper;
-import com.example.group4.service.IMerchantService.IMerchantService;
+import com.example.group4.service.imerchantService.IMerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -131,23 +131,25 @@ public class MerchantServiceImpl implements IMerchantService {
     }
 
     @Override
-    public List<Cost_bill> downloadProfitSheet(int busId, int macId) throws RuntimeException {
+    public List<Cost_bill> downloadProfitSheet(int busId, int[] macId) throws RuntimeException {
         List<Machine> machines = selectMacId(busId);
         List<Cost_bill> cost_bills = new ArrayList<>();
         //全部收益
-        if(macId==-1){
+        if(macId[0]==-1){
             for (int i = 0; i < machines.size(); i++) {
                 Cost_billExample example = new Cost_billExample();
                 example.createCriteria().andMachineIdEqualTo(machines.get(i).getId());
                cost_bills.addAll(cost_billMapper.selectByExample(example));
             }
-            return cost_bills;
         }//某台机器的收益
         else {
-            Cost_billExample example = new Cost_billExample();
-            example.createCriteria().andMachineIdEqualTo(macId);
-            return cost_billMapper.selectByExample(example);
+            for (int i = 0; i < macId.length; i++) {
+                Cost_billExample example = new Cost_billExample();
+                example.createCriteria().andMachineIdEqualTo(macId[i]);
+                cost_bills.addAll(cost_billMapper.selectByExample(example)) ;
+            }
         }
+        return cost_bills;
     }
 
     @Override

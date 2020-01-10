@@ -1,11 +1,11 @@
-package com.example.group4.service.impl.MerchantServiceImpl;
+package com.example.group4.service.impl.merchantServiceImpl;
 
 import com.example.group4.bean.*;
 import com.example.group4.mapper.Cost_billMapper;
 import com.example.group4.mapper.MachineMapper;
 import com.example.group4.mapper.MealcardMapper;
 import com.example.group4.mapper.ex.CostbillEXMapper;
-import com.example.group4.service.IMerchantService.IMachineService;
+import com.example.group4.service.imerchantService.IMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +35,8 @@ public class MachineServiceImpl implements IMachineService {
         if(machine==null){
             new RuntimeException("参数错误");
         }
+        System.out.println(machine);
+        machine.setTime(new Date());
         if(machine.getId()==null){
             machineMapper.insert(machine);
         }
@@ -44,8 +46,10 @@ public class MachineServiceImpl implements IMachineService {
     }
 
     @Override
-    public void delMac(int id) throws RuntimeException {
-        machineMapper.deleteByPrimaryKey(id);
+    public void delMac(int[] ids) throws RuntimeException {
+        for (int i = 0; i < ids.length; i++) {
+            machineMapper.deleteByPrimaryKey(ids[i]);
+        }
     }
 
     @Override
@@ -84,11 +88,30 @@ public class MachineServiceImpl implements IMachineService {
 
     }
 
+    //根据商户id查找机器
     @Override
     public List<Machine> selectMacByBusId(int busId) throws RuntimeException {
         MachineExample example =new MachineExample();
         example.createCriteria().andBusinessIdEqualTo(busId);
         return machineMapper.selectByExample(example);
+    }
+
+    @Override
+    public Machine findMacByMacId(int macId) throws RuntimeException {
+        return machineMapper.selectByPrimaryKey(macId);
+    }
+
+    @Override
+    public List<Machine> fuzzyQueMacByAddr(String word, int busId) throws RuntimeException {
+        if (word==null){
+            return findById(busId);
+        }else {
+            word = "%"+word+"%";
+            MachineExample example = new MachineExample();
+            example.createCriteria().andBusinessIdEqualTo(busId).andAddressLike(word);
+            return machineMapper.selectByExample(example);
+        }
+
     }
 
 
