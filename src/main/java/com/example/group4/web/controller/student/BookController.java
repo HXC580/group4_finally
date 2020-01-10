@@ -4,19 +4,23 @@ package com.example.group4.web.controller.student;
 import com.example.group4.bean.Book;
 import com.example.group4.bean.Lend_list;
 import com.example.group4.bean.Return_list;
+import com.example.group4.bean.student.ex.BookEX;
 import com.example.group4.bean.student.ex.Lend_listEX;
 import com.example.group4.bean.student.ex.Return_listEX;
-import com.example.group4.service.student.IBookService;
+
+import com.example.group4.util.GetQRCode;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.example.group4.service.student.IBookService;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -27,6 +31,17 @@ public class BookController {
 
     @Autowired
     private IBookService iBookService ;
+
+    @GetMapping(value = "/image",produces = MediaType.IMAGE_JPEG_VALUE)
+    @ApiOperation(value="根据图书Id生成二维码")
+    public Message makeQRcode(HttpServletResponse response, int id){
+        BookEX bookEX = iBookService.selectBookById(id);
+        GetQRCode getQRCode=new GetQRCode();
+        getQRCode.getQRCodePicture(bookEX,response);
+        return MessageUtil.success();
+
+
+    }
 
     @GetMapping("/displayAllLendList")
     @ApiOperation(value="获取全部借书信息")

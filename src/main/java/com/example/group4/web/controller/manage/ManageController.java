@@ -1,5 +1,4 @@
-package com.example.group4.web.controller.manage;
-
+package com.example.group4.web.controller.Manage;
 
 import com.example.group4.bean.Business;
 import com.example.group4.bean.Dormitory;
@@ -9,9 +8,9 @@ import com.example.group4.bean.Student;
 
 import com.example.group4.bean.ex.dangerEX;
 
+import com.example.group4.service.Student.IWlanService;
 import com.example.group4.service.manage.IManagerService;
 
-import com.example.group4.service.student.IWlanService;
 import com.example.group4.util.Message;
 import com.example.group4.util.MessageUtil;
 import com.example.group4.web.controller.test.PhoneCode;
@@ -197,16 +196,16 @@ public class ManageController {
         }
         return url;
     }
-
-    @GetMapping("getlut Message")
-    @ApiOperation(value="得到流量信息")
-    public Message bind(String  sid, String pwd){
-        ArrayList<HashMap<String,Double>> list= iWlanService.getMessage(sid,pwd);
-        System.out.println(list);
-        return MessageUtil.success(list);
-
-    }
-
+//
+//    @GetMapping("getlut Message")
+//    @ApiOperation(value="得到流量信息")
+//    public Message bind(String  sid, String pwd){
+//        ArrayList<HashMap<String,Double>> list= iWlanService.getMessage(sid,pwd);
+//        System.out.println(list);
+//        return MessageUtil.success(list);
+//
+//    }
+//
 
     @GetMapping("/excell")
     // @Api(description = "dd")
